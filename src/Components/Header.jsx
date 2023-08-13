@@ -1,4 +1,9 @@
-import { motion } from 'framer-motion';
+import {
+    motion,
+    useScroll,
+    useMotionValueEvent,
+    useAnimation,
+} from 'framer-motion';
 import React, { useState } from 'react';
 import { Link, useMatch } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -13,7 +18,6 @@ const HeaderWrapper = styled(motion.nav)`
     font-size: 14px;
     padding: 20px 60px;
     color: white;
-    background-color: ${(props) => props.theme.black.darker};
 `;
 
 const Col = styled.div`
@@ -87,6 +91,15 @@ const SearchBox = styled(motion.input)`
     border: 1px solid ${(props) => props.theme.white.lighter};
 `;
 
+const navVariants = {
+    top: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    scroll: {
+        backgroundColor: 'rgba(0, 0, 0, 1)',
+    },
+};
+
 const logo = {
     none: {
         fillOpacity: 0,
@@ -101,15 +114,35 @@ const logo = {
 };
 
 export default function Header() {
+    // 상단바 메뉴 빨간 원 애니메이션을 위한 매칭작업
     const movieMatch = useMatch('/');
     const tvMatch = useMatch('/tv');
+
+    // 서치바 애니메이션 토글링
     const [isSearching, setSearching] = useState(false);
     const toggleSearching = () => {
         setSearching((prev) => !prev);
     };
 
+    // 상단바 스크롤 시 색상 변경
+    const navAnimation = useAnimation();
+    const { scrollY } = useScroll();
+
+    // scroll값을 동적으로 받아오기
+    useMotionValueEvent(scrollY, 'change', (latest) => {
+        if (scrollY.get() > 80) {
+            navAnimation.start('scroll');
+        } else {
+            navAnimation.start('top');
+        }
+    });
+
     return (
-        <HeaderWrapper>
+        <HeaderWrapper
+            variants={navVariants}
+            animate={navAnimation}
+            initial={'top'}
+        >
             <Col>
                 <Logo
                     variants={logo}
