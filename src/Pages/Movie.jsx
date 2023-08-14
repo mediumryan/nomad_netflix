@@ -59,23 +59,17 @@ const Row = styled(motion.div)`
 `;
 
 const Box = styled(motion.div)`
-    background-color: ${(props) => props.theme.white.lighter};
-    background-image: url(${(props) => props.bgPhoto});
+    background-image: url(${(props) => props.bg});
     background-size: cover;
     background-position: center center;
     height: 200px;
-    font-size: 18px;
+    padding-bottom: 200px;
     position: relative;
     border-radius: 4px;
     overflow: hidden;
-    img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    &:nth-child(2) {
+    cursor: pointer;
+
+    &:first-child {
         transform-origin: center left;
     }
     &:last-child {
@@ -83,20 +77,14 @@ const Box = styled(motion.div)`
     }
 `;
 
-const SliderBtnBox = styled.div`
-    position: absolute;
-    width: 100%;
-    top: 40%;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`;
-
 const SliderBtn = styled(motion.button)`
     font-size: 36px;
     background: none;
     color: ${(props) => props.theme.red};
+    transition: 300ms all;
+    &:hover {
+        color: ${(props) => props.theme.white.lighter};
+    }
 `;
 
 const rowVariants = {
@@ -133,18 +121,29 @@ export default function Movie() {
         getMovies()
     );
 
-    // handle slider
-    const maxPage = Math.floor(data?.results.length / 6);
+    // 슬라이더
+    const offset = 6;
+    const maxPage = Math.floor(data?.results.length / offset) - 1;
     const [sliderPage, setSliderPage] = useState(0);
     const [back, setBack] = useState(false);
+    const [leaving, setLeaving] = useState(false);
     const goNext = () => {
+        if (leaving) {
+            return;
+        }
+        toggleLeaving();
         setSliderPage((prev) => (prev === maxPage ? 0 : prev + 1));
     };
     const goPrev = () => {
+        if (leaving) {
+            return;
+        }
+        toggleLeaving();
         setSliderPage((prev) => (prev === 0 ? maxPage : prev - 1));
     };
-
-    console.log(maxPage);
+    const toggleLeaving = () => {
+        setLeaving((prev) => !prev);
+    };
 
     return (
         <MovieWrapper>
@@ -158,7 +157,27 @@ export default function Movie() {
                     </BigPoster>
                     <Slider>
                         <h2>Popular Movies</h2>
-                        <AnimatePresence custom={back}>
+                        <SliderBtn>
+                            <FaAngleLeft
+                                onClick={() => {
+                                    goPrev();
+                                    setBack(true);
+                                }}
+                            />
+                        </SliderBtn>
+                        <SliderBtn>
+                            <FaAngleRight
+                                onClick={() => {
+                                    goNext();
+                                    setBack(false);
+                                }}
+                            />
+                        </SliderBtn>
+
+                        <AnimatePresence
+                            onExitComplete={toggleLeaving}
+                            custom={back}
+                        >
                             <Row
                                 custom={back}
                                 variants={rowVariants}
@@ -170,27 +189,12 @@ export default function Movie() {
                                 }}
                                 key={sliderPage}
                             >
-                                <SliderBtnBox>
-                                    <SliderBtn>
-                                        <FaAngleLeft
-                                            onClick={() => {
-                                                goPrev();
-                                                setBack(true);
-                                            }}
-                                        />
-                                    </SliderBtn>
-                                    <SliderBtn>
-                                        <FaAngleRight
-                                            onClick={() => {
-                                                goNext();
-                                                setBack(false);
-                                            }}
-                                        />
-                                    </SliderBtn>
-                                </SliderBtnBox>
                                 {data.results
                                     .slice(1)
-                                    .slice(sliderPage * 6, (sliderPage + 1) * 6)
+                                    .slice(
+                                        sliderPage * offset,
+                                        (sliderPage + 1) * offset
+                                    )
                                     .map((movie) => {
                                         return (
                                             <Box
@@ -201,13 +205,10 @@ export default function Movie() {
                                                     type: 'linear',
                                                 }}
                                                 key={movie.id}
+                                                bg={getImages(
+                                                    movie.poster_path
+                                                )}
                                             >
-                                                <img
-                                                    src={getImages(
-                                                        movie.poster_path
-                                                    )}
-                                                    alt={movie.title}
-                                                />
                                                 <h4>{movie.title}</h4>
                                             </Box>
                                         );
