@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import { getMovies } from '../api';
 import { useQuery } from '@tanstack/react-query';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { getImages } from '../helper';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
@@ -75,6 +75,12 @@ const Box = styled(motion.div)`
         width: 100%;
         height: 100%;
     }
+    &:nth-child(2) {
+        transform-origin: center left;
+    }
+    &:last-child {
+        transform-origin: center right;
+    }
 `;
 
 const SliderBtnBox = styled.div`
@@ -93,11 +99,52 @@ const SliderBtn = styled(motion.button)`
     color: ${(props) => props.theme.red};
 `;
 
+const rowVariants = {
+    initial: (back) => {
+        return {
+            x: back ? window.outerWidth : -window.outerWidth,
+        };
+    },
+    slide: {
+        x: 0,
+    },
+
+    exit: (back) => {
+        return {
+            x: !back ? window.outerWidth : -window.outerWidth,
+        };
+    },
+};
+
+const boxVariants = {
+    initial: {
+        scale: 1,
+    },
+    hover: {
+        scale: 1.3,
+        y: -50,
+        zIndex: 999,
+    },
+};
+
 export default function Movie() {
     // 영화 데이터 받아오기
     const { data, isLoading } = useQuery(['movies', 'nowPlaying'], () =>
         getMovies()
     );
+
+    // handle slider
+    const maxPage = Math.floor(data?.results.length / 6);
+    const [sliderPage, setSliderPage] = useState(0);
+    const [back, setBack] = useState(false);
+    const goNext = () => {
+        setSliderPage((prev) => (prev === maxPage ? 0 : prev + 1));
+    };
+    const goPrev = () => {
+        setSliderPage((prev) => (prev === 0 ? maxPage : prev - 1));
+    };
+
+    console.log(maxPage);
 
     return (
         <MovieWrapper>
@@ -111,32 +158,62 @@ export default function Movie() {
                     </BigPoster>
                     <Slider>
                         <h2>Popular Movies</h2>
-                        <Row>
-                            <SliderBtnBox>
-                                <SliderBtn>
-                                    <FaAngleLeft />
-                                </SliderBtn>
-                                <SliderBtn>
-                                    <FaAngleRight />
-                                </SliderBtn>
-                            </SliderBtnBox>
-                            {data.results
-                                .slice(1)
-                                .slice(0, 6)
-                                .map((movie) => {
-                                    return (
-                                        <Box key={movie.id}>
-                                            <img
-                                                src={getImages(
-                                                    movie.poster_path
-                                                )}
-                                                alt={movie.title}
-                                            />
-                                            <h4>{movie.title}</h4>
-                                        </Box>
-                                    );
-                                })}
-                        </Row>
+                        <AnimatePresence custom={back}>
+                            <Row
+                                custom={back}
+                                variants={rowVariants}
+                                initial="initial"
+                                animate="slide"
+                                exit="exit"
+                                transition={{
+                                    duration: 1,
+                                }}
+                                key={sliderPage}
+                            >
+                                <SliderBtnBox>
+                                    <SliderBtn>
+                                        <FaAngleLeft
+                                            onClick={() => {
+                                                goPrev();
+                                                setBack(true);
+                                            }}
+                                        />
+                                    </SliderBtn>
+                                    <SliderBtn>
+                                        <FaAngleRight
+                                            onClick={() => {
+                                                goNext();
+                                                setBack(false);
+                                            }}
+                                        />
+                                    </SliderBtn>
+                                </SliderBtnBox>
+                                {data.results
+                                    .slice(1)
+                                    .slice(sliderPage * 6, (sliderPage + 1) * 6)
+                                    .map((movie) => {
+                                        return (
+                                            <Box
+                                                variants={boxVariants}
+                                                initial="initial"
+                                                whileHover="hover"
+                                                transition={{
+                                                    type: 'linear',
+                                                }}
+                                                key={movie.id}
+                                            >
+                                                <img
+                                                    src={getImages(
+                                                        movie.poster_path
+                                                    )}
+                                                    alt={movie.title}
+                                                />
+                                                <h4>{movie.title}</h4>
+                                            </Box>
+                                        );
+                                    })}
+                            </Row>
+                        </AnimatePresence>
                     </Slider>
                 </>
             )}
