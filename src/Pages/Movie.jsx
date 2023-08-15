@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
-import { getMovies } from '../api';
+import {
+    getNowPlayingMovies,
+    getPopularMovies,
+    getTopRatedMovies,
+} from '../api';
 import { useQuery } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
 import { getImages } from '../helper';
@@ -95,23 +99,29 @@ const MovieCover = styled(motion.div)`
 `;
 
 const SelectedBox = styled(motion.div)`
-    width: 480px;
-    height: 700px;
+    width: 420px;
+    height: 600px;
     position: fixed;
     top: 50px;
     left: 0;
     right: 0;
     margin: 0 auto;
-    padding: 24px;
+    padding: 48px;
     border-radius: 20px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.25)),
         url(${(props) => props.bg});
     color: ${(props) => props.theme.white.lighter};
     z-index: 2;
+    -webkit-box-shadow: 13px 15px 15px 4px #c1f9cc;
+    box-shadow: 13px 15px 15px 4px #c1f9cc;
     h2 {
-        font-size: 24px;
+        font-size: 48px;
         font-weight: 700;
         margin-bottom: 24px;
+        text-align: center;
+    }
+    p {
+        font-size: 20px;
     }
 `;
 
@@ -162,9 +172,18 @@ const movieCoverVariants = {
 
 export default function Movie() {
     // 영화 데이터 받아오기
-    const { data, isLoading } = useQuery(['movies', 'nowPlaying'], () =>
-        getMovies()
+    const { data, isLoading } = useQuery(
+        ['movies', 'nowPlaying'],
+        getNowPlayingMovies
     );
+    // const { data: topRatedMovies, isLoading: topRatedLoading } = useQuery(
+    //     ['movies', 'topRated'],
+    //     getTopRatedMovies
+    // );
+    // const { data: popularMovies, isLoading: popularLoading } = useQuery(
+    //     ['movies', 'popular'],
+    //     getPopularMovies
+    // );
 
     // 슬라이더
     const offset = 6;
@@ -196,7 +215,6 @@ export default function Movie() {
     const selectedMovie =
         selectedMatch?.params.id &&
         data?.results.find((a) => a.id + '' === selectedMatch?.params.id);
-    console.log(selectedMovie);
 
     return (
         <MovieWrapper>
