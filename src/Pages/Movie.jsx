@@ -95,21 +95,32 @@ const MovieCover = styled(motion.div)`
 `;
 
 const SelectedBox = styled(motion.div)`
-    width: 400px;
-    height: 400px;
-    position: absolute;
-    top: 100px;
+    width: 480px;
+    height: 700px;
+    position: fixed;
+    top: 50px;
     left: 0;
     right: 0;
     margin: 0 auto;
-    background-color: grey;
+    padding: 24px;
+    border-radius: 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.25)),
+        url(${(props) => props.bg});
+    color: ${(props) => props.theme.white.lighter};
+    z-index: 2;
+    h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 24px;
+    }
 `;
 
 const SelectedLayout = styled(motion.div)`
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
     height: 100%;
+    opacity: 0;
     background-color: rgba(0, 0, 0, 0.5);
 `;
 
@@ -182,6 +193,10 @@ export default function Movie() {
     // 슬라이더 모달
     const navigate = useNavigate();
     const selectedMatch = useMatch('/movies/:id');
+    const selectedMovie =
+        selectedMatch?.params.id &&
+        data?.results.find((a) => a.id + '' === selectedMatch?.params.id);
+    console.log(selectedMovie);
 
     return (
         <MovieWrapper>
@@ -270,10 +285,21 @@ export default function Movie() {
                     <AnimatePresence>
                         {selectedMatch ? (
                             <>
-                                <SelectedBox
-                                    layoutId={selectedMatch.params.id}
-                                ></SelectedBox>
+                                {selectedMovie && (
+                                    <SelectedBox
+                                        layoutId={selectedMatch.params.id}
+                                        bg={getImages(
+                                            selectedMovie.poster_path,
+                                            'w500'
+                                        )}
+                                    >
+                                        <h2>{selectedMovie.title}</h2>
+                                        <p>{selectedMovie.overview}</p>
+                                    </SelectedBox>
+                                )}
                                 <SelectedLayout
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
                                     onClick={() => {
                                         navigate('../');
                                     }}
