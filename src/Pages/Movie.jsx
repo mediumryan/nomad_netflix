@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
 import { getImages } from '../helper';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import { useMatch, useNavigate } from 'react-router-dom';
 
 const MovieWrapper = styled.div`
     height: 200vh;
@@ -62,9 +63,7 @@ const Box = styled(motion.div)`
     background-image: url(${(props) => props.bg});
     background-size: cover;
     background-position: center center;
-    height: 200px;
-    padding-bottom: 200px;
-    position: relative;
+    height: 320px;
     border-radius: 4px;
     overflow: hidden;
     cursor: pointer;
@@ -85,6 +84,33 @@ const SliderBtn = styled(motion.button)`
     &:hover {
         color: ${(props) => props.theme.white.lighter};
     }
+`;
+
+const MovieCover = styled(motion.div)`
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: ${(props) => props.theme.white.lighter};
+    opacity: 0;
+    padding: 20px;
+`;
+
+const SelectedBox = styled(motion.div)`
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: grey;
+`;
+
+const SelectedLayout = styled(motion.div)`
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const rowVariants = {
@@ -111,7 +137,15 @@ const boxVariants = {
     hover: {
         scale: 1.3,
         y: -50,
-        zIndex: 999,
+    },
+};
+
+const movieCoverVariants = {
+    initial: {
+        opacity: 0,
+    },
+    hover: {
+        opacity: 1,
     },
 };
 
@@ -144,6 +178,10 @@ export default function Movie() {
     const toggleLeaving = () => {
         setLeaving((prev) => !prev);
     };
+
+    // 슬라이더 모달
+    const navigate = useNavigate();
+    const selectedMatch = useMatch('/movies/:id');
 
     return (
         <MovieWrapper>
@@ -198,24 +236,51 @@ export default function Movie() {
                                     .map((movie) => {
                                         return (
                                             <Box
+                                                layoutId={movie.id + ''}
                                                 variants={boxVariants}
                                                 initial="initial"
                                                 whileHover="hover"
                                                 transition={{
                                                     type: 'linear',
+                                                    delay: 0.3,
                                                 }}
                                                 key={movie.id}
                                                 bg={getImages(
                                                     movie.poster_path
                                                 )}
+                                                onClick={() => {
+                                                    navigate(
+                                                        `/movies/${movie.id}`
+                                                    );
+                                                }}
                                             >
-                                                <h4>{movie.title}</h4>
+                                                <MovieCover
+                                                    variants={
+                                                        movieCoverVariants
+                                                    }
+                                                >
+                                                    <h4>{movie.title}</h4>
+                                                </MovieCover>
                                             </Box>
                                         );
                                     })}
                             </Row>
                         </AnimatePresence>
                     </Slider>
+                    <AnimatePresence>
+                        {selectedMatch ? (
+                            <>
+                                <SelectedBox
+                                    layoutId={selectedMatch.params.id}
+                                ></SelectedBox>
+                                <SelectedLayout
+                                    onClick={() => {
+                                        navigate('../');
+                                    }}
+                                />
+                            </>
+                        ) : null}
+                    </AnimatePresence>
                 </>
             )}
         </MovieWrapper>
