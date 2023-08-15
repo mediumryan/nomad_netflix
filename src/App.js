@@ -6,6 +6,7 @@ import Movie from './Pages/Movie';
 import Tv from './Pages/Tv';
 import Search from './Pages/Search';
 import NotFound from './Pages/NotFound';
+import Test from './Pages/Test';
 
 const MainWrapper = styled.div``;
 
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/tv" element={<Tv />} />
                 <Route path="/tv/:id" element={<Tv />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/test" element={<Test />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </MainWrapper>

@@ -8,6 +8,10 @@
     font-style: normal;
 }
 
+html {
+    background-color: #181818;
+}
+
 body {
     font-family: 'Cafe24Supermagic-Bold-v1.0';
 }
