@@ -10,8 +10,8 @@ const SliderBox = styled(motion.div)`
     top: -100px;
     margin-bottom: 330px;
     h2 {
-        color: ${(props) => props.theme.red};
-        font-size: 24px;
+        color: ${(props) => props.theme.white.darker};
+        font-size: 36px;
         margin: 0 0 12px 12px;
         cursor: default;
     }
@@ -74,8 +74,8 @@ const SelectedBox = styled(motion.div)`
         url(${(props) => props.bg});
     color: ${(props) => props.theme.white.lighter};
     z-index: 2;
-    -webkit-box-shadow: 13px 15px 15px 4px #c1f9cc;
-    box-shadow: 13px 15px 15px 4px #c1f9cc;
+    -webkit-box-shadow: 8px 8px 8px 4px #8ea292;
+    box-shadow: 8px 8px 8px 4px #8ea292;
     h2 {
         font-size: 48px;
         font-weight: 700;
@@ -159,15 +159,15 @@ export default function Slider({ data }) {
 
     // 슬라이더 모달
     const navigate = useNavigate();
-    const selectedMatch = useMatch('/movies/:id');
-    const selectedMovie =
+    const selectedMatch = useMatch(`/tv/:id`);
+    const selectedItem =
         selectedMatch?.params.id &&
         data?.results.find((a) => a.id + '' === selectedMatch?.params.id);
 
     return (
         <>
             <SliderBox>
-                <h2>Popular Movies</h2>
+                <h2>Popular Shows</h2>
                 <SliderBtn>
                     <FaAngleLeft
                         onClick={() => {
@@ -203,10 +203,10 @@ export default function Slider({ data }) {
                                 sliderPage * offset,
                                 (sliderPage + 1) * offset
                             )
-                            .map((movie) => {
+                            .map((item) => {
                                 return (
                                     <Box
-                                        layoutId={movie.id + ''}
+                                        layoutId={item.id + ''}
                                         variants={boxVariants}
                                         initial="initial"
                                         whileHover="hover"
@@ -214,16 +214,16 @@ export default function Slider({ data }) {
                                             type: 'linear',
                                             delay: 0.3,
                                         }}
-                                        key={movie.id}
-                                        bg={getImages(movie.poster_path)}
+                                        key={item.id}
+                                        bg={getImages(item.poster_path)}
                                         onClick={() => {
-                                            navigate(`/movies/${movie.id}`);
+                                            navigate(`/tv/${item.id}`);
                                         }}
                                     >
                                         <MovieCover
                                             variants={movieCoverVariants}
                                         >
-                                            <h4>{movie.title}</h4>
+                                            <h4>{item.name}</h4>
                                         </MovieCover>
                                     </Box>
                                 );
@@ -234,23 +234,24 @@ export default function Slider({ data }) {
             <AnimatePresence>
                 {selectedMatch ? (
                     <>
-                        {selectedMovie && (
+                        {selectedItem && (
                             <SelectedBox
                                 layoutId={selectedMatch.params.id}
-                                bg={getImages(
-                                    selectedMovie.poster_path,
-                                    'w500'
-                                )}
+                                bg={getImages(selectedItem.poster_path, 'w500')}
                             >
-                                <h2>{selectedMovie.title}</h2>
-                                <p>{selectedMovie.overview}</p>
+                                <h2>{selectedItem.name}</h2>
+                                <p>
+                                    {selectedItem.overview
+                                        ? selectedItem.overview
+                                        : '개요 정보가 존재하지 않습니다.'}
+                                </p>
                             </SelectedBox>
                         )}
                         <SelectedLayout
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => {
-                                navigate('../');
+                                navigate('/tv');
                             }}
                         />
                     </>

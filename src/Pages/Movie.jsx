@@ -7,7 +7,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { getImages } from '../helper';
-import Slider from '../Components/Slider';
+import MovieSlider from '../Components/MovieSlider';
 
 const MovieWrapper = styled.div`
     height: 100%;
@@ -75,9 +75,9 @@ export default function Movie() {
                             {nowPlayingMovies.results[0].overview}
                         </BigStory>
                     </BigPoster>
-                    <Slider data={nowPlayingMovies} />
-                    <Slider data={topRatedMovies} />
-                    <Slider data={popularMovies} />
+                    <MovieSlider data={nowPlayingMovies} />
+                    <MovieSlider data={topRatedMovies} />
+                    <MovieSlider data={popularMovies} />
                 </>
             )}
         </MovieWrapper>
