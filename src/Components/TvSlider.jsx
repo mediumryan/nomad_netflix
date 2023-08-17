@@ -1,138 +1,24 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { useMatch, useNavigate } from 'react-router-dom';
-import { styled } from 'styled-components';
 import { getImages } from '../helper';
+import TvBoxInfo from './TvBoxInfo';
+// styled-components
+import {
+    SliderBox,
+    Row,
+    Box,
+    SliderBtn,
+    SelectedBox,
+    SelectedLayout,
+    CloseBtn,
+    GoToDetail,
+} from './MovieSlider';
+// framer-motion variants
+import { rowVariants, boxVariants } from './MovieSlider';
 
-const SliderBox = styled(motion.div)`
-    position: relative;
-    top: -100px;
-    margin-bottom: 330px;
-    h2 {
-        color: ${(props) => props.theme.white.darker};
-        font-size: 36px;
-        margin: 0 0 12px 12px;
-        cursor: default;
-    }
-`;
-
-const Row = styled(motion.div)`
-    display: grid;
-    gap: 5px;
-    grid-template-columns: repeat(6, 1fr);
-    position: absolute;
-    width: 100%;
-`;
-
-const Box = styled(motion.div)`
-    background-image: url(${(props) => props.bg});
-    background-size: cover;
-    background-position: center center;
-    height: 320px;
-    border-radius: 4px;
-    overflow: hidden;
-    cursor: pointer;
-
-    &:first-child {
-        transform-origin: center left;
-    }
-    &:last-child {
-        transform-origin: center right;
-    }
-`;
-
-const SliderBtn = styled(motion.button)`
-    font-size: 36px;
-    background: none;
-    color: ${(props) => props.theme.red};
-    transition: 300ms all;
-    &:hover {
-        color: ${(props) => props.theme.white.lighter};
-    }
-`;
-
-const MovieCover = styled(motion.div)`
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: ${(props) => props.theme.white.lighter};
-    opacity: 0;
-    padding: 20px;
-`;
-
-const SelectedBox = styled(motion.div)`
-    width: 420px;
-    height: 600px;
-    position: fixed;
-    top: 50px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    padding: 48px;
-    border-radius: 20px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.25)),
-        url(${(props) => props.bg});
-    color: ${(props) => props.theme.white.lighter};
-    z-index: 2;
-    -webkit-box-shadow: 8px 8px 8px 4px #8ea292;
-    box-shadow: 8px 8px 8px 4px #8ea292;
-    h2 {
-        font-size: 48px;
-        font-weight: 700;
-        margin-bottom: 24px;
-        text-align: center;
-    }
-    p {
-        font-size: 20px;
-    }
-`;
-
-const SelectedLayout = styled(motion.div)`
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-`;
-
-const rowVariants = {
-    initial: (back) => {
-        return {
-            x: back ? window.outerWidth : -window.outerWidth,
-        };
-    },
-    slide: {
-        x: 0,
-    },
-
-    exit: (back) => {
-        return {
-            x: !back ? window.outerWidth : -window.outerWidth,
-        };
-    },
-};
-
-const boxVariants = {
-    initial: {
-        scale: 1,
-    },
-    hover: {
-        scale: 1.3,
-        y: -50,
-    },
-};
-
-const movieCoverVariants = {
-    initial: {
-        opacity: 0,
-    },
-    hover: {
-        opacity: 1,
-    },
-};
-
-export default function Slider({ data }) {
+export default function Slider({ data, sliderTitle }) {
     // 슬라이더
     const offset = 6;
     const maxPage = Math.floor(data?.results.length / offset) - 1;
@@ -167,7 +53,7 @@ export default function Slider({ data }) {
     return (
         <>
             <SliderBox>
-                <h2>Popular Shows</h2>
+                <h2>{sliderTitle}</h2>
                 <SliderBtn>
                     <FaAngleLeft
                         onClick={() => {
@@ -220,11 +106,7 @@ export default function Slider({ data }) {
                                             navigate(`/tv/${item.id}`);
                                         }}
                                     >
-                                        <MovieCover
-                                            variants={movieCoverVariants}
-                                        >
-                                            <h4>{item.name}</h4>
-                                        </MovieCover>
+                                        <TvBoxInfo item={item} />
                                     </Box>
                                 );
                             })}
@@ -239,12 +121,31 @@ export default function Slider({ data }) {
                                 layoutId={selectedMatch.params.id}
                                 bg={getImages(selectedItem.poster_path, 'w500')}
                             >
+                                <CloseBtn
+                                    onClick={() => {
+                                        navigate('/tv');
+                                    }}
+                                >
+                                    X
+                                </CloseBtn>
                                 <h2>{selectedItem.name}</h2>
                                 <p>
                                     {selectedItem.overview
                                         ? selectedItem.overview
                                         : '개요 정보가 존재하지 않습니다.'}
                                 </p>
+                                <hr
+                                    style={{
+                                        marginTop: '24px',
+                                        marginBottom: '24px',
+                                    }}
+                                />
+                                <span>원제 : {selectedItem.original_name}</span>
+                                <span>평점 : {selectedItem.vote_average}</span>
+                                <span>
+                                    청불 : {selectedItem.adult ? 'O' : 'X'}
+                                </span>
+                                <GoToDetail>영화 상세 페이지로 이동</GoToDetail>
                             </SelectedBox>
                         )}
                         <SelectedLayout

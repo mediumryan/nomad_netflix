@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_KEY =
-    'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMmJlYzA2NTNhZmQ5ZDI3MjBiZjU0NGM3NWU0MTlkOCIsInN1YiI6IjYzNzYyNWZlZmFiM2ZhMDBiNGQwMjM4OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5smNKT_2xBtFZGcQtTnIy_5ufNzL5Ah00oHMrNcpFLE';
+    'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNTdhNjc5OTE0Yjc4NWU5MzdlODI3M2VkZjEzYmFjYiIsInN1YiI6IjYzNzYyNWZlZmFiM2ZhMDBiNGQwMjM4OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GviGW3SOtq4sot8aJp8to7nRlL2iZ5H38FbBcElfYik';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 const headers = {
@@ -9,6 +9,7 @@ const headers = {
     Authorization: `Bearer ${API_KEY}`,
 };
 
+// Movies
 export const getNowPlayingMovies = async () => {
     const params = { language: 'ko-KR', page: 1, region: 'KR' };
     const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
@@ -36,6 +37,15 @@ export const getTopRatedMovies = async () => {
     return response.data;
 };
 
+export const getMovieDetails = async (movieId) => {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}`, {
+        params: { language: 'ko-KR' },
+        headers,
+    });
+    return response.data;
+};
+
+// TV Shows
 export const getPopularTvShows = async () => {
     const params = { language: 'ko-KR', page: 1, region: 'KR' };
     const response = await axios.get(`${BASE_URL}/tv/popular`, {

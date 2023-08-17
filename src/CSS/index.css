@@ -8,6 +8,10 @@
     font-style: normal;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     background-color: #181818;
 }
@@ -18,6 +22,7 @@ body {
 
 input,
 button {
+    font-family: 'Cafe24Supermagic-Bold-v1.0';
     border: none;
     outline: none;
     cursor: pointer;

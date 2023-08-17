@@ -1,11 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import { FaAngleLeft, FaAngleRight, FaInfoCircle } from 'react-icons/fa';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getImages } from '../helper';
+import MovieBoxInfo from './MovieBoxInfo';
 
-const SliderBox = styled(motion.div)`
+// styled-components
+export const SliderBox = styled(motion.div)`
     position: relative;
     top: -100px;
     margin-bottom: 330px;
@@ -17,7 +19,7 @@ const SliderBox = styled(motion.div)`
     }
 `;
 
-const Row = styled(motion.div)`
+export const Row = styled(motion.div)`
     display: grid;
     gap: 5px;
     grid-template-columns: repeat(6, 1fr);
@@ -25,15 +27,17 @@ const Row = styled(motion.div)`
     width: 100%;
 `;
 
-const Box = styled(motion.div)`
+export const Box = styled(motion.div)`
     background-image: url(${(props) => props.bg});
     background-size: cover;
     background-position: center center;
-    height: 320px;
+    min-height: 320px;
+    max-height: 320px;
+    overflow-y: scroll;
     border-radius: 4px;
     overflow: hidden;
     cursor: pointer;
-
+    position: relative;
     &:first-child {
         transform-origin: center left;
     }
@@ -42,7 +46,7 @@ const Box = styled(motion.div)`
     }
 `;
 
-const SliderBtn = styled(motion.button)`
+export const SliderBtn = styled(motion.button)`
     font-size: 36px;
     background: none;
     color: ${(props) => props.theme.red};
@@ -52,15 +56,7 @@ const SliderBtn = styled(motion.button)`
     }
 `;
 
-const MovieCover = styled(motion.div)`
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: ${(props) => props.theme.white.lighter};
-    opacity: 0;
-    padding: 20px;
-`;
-
-const SelectedBox = styled(motion.div)`
+export const SelectedBox = styled(motion.div)`
     width: 420px;
     height: 600px;
     position: fixed;
@@ -70,14 +66,14 @@ const SelectedBox = styled(motion.div)`
     margin: 0 auto;
     padding: 48px;
     border-radius: 20px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.25)),
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)),
         url(${(props) => props.bg});
     color: ${(props) => props.theme.white.lighter};
     z-index: 2;
     -webkit-box-shadow: 8px 8px 8px 4px #8ea292;
     box-shadow: 8px 8px 8px 4px #8ea292;
     h2 {
-        font-size: 48px;
+        font-size: 32px;
         font-weight: 700;
         margin-bottom: 24px;
         text-align: center;
@@ -85,9 +81,45 @@ const SelectedBox = styled(motion.div)`
     p {
         font-size: 20px;
     }
+    span {
+        display: block;
+        margin-bottom: 24px;
+        font-size: 20px;
+    }
 `;
 
-const SelectedLayout = styled(motion.div)`
+export const CloseBtn = styled.button`
+    font-size: 22px;
+    padding: 8px;
+    background: none;
+    color: ${(props) => props.theme.white.lighter};
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: 300ms all linear;
+    &:hover {
+        color: ${(props) => props.theme.red};
+    }
+`;
+
+export const GoToDetail = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    font-size: 22px;
+    padding: 8px 0;
+    margin: 0 auto;
+    border-radius: 4px;
+    color: ${(props) => props.theme.black.lighter};
+    background-color: ${(props) => props.theme.white.darker};
+    transition: 300ms all;
+    &:hover {
+        transform: scale(1.05);
+    }
+`;
+
+export const SelectedLayout = styled(motion.div)`
     position: fixed;
     top: 0;
     width: 100%;
@@ -96,7 +128,8 @@ const SelectedLayout = styled(motion.div)`
     background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const rowVariants = {
+// framer-motion variants
+export const rowVariants = {
     initial: (back) => {
         return {
             x: back ? window.outerWidth : -window.outerWidth,
@@ -113,26 +146,18 @@ const rowVariants = {
     },
 };
 
-const boxVariants = {
+export const boxVariants = {
     initial: {
         scale: 1,
     },
     hover: {
         scale: 1.3,
         y: -50,
+        zIndex: 2,
     },
 };
 
-const movieCoverVariants = {
-    initial: {
-        opacity: 0,
-    },
-    hover: {
-        opacity: 1,
-    },
-};
-
-export default function Slider({ data }) {
+export default function Slider({ data, sliderTitle }) {
     // 슬라이더
     const offset = 6;
     const maxPage = Math.floor(data?.results.length / offset) - 1;
@@ -167,7 +192,7 @@ export default function Slider({ data }) {
     return (
         <>
             <SliderBox>
-                <h2>Popular Movies</h2>
+                <h2>{sliderTitle}</h2>
                 <SliderBtn>
                     <FaAngleLeft
                         onClick={() => {
@@ -184,7 +209,6 @@ export default function Slider({ data }) {
                         }}
                     />
                 </SliderBtn>
-
                 <AnimatePresence onExitComplete={toggleLeaving} custom={back}>
                     <Row
                         custom={back}
@@ -220,11 +244,7 @@ export default function Slider({ data }) {
                                             navigate(`/movie/${item.id}`);
                                         }}
                                     >
-                                        <MovieCover
-                                            variants={movieCoverVariants}
-                                        >
-                                            <h4>{item.title}</h4>
-                                        </MovieCover>
+                                        <MovieBoxInfo item={item} />
                                     </Box>
                                 );
                             })}
@@ -239,8 +259,36 @@ export default function Slider({ data }) {
                                 layoutId={selectedMatch.params.id}
                                 bg={getImages(selectedItem.poster_path, 'w500')}
                             >
+                                <CloseBtn
+                                    onClick={() => {
+                                        navigate('/');
+                                    }}
+                                >
+                                    X
+                                </CloseBtn>
                                 <h2>{selectedItem.title}</h2>
                                 <p>{selectedItem.overview}</p>
+                                <hr
+                                    style={{
+                                        marginTop: '24px',
+                                        marginBottom: '24px',
+                                    }}
+                                />
+                                <span>
+                                    원제 : {selectedItem.original_title}
+                                </span>
+                                <span>평점 : {selectedItem.vote_average}</span>
+                                <span>
+                                    청불 : {selectedItem.adult ? 'O' : 'X'}
+                                </span>
+                                <GoToDetail
+                                    onClick={() => {
+                                        navigate(`/detail/${selectedItem.id}`);
+                                    }}
+                                >
+                                    <FaInfoCircle />
+                                    상세 페이지
+                                </GoToDetail>
                             </SelectedBox>
                         )}
                         <SelectedLayout

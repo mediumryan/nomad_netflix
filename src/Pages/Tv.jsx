@@ -5,46 +5,17 @@ import {
     getTopRatedTvShows,
 } from '../api';
 import { useQuery } from '@tanstack/react-query';
-import { motion } from 'framer-motion';
-import { getImages } from '../helper';
 import TvSlider from '../Components/TvSlider';
+import TvBigPoster from '../Components/TvBigPoster';
+import { Loader, MovieWrapper } from './Movie';
 
-const TvWrapper = styled.div`
+const TvWrapper = styled(MovieWrapper)`
     height: 100%;
-`;
-
-const Loader = styled.div`
-    font-size: 48px;
-    text-align: center;
-`;
-
-const BigPoster = styled(motion.div)`
-    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)),
-        url(${(props) => props.bg_path});
-    background-size: cover;
-    background-position: center center;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: ${(props) => props.theme.white.darker};
-`;
-
-const BigTitle = styled.h2`
-    padding-left: 20px;
-    font-size: 48px;
-    margin-bottom: 48px;
-`;
-
-const BigStory = styled.p`
-    padding-left: 20px;
-    font-size: 18px;
-    width: 50%;
-    line-height: 1.5;
+    background-color: ${(props) => props.theme.black.darker};
 `;
 
 export default function Tv() {
-    // 영화 데이터 받아오기
+    // TV 데이터 받아오기
     const { data: popularTvShows, isLoading: popularLoading } = useQuery(
         ['tv', 'popular'],
         getPopularTvShows
@@ -56,27 +27,19 @@ export default function Tv() {
         getTopRatedTvShows
     );
 
-    console.log(popularTvShows.results);
-
     return (
         <TvWrapper>
             {popularLoading || airingTodayLoading || topRatedLoading ? (
                 <Loader>Loading ...</Loader>
             ) : (
                 <>
-                    <BigPoster
-                        bg_path={getImages(
-                            popularTvShows.results[0].poster_path
-                        )}
-                    >
-                        <BigTitle>{popularTvShows.results[0].name}</BigTitle>
-                        <BigStory>
-                            {popularTvShows.results[0].overview}
-                        </BigStory>
-                    </BigPoster>
-                    <TvSlider data={popularTvShows} />
-                    <TvSlider data={airingTodayTvShows} />
-                    <TvSlider data={topRatedTvShows} />
+                    <TvBigPoster bigPosterValues={popularTvShows.results[0]} />
+                    <TvSlider data={popularTvShows} sliderTitle="Popular" />
+                    <TvSlider
+                        data={airingTodayTvShows}
+                        sliderTitle="Airing_Today"
+                    />
+                    <TvSlider data={topRatedTvShows} sliderTitle="Top_Rated" />
                 </>
             )}
         </TvWrapper>
