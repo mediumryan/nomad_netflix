@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 import { getImages } from '../helper';
+import { GoToDetail } from './MovieSlider';
+import { useNavigate } from 'react-router-dom';
+import { FaInfoCircle, FaPlayCircle } from 'react-icons/fa';
 
 export const BigPoster = styled(motion.div)`
     background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)),
@@ -27,11 +30,41 @@ export const BigStory = styled.p`
     line-height: 1.5;
 `;
 
+export const BigBtnBox = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+export const BigGoToDetail = styled(GoToDetail)`
+    margin: 24px 0 0 24px;
+    width: 180px;
+    transition: 300ms all;
+    &:hover {
+        opacity: 0.77;
+    }
+`;
+
+export const BigPlayBtn = styled(BigGoToDetail)``;
+
 export default function MovieBigPoster({ bigPosterValues }) {
+    const navigate = useNavigate();
+
     return (
         <BigPoster bg_path={getImages(bigPosterValues.poster_path)}>
             <BigTitle>{bigPosterValues.title}</BigTitle>
             <BigStory>{bigPosterValues.overview}</BigStory>
+            <BigBtnBox>
+                <BigPlayBtn>
+                    <FaPlayCircle />
+                </BigPlayBtn>
+                <BigGoToDetail
+                    onClick={() => {
+                        navigate(`/detail/${bigPosterValues.id}`);
+                    }}
+                >
+                    <FaInfoCircle />
+                </BigGoToDetail>
+            </BigBtnBox>
         </BigPoster>
     );
 }

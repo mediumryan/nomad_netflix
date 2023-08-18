@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieDetails } from '../api';
+import { getMovieCredits, getMovieDetails } from '../api';
 import { styled } from 'styled-components';
 import { getImages } from '../helper';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { Loader } from './Movie';
 
 const DetailWrapper = styled.div`
     width: 100%;
@@ -77,6 +78,10 @@ const DetailDescription = styled.div`
         font-size: 20px;
         margin-bottom: 24px;
     }
+    p.vote {
+        display: flex;
+        align-items: center;
+    }
     button {
         position: absolute;
         top: 10px;
@@ -95,32 +100,58 @@ const DetailDescription = styled.div`
     }
 `;
 
+const Stars = styled.div`
+    display: flex;
+    align-items: center;
+    margin: 0;
+`;
+
+const Star = styled(motion.span)`
+    width: 8px;
+    height: 20px;
+    margin-right: 2px;
+    border-radius: 2px;
+    background-color: ${(props) =>
+        props.colored >= props.index + 1 ? 'yellow' : 'white'};
+`;
+
 export default function Detail() {
     const { id } = useParams();
     // 디테일 데이터 받아오기
-    const { data, isLoading } = useQuery(['movies', 'detailData'], () => {
-        return getMovieDetails(id);
-    });
-
+    const { data: detailData, isLoading: detailIsLoading } = useQuery(
+        ['movies', 'detailData'],
+        () => {
+            return getMovieDetails(id);
+        }
+    );
+    const { data: creditsData, isLoading: creditsIsLoading } = useQuery(
+        ['movies', 'creditsData'],
+        () => {
+            return getMovieCredits(id);
+        }
+    );
+    // 스토리 on/off
     const [onStory, setOnStory] = useState(false);
     const toggleStory = () => {
         setOnStory((prev) => !prev);
     };
 
-    console.log(data);
+    console.log(detailData);
 
     return (
         <DetailWrapper>
-            {!isLoading && (
+            {detailIsLoading || creditsIsLoading ? (
+                <Loader>'Loading...'</Loader>
+            ) : (
                 <>
                     <DetailImgBox>
                         <DetailImg
-                            src={getImages(data.poster_path)}
-                            alt={data.title}
+                            src={getImages(detailData.poster_path)}
+                            alt={detailData.title}
                             onStory={onStory}
                         />
                         <DetailOverView>
-                            <h2>"{data.tagline}"</h2>
+                            <h2>"{detailData.tagline}"</h2>
                             <hr
                                 style={{
                                     marginTop: '24px',
@@ -128,11 +159,11 @@ export default function Detail() {
                                     width: '100%',
                                 }}
                             />
-                            <p>{data.overview}</p>
+                            <p>{detailData.overview}</p>
                         </DetailOverView>
                     </DetailImgBox>
                     <DetailDescription>
-                        <h2>{data.title}</h2>
+                        <h2>{detailData.title}</h2>
                         <button onClick={toggleStory}>
                             {onStory ? '스토리 닫기' : '스토리 보기'}
                         </button>
@@ -142,16 +173,43 @@ export default function Detail() {
                                 marginBottom: '24px',
                             }}
                         />
-                        <p>원제 : {data.original_title}</p>
-                        <p>평점 : {data.vote_average.toFixed(1)}</p>
+                        <p>원제 : {detailData.original_title}</p>
                         <p>
                             장르 :
-                            {data.genres.map((genre) => genre.name).join(', ')}
+                            {detailData.genres
+                                .map((genre) => genre.name)
+                                .join(', ')}
                         </p>
-                        <p>개봉일 : {data.release_date}</p>
+                        <p>개봉일 : {detailData.release_date}</p>
                         <p>
-                            상영시간 : {Math.floor(data.runtime / 60)}시간
-                            {Math.floor(data.runtime % 60)}분
+                            상영시간 : {Math.floor(detailData.runtime / 60)}
+                            시간
+                            {Math.floor(detailData.runtime % 60)}분
+                        </p>
+                        <p style={{ lineHeight: '1.5' }}>
+                            출연진 :{' '}
+                            {creditsData.cast
+                                .slice(0, 4)
+                                .map((cast) => cast.name)
+                                .join(', ')}
+                        </p>
+                        <p className="vote">
+                            평점 : {detailData.vote_average.toFixed(1)}
+                            <Stars>
+                                {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+                                    (star, index) => {
+                                        return (
+                                            <Star
+                                                key={index}
+                                                index={index}
+                                                colored={detailData.vote_average.toFixed(
+                                                    1
+                                                )}
+                                            />
+                                        );
+                                    }
+                                )}
+                            </Stars>
                         </p>
                     </DetailDescription>
                 </>

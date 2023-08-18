@@ -45,6 +45,14 @@ export const getMovieDetails = async (movieId) => {
     return response.data;
 };
 
+export const getMovieCredits = async (movieId) => {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits`, {
+        params: { language: 'ko-KR' },
+        headers,
+    });
+    return response.data;
+};
+
 // TV Shows
 export const getPopularTvShows = async () => {
     const params = { language: 'ko-KR', page: 1, region: 'KR' };

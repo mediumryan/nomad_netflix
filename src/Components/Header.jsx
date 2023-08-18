@@ -177,8 +177,8 @@ export default function Header() {
             <SearchContainer>
                 <SearchIcon
                     onClick={toggleSearching}
-                    initial={{ x: isSearching ? -190 : -410 }}
-                    animate={{ x: isSearching ? -410 : -190 }}
+                    initial={{ x: isSearching ? -190 : -385 }}
+                    animate={{ x: isSearching ? -385 : -190 }}
                     transition={{
                         type: 'linear',
                     }}
