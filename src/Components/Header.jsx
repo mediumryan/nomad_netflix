@@ -5,6 +5,7 @@ import {
     useAnimation,
 } from 'framer-motion';
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link, useMatch, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
@@ -127,6 +128,13 @@ export default function Header() {
         setSearching((prev) => !prev);
     };
 
+    // 서치값 받기
+    const { register, handleSubmit, setValue } = useForm();
+    const submitValue = (data) => {
+        navigate(`/search/${data.query}`);
+        setValue('query', '');
+    };
+
     // 상단바 스크롤 시 색상 변경
     const navAnimation = useAnimation();
     const { scrollY } = useScroll();
@@ -174,7 +182,7 @@ export default function Header() {
                     </Item>
                 </Items>
             </Col>
-            <SearchContainer>
+            <SearchContainer onSubmit={handleSubmit(submitValue)}>
                 <SearchIcon
                     onClick={toggleSearching}
                     initial={{ x: isSearching ? -190 : -385 }}
@@ -193,6 +201,7 @@ export default function Header() {
                     ></path>
                 </SearchIcon>
                 <SearchBox
+                    {...register('query', { required: true })}
                     placeholder="Search movies, tv shows"
                     initial={{
                         scaleX: isSearching ? 0 : 1,

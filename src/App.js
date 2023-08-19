@@ -19,7 +19,7 @@ function App() {
                 <Route path="/movie/:id" element={<Movie />} />
                 <Route path="/tv" element={<Tv />} />
                 <Route path="/tv/:id" element={<Tv />} />
-                <Route path="/search" element={<Search />} />
+                <Route path="/search/:query" element={<Search />} />
                 <Route path="/detail/:id" element={<Detail />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>

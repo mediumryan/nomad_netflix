@@ -53,6 +53,25 @@ export const getMovieCredits = async (movieId) => {
     return response.data;
 };
 
+export const getMovieVideos = async (movieId) => {
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}/videos`, {
+        params: { language: 'ko-KR' },
+        headers,
+    });
+    return response.data;
+};
+
+export const getMovieSearch = async (query) => {
+    const response = await axios.get(
+        `${BASE_URL}/search/movie?query=${query}`,
+        {
+            params: { language: 'ko-KR' },
+            headers,
+        }
+    );
+    return response.data;
+};
+
 // TV Shows
 export const getPopularTvShows = async () => {
     const params = { language: 'ko-KR', page: 1, region: 'KR' };
