@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getMovieSearch } from '../api';
 import { styled } from 'styled-components';
 import { Loader } from './Movie';
 import { getImages } from '../helper';
+import { motion } from 'framer-motion';
+import MovieBoxInfo from './../Components/MovieBoxInfo';
 
 const SearchWrapper = styled.div`
     width: 100%;
@@ -20,29 +22,40 @@ const SearchItems = styled.div`
     height: 100%;
     transform: translateY(15%);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 24px;
     justify-content: center;
     align-items: center;
 `;
 
-const SearchItem = styled.div`
-    width: 250px;
-    height: 280px;
-    position: relative;
+const SearchItem = styled(motion.div)`
+    min-height: 320px;
+    max-height: 320px;
+    overflow-y: scroll;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
 `;
 
 const SearchItemImg = styled.img`
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
 `;
+
+export const searchBoxVariants = {
+    initial: {
+        scale: 1,
+    },
+    hover: {
+        scale: 1.15,
+        y: -50,
+        zIndex: 2,
+    },
+};
 
 export default function Search() {
     const { query } = useParams();
+    const navigate = useNavigate();
 
     const { data, isLoading } = useQuery(['movies', 'searchData'], () => {
         return getMovieSearch(query);
@@ -58,16 +71,36 @@ export default function Search() {
                 <SearchItems>
                     {data.results.map((item) => {
                         return (
-                            <SearchItem>
-                                {isLoading ? (
-                                    'Image is Loading...'
+                            <SearchItem
+                                variants={searchBoxVariants}
+                                initial="initial"
+                                whileHover="hover"
+                                transition={{
+                                    type: 'linear',
+                                    delay: 0.3,
+                                }}
+                                key={item.id}
+                                onClick={() => {
+                                    navigate(`/movie/${item.id}`);
+                                }}
+                            >
+                                {item.poster_path || item.backdrop_path ? (
+                                    <>
+                                        <SearchItemImg
+                                            src={getImages(item.poster_path)}
+                                        />
+                                        <MovieBoxInfo item={item} />
+                                    </>
                                 ) : (
-                                    <SearchItemImg
-                                        src={getImages(item.poster_path)}
-                                        alt={item.title}
-                                    />
+                                    <p
+                                        style={{
+                                            fontSize: '24px',
+                                            textAlign: 'center  ',
+                                        }}
+                                    >
+                                        Image not found
+                                    </p>
                                 )}
-                                <h2>{item.title}</h2>
                             </SearchItem>
                         );
                     })}
