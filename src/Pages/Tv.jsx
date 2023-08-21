@@ -5,9 +5,9 @@ import {
     getTopRatedTvShows,
 } from '../api';
 import { useQuery } from '@tanstack/react-query';
-import TvSlider from '../Components/TvSlider';
-import TvBigPoster from '../Components/TvBigPoster';
 import { Loader, MovieWrapper } from './Movie';
+import BigPoster from '../Components/BigPoster';
+import Slider from '../Components/Slider/Slider';
 
 const TvWrapper = styled(MovieWrapper)`
     height: 100%;
@@ -27,19 +27,33 @@ export default function Tv() {
         getTopRatedTvShows
     );
 
+    const MEDIA_TYPE = 'tv';
+
     return (
         <TvWrapper>
             {popularLoading || airingTodayLoading || topRatedLoading ? (
                 <Loader>Loading ...</Loader>
             ) : (
                 <>
-                    <TvBigPoster bigPosterValues={popularTvShows.results[0]} />
-                    <TvSlider data={popularTvShows} sliderTitle="Popular" />
-                    <TvSlider
+                    <BigPoster
+                        bigPosterValues={popularTvShows.results[0]}
+                        mediaType={MEDIA_TYPE}
+                    />
+                    <Slider
+                        data={popularTvShows}
+                        sliderTitle="Popular"
+                        mediaType={MEDIA_TYPE}
+                    />
+                    <Slider
                         data={airingTodayTvShows}
                         sliderTitle="Airing_Today"
+                        mediaType={MEDIA_TYPE}
                     />
-                    <TvSlider data={topRatedTvShows} sliderTitle="Top_Rated" />
+                    <Slider
+                        data={topRatedTvShows}
+                        sliderTitle="Top_Rated"
+                        mediaType={MEDIA_TYPE}
+                    />
                 </>
             )}
         </TvWrapper>

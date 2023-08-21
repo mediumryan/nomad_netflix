@@ -5,8 +5,8 @@ import {
     getTopRatedMovies,
 } from '../api';
 import { useQuery } from '@tanstack/react-query';
-import MovieSlider from '../Components/MovieSlider';
-import MovieBigPoster from '../Components/MovieBigPoster';
+import BigPoster from '../Components/BigPoster';
+import Slider from '../Components/Slider/Slider';
 
 export const MovieWrapper = styled.div`
     height: 100%;
@@ -33,24 +33,33 @@ export default function Movie() {
         getPopularMovies
     );
 
+    const MEDIA_TYPE = 'movie';
+
     return (
         <MovieWrapper>
             {nowPlayingLoading || topRatedLoading || popularLoading ? (
                 <Loader>Loading ...</Loader>
             ) : (
                 <>
-                    <MovieBigPoster
+                    <BigPoster
                         bigPosterValues={nowPlayingMovies.results[0]}
+                        mediaType={MEDIA_TYPE}
                     />
-                    <MovieSlider
+                    <Slider
                         data={nowPlayingMovies}
                         sliderTitle="Now_Playing"
+                        mediaType={MEDIA_TYPE}
                     />
-                    <MovieSlider
+                    <Slider
                         data={topRatedMovies}
                         sliderTitle="Top_Rated"
+                        mediaType={MEDIA_TYPE}
                     />
-                    <MovieSlider data={popularMovies} sliderTitle="Up_Coming" />
+                    <Slider
+                        data={popularMovies}
+                        sliderTitle="Up_Coming"
+                        mediaType={MEDIA_TYPE}
+                    />
                 </>
             )}
         </MovieWrapper>

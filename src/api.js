@@ -61,17 +61,6 @@ export const getMovieVideos = async (movieId) => {
     return response.data;
 };
 
-export const getMovieSearch = async (query) => {
-    const response = await axios.get(
-        `${BASE_URL}/search/movie?query=${query}`,
-        {
-            params: { language: 'ko-KR' },
-            headers,
-        }
-    );
-    return response.data;
-};
-
 // TV Shows
 export const getPopularTvShows = async () => {
     const params = { language: 'ko-KR', page: 1, region: 'KR' };
@@ -97,5 +86,42 @@ export const getTopRatedTvShows = async () => {
         params,
         headers,
     });
+    return response.data;
+};
+
+export const getTvShowDetails = async (tvShowId) => {
+    const response = await axios.get(`${BASE_URL}/tv/${tvShowId}`, {
+        params: { language: 'ko-KR' },
+        headers,
+    });
+    return response.data;
+};
+
+export const getTvShowCredits = async (tvShowId) => {
+    const response = await axios.get(`${BASE_URL}/tv/${tvShowId}/credits`, {
+        params: { language: 'ko-KR' },
+        headers,
+    });
+    return response.data;
+};
+
+export const getTvShowVideos = async (tvShowId) => {
+    const response = await axios.get(`${BASE_URL}/tv/${tvShowId}/videos`, {
+        params: { language: 'ko-KR' },
+        headers,
+    });
+    return response.data;
+};
+
+// search tv & movie
+
+export const getSearch = async (query) => {
+    const response = await axios.get(
+        `${BASE_URL}/search/multi?query=${query}`,
+        {
+            params: { language: 'ko-KR' },
+            headers,
+        }
+    );
     return response.data;
 };

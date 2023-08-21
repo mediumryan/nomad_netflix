@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieCredits, getMovieDetails, getMovieVideos } from '../api';
+import { getTvShowCredits, getTvShowDetails, getTvShowVideos } from '../api';
 import { styled } from 'styled-components';
 import { getImages } from '../helper';
 import { motion } from 'framer-motion';
@@ -163,21 +163,21 @@ export default function Detail() {
     const { id } = useParams();
     // 데이터 받아오기
     const { data: detailData, isLoading: detailIsLoading } = useQuery(
-        ['movies', 'detailData'],
+        ['tv', 'detailData'],
         () => {
-            return getMovieDetails(id);
+            return getTvShowDetails(id);
         }
     );
     const { data: creditsData, isLoading: creditsIsLoading } = useQuery(
-        ['movies', 'creditsData'],
+        ['tv', 'creditsData'],
         () => {
-            return getMovieCredits(id);
+            return getTvShowCredits(id);
         }
     );
     const { data: videosData, isLoading: videosIsLoading } = useQuery(
-        ['movies', 'movieVideos'],
+        ['tv', 'videos'],
         () => {
-            return getMovieVideos(id);
+            return getTvShowVideos(id);
         }
     );
     // 스토리 on/off
@@ -195,6 +195,8 @@ export default function Detail() {
         setVideoIndex((prev) => (prev === videoOffset ? 0 : prev + 1));
     };
 
+    console.log(detailData);
+
     return (
         <DetailWrapper>
             {detailIsLoading || creditsIsLoading || videosIsLoading ? (
@@ -204,7 +206,7 @@ export default function Detail() {
                     <DetailImgBox>
                         <DetailImg
                             src={getImages(detailData.poster_path)}
-                            alt={detailData.title}
+                            alt={detailData.name}
                             onStory={onStory}
                         />
                         <button onClick={toggleStory}>
@@ -215,7 +217,7 @@ export default function Detail() {
                                 "
                                 {detailData.tagline
                                     ? detailData.tagline
-                                    : detailData.title}
+                                    : detailData.name}
                                 "
                             </h2>
                             <hr
@@ -229,14 +231,14 @@ export default function Detail() {
                         </DetailOverView>
                     </DetailImgBox>
                     <DetailDescription>
-                        <h2>{detailData.title}</h2>
+                        <h2>{detailData.name}</h2>
                         <hr
                             style={{
                                 marginTop: '24px',
                                 marginBottom: '24px',
                             }}
                         />
-                        <p>원제 : {detailData.original_title}</p>
+                        <p>원제 : {detailData.original_name}</p>
                         <p>
                             장르 :
                             {detailData.genres
@@ -244,11 +246,7 @@ export default function Detail() {
                                 .join(', ')}
                         </p>
                         <p>개봉일 : {detailData.release_date}</p>
-                        <p>
-                            상영시간 : {Math.floor(detailData.runtime / 60)}
-                            시간
-                            {Math.floor(detailData.runtime % 60)}분
-                        </p>
+                        <p>런타임 : {detailData.episode_run_time}분</p>
                         <p style={{ lineHeight: '1.5' }}>
                             출연진 :{' '}
                             {creditsData.cast

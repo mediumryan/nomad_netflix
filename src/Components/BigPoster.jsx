@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 import { getImages } from '../helper';
-import { GoToDetail } from './MovieSlider';
+import { GoToDetail } from './Slider/Slider';
 import { useNavigate } from 'react-router-dom';
 import { FaInfoCircle, FaPlayCircle } from 'react-icons/fa';
 
-export const BigPoster = styled(motion.div)`
+export const BigPosterContainer = styled(motion.div)`
     background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)),
         url(${(props) => props.bg_path});
     background-size: cover;
-    background-position: center center;
+    background-position: center;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -46,12 +46,16 @@ export const BigGoToDetail = styled(GoToDetail)`
 
 export const BigPlayBtn = styled(BigGoToDetail)``;
 
-export default function MovieBigPoster({ bigPosterValues }) {
+export default function BigPoster({ bigPosterValues, mediaType }) {
     const navigate = useNavigate();
 
     return (
-        <BigPoster bg_path={getImages(bigPosterValues.poster_path)}>
-            <BigTitle>{bigPosterValues.title}</BigTitle>
+        <BigPosterContainer bg_path={getImages(bigPosterValues.poster_path)}>
+            <BigTitle>
+                {mediaType === 'movie'
+                    ? bigPosterValues.title
+                    : bigPosterValues.name}
+            </BigTitle>
             <BigStory>{bigPosterValues.overview}</BigStory>
             <BigBtnBox>
                 <BigPlayBtn>
@@ -59,12 +63,14 @@ export default function MovieBigPoster({ bigPosterValues }) {
                 </BigPlayBtn>
                 <BigGoToDetail
                     onClick={() => {
-                        navigate(`/detail/${bigPosterValues.id}`);
+                        mediaType === 'movie'
+                            ? navigate(`/movie/detail/${bigPosterValues.id}`)
+                            : navigate(`/tv/detail/${bigPosterValues.id}`);
                     }}
                 >
                     <FaInfoCircle />
                 </BigGoToDetail>
             </BigBtnBox>
-        </BigPoster>
+        </BigPosterContainer>
     );
 }

@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { FaAngleLeft, FaAngleRight, FaInfoCircle } from 'react-icons/fa';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { getImages } from '../helper';
-import MovieBoxInfo from './MovieBoxInfo';
+import { getImages } from './../../helper';
+import BoxInfo from './BoxInfo';
 
 // styled-components
 export const SliderBox = styled(motion.div)`
@@ -80,6 +80,8 @@ export const SelectedBox = styled(motion.div)`
     }
     p {
         font-size: 20px;
+        max-height: 40%;
+        overflow-y: scroll;
     }
     span {
         display: block;
@@ -157,7 +159,7 @@ export const boxVariants = {
     },
 };
 
-export default function Slider({ data, sliderTitle }) {
+export default function Slider({ data, sliderTitle, mediaType }) {
     // 슬라이더
     const offset = 6;
     const maxPage = Math.floor(data?.results.length / offset) - 1;
@@ -184,10 +186,12 @@ export default function Slider({ data, sliderTitle }) {
 
     // 슬라이더 모달
     const navigate = useNavigate();
-    const selectedMatch = useMatch(`/movie/:id`);
+    const selectedMatch = useMatch(`/${mediaType}/:id`);
     const selectedItem =
         selectedMatch?.params.id &&
         data?.results.find((a) => a.id + '' === selectedMatch?.params.id);
+
+    console.log(selectedItem);
 
     return (
         <>
@@ -241,10 +245,12 @@ export default function Slider({ data, sliderTitle }) {
                                         key={item.id}
                                         bg={getImages(item.poster_path)}
                                         onClick={() => {
-                                            navigate(`/movie/${item.id}`);
+                                            navigate(
+                                                `/${mediaType}/${item.id}`
+                                            );
                                         }}
                                     >
-                                        <MovieBoxInfo item={item} />
+                                        <BoxInfo item={item} />
                                     </Box>
                                 );
                             })}
@@ -261,12 +267,18 @@ export default function Slider({ data, sliderTitle }) {
                             >
                                 <CloseBtn
                                     onClick={() => {
-                                        navigate('/');
+                                        mediaType === 'movie'
+                                            ? navigate('/')
+                                            : navigate('/tv');
                                     }}
                                 >
                                     X
                                 </CloseBtn>
-                                <h2>{selectedItem.title}</h2>
+                                <h2>
+                                    {mediaType === 'movie'
+                                        ? selectedItem.title
+                                        : selectedItem.name}
+                                </h2>
                                 <p>{selectedItem.overview}</p>
                                 <hr
                                     style={{
@@ -275,7 +287,10 @@ export default function Slider({ data, sliderTitle }) {
                                     }}
                                 />
                                 <span>
-                                    원제 : {selectedItem.original_title}
+                                    원제 :{' '}
+                                    {mediaType === 'movie'
+                                        ? selectedItem.original_title
+                                        : selectedItem.original_name}
                                 </span>
                                 <span>평점 : {selectedItem.vote_average}</span>
                                 <span>
@@ -283,7 +298,13 @@ export default function Slider({ data, sliderTitle }) {
                                 </span>
                                 <GoToDetail
                                     onClick={() => {
-                                        navigate(`/detail/${selectedItem.id}`);
+                                        mediaType === 'movie'
+                                            ? navigate(
+                                                  `/movie/detail/${selectedItem.id}`
+                                              )
+                                            : navigate(
+                                                  `/tv/detail/${selectedItem.id}`
+                                              );
                                     }}
                                 >
                                     <FaInfoCircle />
@@ -295,7 +316,9 @@ export default function Slider({ data, sliderTitle }) {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => {
-                                navigate('/');
+                                mediaType === 'movie'
+                                    ? navigate('/')
+                                    : navigate('/tv');
                             }}
                         />
                     </>
