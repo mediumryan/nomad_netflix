@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMatch, useParams } from 'react-router-dom';
+import { useMatch, useNavigate, useParams } from 'react-router-dom';
 import { getSearch } from '../api';
 import { styled } from 'styled-components';
 import { Loader } from './Movie';
-import SearchItem from '../Components/Search/SearchItem';
 import SearchSelectedItem from '../Components/Search/SearchSelectedItem';
 import { AnimatePresence } from 'framer-motion';
+import { Box, boxVariants } from '../Components/Slider/Slider';
+import BoxInfo from '../Components/Slider/BoxInfo';
+import { getImages } from '../helper';
 
 const SearchWrapper = styled.div`
     width: 100%;
@@ -30,6 +32,7 @@ const SearchItems = styled.div`
 
 export default function Search() {
     const { query } = useParams();
+    const navigate = useNavigate();
 
     const { data, isLoading } = useQuery(['movies', 'searchData'], () => {
         return getSearch(query);
@@ -41,7 +44,6 @@ export default function Search() {
     const selectedItem =
         selectedMatch &&
         data?.results.find((a) => a.id + '' === selectedMatch?.params.id);
-    console.log(data);
 
     return (
         <SearchWrapper>
@@ -51,11 +53,30 @@ export default function Search() {
                 <SearchItems>
                     {data.results.map((item) => {
                         return (
-                            <SearchItem
+                            <Box
+                                layoutId={item.id + ''}
+                                variants={boxVariants}
+                                initial="initial"
+                                whileHover="hover"
+                                transition={{
+                                    type: 'linear',
+                                    delay: 0.3,
+                                }}
                                 key={item.id}
-                                item={item}
-                                query={query}
-                            />
+                                bg={getImages(
+                                    item.poster_path
+                                        ? item.poster_path
+                                        : item.backdrop_path
+                                )}
+                                onClick={() => {
+                                    navigate(`/search/${query}/${item.id}`);
+                                }}
+                            >
+                                <BoxInfo
+                                    item={item}
+                                    mediaType={item.media_type}
+                                />
+                            </Box>
                         );
                     })}
                 </SearchItems>

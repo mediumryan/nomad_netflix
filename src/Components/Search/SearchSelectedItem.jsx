@@ -30,7 +30,11 @@ export default function SearchSelectedItem({
                     >
                         X
                     </CloseBtn>
-                    <h2>{selectedItem.title}</h2>
+                    <h2>
+                        {selectedItem.media_type === 'movie'
+                            ? selectedItem.title
+                            : selectedItem.name}
+                    </h2>
                     <p>{selectedItem.overview}</p>
                     <hr
                         style={{
@@ -38,12 +42,19 @@ export default function SearchSelectedItem({
                             marginBottom: '24px',
                         }}
                     />
-                    <span>원제 : {selectedItem.original_title}</span>
-                    <span>평점 : {selectedItem.vote_average}</span>
+                    <span>
+                        원제 :{' '}
+                        {selectedItem.media_type === 'movie'
+                            ? selectedItem.original_title
+                            : selectedItem.original_name}
+                    </span>
+                    <span>평점 : {selectedItem.vote_average.toFixed(1)}</span>
                     <span>청불 : {selectedItem.adult ? 'O' : 'X'}</span>
                     <GoToDetail
                         onClick={() => {
-                            navigate(`/detail/${selectedItem.id}`);
+                            selectedItem.media_type === 'movie'
+                                ? navigate(`/movie/detail/${selectedItem.id}`)
+                                : navigate(`/tv/detail/${selectedItem.id}`);
                         }}
                     >
                         <FaInfoCircle />

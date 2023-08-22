@@ -55,7 +55,7 @@ export default function SearchItem({ item, query }) {
                             item.media_type === 'movie' ? item.title : item.name
                         }
                     />
-                    <BoxInfo item={item} />
+                    <BoxInfo item={item} mediaType={item.media_type} />
                 </>
             ) : (
                 <p

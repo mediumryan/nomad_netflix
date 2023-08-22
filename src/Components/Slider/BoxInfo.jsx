@@ -63,10 +63,10 @@ export const infoVariants = {
     },
 };
 
-export default function BoxInfo({ item }) {
+export default function BoxInfo({ item, mediaType }) {
     return (
         <Info variants={infoVariants}>
-            <h4>{item.title}</h4>
+            <h4>{mediaType === 'movie' ? item.title : item.name}</h4>
             <InfoBtnBox>
                 <InfoBtnLeft>
                     <InfoBtn>
