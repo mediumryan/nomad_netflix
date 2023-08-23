@@ -61,16 +61,20 @@ export const boxVariants = {
 };
 
 export default function SliderRow({
+    sliderTitle,
     back,
     sliderPage,
     data,
     offset,
     mediaType,
-    toggleLeaving,
+    setLeaving,
 }) {
     const navigate = useNavigate();
     return (
-        <AnimatePresence onExitComplete={toggleLeaving} custom={back}>
+        <AnimatePresence
+            onExitComplete={() => setTimeout(setLeaving(false), 100)}
+            custom={back}
+        >
             <Row
                 custom={back}
                 variants={rowVariants}
@@ -88,7 +92,7 @@ export default function SliderRow({
                     .map((item) => {
                         return (
                             <Box
-                                layoutId={item.id + ''}
+                                layoutId={sliderTitle + item.id}
                                 variants={boxVariants}
                                 initial="initial"
                                 whileHover="hover"

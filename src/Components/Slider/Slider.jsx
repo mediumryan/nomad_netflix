@@ -4,7 +4,7 @@ import { useMatch } from 'react-router-dom';
 import { styled } from 'styled-components';
 import SliderRow from './SliderRow';
 import SelectedItem from './SelectedItem';
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import SliderBtns from './SliderBtns';
 
 // styled-components
 export const SliderBox = styled(motion.div)`
@@ -19,16 +19,6 @@ export const SliderBox = styled(motion.div)`
     }
 `;
 
-export const SliderBtn = styled(motion.button)`
-    font-size: 36px;
-    background: none;
-    color: ${(props) => props.theme.red};
-    transition: 300ms all;
-    &:hover {
-        color: ${(props) => props.theme.white.lighter};
-    }
-`;
-
 export default function Slider({ data, sliderTitle, mediaType }) {
     // 슬라이더
     const offset = 6;
@@ -37,22 +27,18 @@ export default function Slider({ data, sliderTitle, mediaType }) {
     const [back, setBack] = useState(false);
     const [leaving, setLeaving] = useState(false);
 
-    const toggleLeaving = () => {
-        setLeaving((prev) => !prev);
-    };
-
     const goNext = () => {
         if (leaving) {
             return;
         }
-        toggleLeaving();
+        setLeaving(true);
         setSliderPage((prev) => (prev === maxPage ? 0 : prev + 1));
     };
     const goPrev = () => {
         if (leaving) {
             return;
         }
-        toggleLeaving();
+        setLeaving(true);
         setSliderPage((prev) => (prev === 0 ? maxPage : prev - 1));
     };
 
@@ -69,34 +55,26 @@ export default function Slider({ data, sliderTitle, mediaType }) {
         <>
             <SliderBox>
                 <h2>{sliderTitle}</h2>
-                <SliderBtn>
-                    <FaAngleLeft
-                        onClick={() => {
-                            goPrev();
-                            setBack(true);
-                        }}
-                    />
-                </SliderBtn>
-                <SliderBtn>
-                    <FaAngleRight
-                        onClick={() => {
-                            goNext();
-                            setBack(false);
-                        }}
-                    />
-                </SliderBtn>
+                <SliderBtns
+                    goPrev={goPrev}
+                    goNext={goNext}
+                    setBack={setBack}
+                    leaving={leaving}
+                />
                 <SliderRow
+                    sliderTitle={sliderTitle}
                     back={back}
                     sliderPage={sliderPage}
                     data={data}
                     offset={offset}
                     mediaType={mediaType}
-                    toggleLeaving={toggleLeaving}
+                    setLeaving={setLeaving}
                 />
             </SliderBox>
             <AnimatePresence>
                 {selectedMatch ? (
                     <SelectedItem
+                        sliderTitle={sliderTitle}
                         selectedMatch={selectedMatch}
                         data={data}
                         mediaType={mediaType}

@@ -81,7 +81,12 @@ export const SelectedLayout = styled(motion.div)`
     background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export default function SelectedItem({ selectedMatch, data, mediaType }) {
+export default function SelectedItem({
+    sliderTitle,
+    selectedMatch,
+    data,
+    mediaType,
+}) {
     const navigate = useNavigate();
 
     const selectedItem =
@@ -92,7 +97,7 @@ export default function SelectedItem({ selectedMatch, data, mediaType }) {
         <>
             {selectedItem && (
                 <SelectedBox
-                    layoutId={selectedMatch.params.id}
+                    layoutId={sliderTitle + selectedMatch.params.id}
                     bg={getImages(selectedItem.poster_path, 'w500')}
                 >
                     <CloseBtn
