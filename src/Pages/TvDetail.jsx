@@ -159,6 +159,17 @@ const Videos = styled.iframe`
     text-align: center;
 `;
 
+const TvLogo = styled.img`
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
+    padding: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 4px 4px 4px 2px #8ea292;
+    box-shadow: 4px 4px 4px 2px #8ea292;
+    background-color: ${(props) => props.theme.white.darker};
+`;
+
 export default function Detail() {
     const { id } = useParams();
     // 데이터 받아오기
@@ -245,14 +256,22 @@ export default function Detail() {
                                 .map((genre) => genre.name)
                                 .join(', ')}
                         </p>
-                        <p>개봉일 : {detailData.release_date}</p>
-                        <p>런타임 : {detailData.episode_run_time}분</p>
+                        <p>
+                            {detailData.release_date
+                                ? `개봉일 : ${detailData.release_date}`
+                                : null}
+                        </p>
+                        <p>
+                            {detailData.episode_run_time.length > 0 &&
+                                `런타임 : ${detailData.episode_run_time}분`}
+                        </p>
                         <p style={{ lineHeight: '1.5' }}>
-                            출연진 :{' '}
-                            {creditsData.cast
+                            {creditsData.cast.length > 0 &&
+                                `출연진 :
+                            ${creditsData.cast
                                 .slice(0, 4)
                                 .map((cast) => cast.name)
-                                .join(', ')}
+                                .join(', ')}`}
                         </p>
                         <p className="vote">
                             평점 : {detailData.vote_average.toFixed(1)}
@@ -271,6 +290,18 @@ export default function Detail() {
                                     }
                                 )}
                             </Stars>
+                        </p>
+                        <p>
+                            {detailData.production_companies.length > 0 &&
+                                detailData.production_companies[0].logo_path &&
+                                detailData.production_companies.map(
+                                    (company) => (
+                                        <TvLogo
+                                            src={`https://image.tmdb.org/t/p/w500${company.logo_path}`}
+                                            key={company.id}
+                                        />
+                                    )
+                                )}
                         </p>
                     </DetailDescription>
                     <VideoBox>

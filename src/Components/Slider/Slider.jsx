@@ -81,6 +81,7 @@ export default function Slider({ data, sliderTitle, mediaType }) {
                     />
                 ) : null}
             </AnimatePresence>
+            xw
         </>
     );
 }
