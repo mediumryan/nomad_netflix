@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 import { getImages } from '../helper';
-import { GoToDetail } from './Slider/Slider';
+import { GoToDetail } from './Slider/SelectedItem';
 import { useNavigate } from 'react-router-dom';
 import { FaInfoCircle, FaPlayCircle } from 'react-icons/fa';
 

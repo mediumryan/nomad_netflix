@@ -4,7 +4,7 @@ import {
     GoToDetail,
     SelectedBox,
     SelectedLayout,
-} from '../Slider/Slider';
+} from '../Slider/SelectedItem';
 import { getImages } from '../../helper';
 import { useNavigate } from 'react-router-dom';
 import { FaInfoCircle } from 'react-icons/fa';

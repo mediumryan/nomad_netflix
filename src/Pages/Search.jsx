@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 import { Loader } from './Movie';
 import SearchSelectedItem from '../Components/Search/SearchSelectedItem';
 import { AnimatePresence } from 'framer-motion';
-import { Box, boxVariants } from '../Components/Slider/Slider';
+import { Box, boxVariants } from '../Components/Slider/SliderRow';
 import BoxInfo from '../Components/Slider/BoxInfo';
 import { getImages } from '../helper';
 
