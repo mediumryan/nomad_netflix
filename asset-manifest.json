@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/nomad_netflix/static/css/main.93b0dfc3.css",
+    "main.js": "/nomad_netflix/static/js/main.a4aab3b7.js",
+    "index.html": "/nomad_netflix/index.html",
+    "main.93b0dfc3.css.map": "/nomad_netflix/static/css/main.93b0dfc3.css.map",
+    "main.a4aab3b7.js.map": "/nomad_netflix/static/js/main.a4aab3b7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.93b0dfc3.css",
+    "static/js/main.a4aab3b7.js"
+  ]
+}
