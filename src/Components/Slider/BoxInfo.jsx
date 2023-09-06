@@ -15,9 +15,9 @@ export const Info = styled(motion.div)`
     position: absolute;
     width: 100%;
     bottom: 0;
-    padding: 0 24px;
+    padding: 0 var(--padding-medium-large);
     h4 {
-        margin: 12px 0;
+        margin: var(--margin-medium) 0;
     }
 `;
 
@@ -25,17 +25,15 @@ export const InfoBtnBox = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0 12px 0;
+    padding: 0 0 var(--padding-medium) 0;
 `;
-
-export const InfoBtnLeft = styled.div``;
 
 export const InfoBtn = styled.button`
     border-radius: 50%;
     width: 24px;
     height: 24px;
     padding: 4px;
-    margin: 4px;
+    margin: var(--padding-micro);
     color: ${(props) => props.theme.white.lighter};
     background: none;
     border: 1px solid ${(props) => props.theme.white.lighter};
@@ -68,7 +66,7 @@ export default function BoxInfo({ item, mediaType }) {
         <Info variants={infoVariants}>
             <h4>{mediaType === 'movie' ? item.title : item.name}</h4>
             <InfoBtnBox>
-                <InfoBtnLeft>
+                <div>
                     <InfoBtn>
                         <FaPlay />
                     </InfoBtn>
@@ -81,7 +79,7 @@ export default function BoxInfo({ item, mediaType }) {
                     <InfoBtn>
                         <FaThumbsDown />
                     </InfoBtn>
-                </InfoBtnLeft>
+                </div>
                 <InfoBtn>
                     <FaAngleDown />
                 </InfoBtn>

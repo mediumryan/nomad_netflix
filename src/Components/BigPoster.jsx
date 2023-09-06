@@ -18,14 +18,14 @@ export const BigPosterContainer = styled(motion.div)`
 `;
 
 export const BigTitle = styled.h2`
-    padding-left: 20px;
-    font-size: 48px;
-    margin-bottom: 48px;
+    padding-left: var(--padding-medium-large);
+    font-size: var(--font-size-large);
+    margin-bottom: var(--margin-very-large);
 `;
 
 export const BigStory = styled.p`
-    padding-left: 20px;
-    font-size: 18px;
+    padding-left: var(--padding-medium-large);
+    font-size: var(--font-size-small);
     width: 50%;
     line-height: 1.5;
 `;
@@ -36,7 +36,7 @@ export const BigBtnBox = styled.div`
 `;
 
 export const BigGoToDetail = styled(GoToDetail)`
-    margin: 24px 0 0 24px;
+    margin: var(--margin-medium-large) 0 0 var(--margin-medium-large);
     width: 180px;
     transition: 300ms all;
     &:hover {

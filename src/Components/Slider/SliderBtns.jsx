@@ -3,7 +3,7 @@ import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { styled } from 'styled-components';
 
 export const SliderBtn = styled(motion.button)`
-    font-size: 36px;
+    font-size: var(--font-size-medium-large);
     background: none;
     color: ${(props) => props.theme.red};
     transition: 300ms all;

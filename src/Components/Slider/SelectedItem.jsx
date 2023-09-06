@@ -13,7 +13,7 @@ export const SelectedBox = styled(motion.div)`
     left: 0;
     right: 0;
     margin: 0 auto;
-    padding: 48px;
+    padding: var(--padding-very-large);
     border-radius: 20px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)),
         url(${(props) => props.bg});
@@ -22,26 +22,26 @@ export const SelectedBox = styled(motion.div)`
     -webkit-box-shadow: 8px 8px 8px 4px #8ea292;
     box-shadow: 8px 8px 8px 4px #8ea292;
     h2 {
-        font-size: 32px;
+        font-size: var(--font-size-medium-large);
         font-weight: 700;
-        margin-bottom: 24px;
+        margin-bottom: var(--margin-medium-large);
         text-align: center;
     }
     p {
-        font-size: 20px;
+        font-size: var(--font-size-small);
         max-height: 30%;
         overflow-y: scroll;
     }
     span {
         display: block;
-        margin-bottom: 24px;
-        font-size: 20px;
+        margin-bottom: var(--margin-medium-large);
+        font-size: var(--font-size-small);
     }
 `;
 
 export const CloseBtn = styled.button`
-    font-size: 22px;
-    padding: 8px;
+    font-size: var(--font-size-small);
+    padding: var(--padding-small);
     background: none;
     color: ${(props) => props.theme.white.lighter};
     position: absolute;
@@ -58,8 +58,8 @@ export const GoToDetail = styled.button`
     justify-content: center;
     align-items: center;
     width: 50%;
-    font-size: 22px;
-    padding: 8px 0;
+    font-size: var(--font-size-medium);
+    padding: var(--padding-small) 0;
     margin: 0 auto;
     border-radius: 4px;
     color: ${(props) => props.theme.black.lighter};

@@ -13,8 +13,8 @@ export const SliderBox = styled(motion.div)`
     margin-bottom: 330px;
     h2 {
         color: ${(props) => props.theme.white.darker};
-        font-size: 36px;
-        margin: 0 0 12px 12px;
+        font-size: var(--font-size-medium-large);
+        margin: 0 0 var(--margin-medium) var(--margin-medium);
         cursor: default;
     }
 `;
@@ -44,12 +44,6 @@ export default function Slider({ data, sliderTitle, mediaType }) {
 
     // 슬라이더 모달
     const selectedMatch = useMatch(`/${mediaType}/:id`);
-
-    // console
-    console.log(`max-page : ${maxPage}`);
-    console.log(`slide-page : ${sliderPage}`);
-    console.log(`leaving : ${leaving}`);
-    console.log(`back : ${back}`);
 
     return (
         <>
@@ -81,7 +75,6 @@ export default function Slider({ data, sliderTitle, mediaType }) {
                     />
                 ) : null}
             </AnimatePresence>
-            xw
         </>
     );
 }

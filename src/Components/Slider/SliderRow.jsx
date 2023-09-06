@@ -6,7 +6,7 @@ import BoxInfo from './BoxInfo';
 
 export const Row = styled(motion.div)`
     display: grid;
-    gap: 5px;
+    gap: var(--margin-micro);
     grid-template-columns: repeat(6, 1fr);
     position: absolute;
     width: 100%;
@@ -106,7 +106,7 @@ export default function SliderRow({
                                     navigate(`/${mediaType}/${item.id}`);
                                 }}
                             >
-                                <BoxInfo item={item} />
+                                <BoxInfo item={item} mediaType={mediaType} />
                             </Box>
                         );
                     })}

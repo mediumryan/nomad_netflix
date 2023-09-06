@@ -19,6 +19,11 @@ const SearchItemImg = styled.img`
     height: 100%;
 `;
 
+const NoImage = styled.p`
+    font-size: var(--font-size-medium);
+    text-align: center;
+`;
+
 export const searchBoxVariants = {
     initial: {
         scale: 1,
@@ -58,14 +63,7 @@ export default function SearchItem({ item, query }) {
                     <BoxInfo item={item} mediaType={item.media_type} />
                 </>
             ) : (
-                <p
-                    style={{
-                        fontSize: '24px',
-                        textAlign: 'center  ',
-                    }}
-                >
-                    Image not found
-                </p>
+                <NoImage>Image not found</NoImage>
             )}
         </SearchItemWrapper>
     );
