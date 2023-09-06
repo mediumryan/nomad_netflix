@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import { Link, useMatch } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
+import { menuState } from '../../atom';
 
 const Items = styled(motion.div)`
-    display: flex;
+    display: ${(props) => (props.active === true ? 'flex' : 'none')};
     align-items: center;
 `;
 
@@ -32,9 +34,10 @@ export default function HeaderItems() {
     // 빨간 원 (isHere) 위치 조작을 위한 라우트 매칭
     const movieMatch = useMatch('/');
     const tvMatch = useMatch('/tv');
+    const menu = useRecoilValue(menuState);
 
     return (
-        <Items>
+        <Items active={menu}>
             <Item to="/">
                 Movies
                 {movieMatch && <IsHere layoutId="isHere" />}

@@ -33,6 +33,9 @@ export const BigStory = styled.p`
 export const BigBtnBox = styled.div`
     display: flex;
     align-items: center;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        width: 50%;
+    }
 `;
 
 export const BigGoToDetail = styled(GoToDetail)`
@@ -56,7 +59,11 @@ export default function BigPoster({ bigPosterValues, mediaType }) {
                     ? bigPosterValues.title
                     : bigPosterValues.name}
             </BigTitle>
-            <BigStory>{bigPosterValues.overview}</BigStory>
+            <BigStory>
+                {bigPosterValues.overview !== ''
+                    ? bigPosterValues.overview
+                    : 'Overview not found'}
+            </BigStory>
             <BigBtnBox>
                 <BigPlayBtn>
                     <FaPlayCircle />

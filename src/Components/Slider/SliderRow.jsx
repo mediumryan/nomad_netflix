@@ -10,6 +10,12 @@ export const Row = styled(motion.div)`
     grid-template-columns: repeat(6, 1fr);
     position: absolute;
     width: 100%;
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 `;
 
 export const Box = styled(motion.div)`

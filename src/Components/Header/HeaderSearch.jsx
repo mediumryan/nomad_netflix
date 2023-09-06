@@ -4,10 +4,12 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { FaCheck } from 'react-icons/fa';
+import { useRecoilValue } from 'recoil';
+import { menuState } from '../../atom';
 
 const SearchContainer = styled(motion.form)`
     color: white;
-    display: flex;
+    display: ${(props) => (props.active === true ? 'flex' : 'none')};
     align-items: center;
 `;
 
@@ -37,6 +39,7 @@ const SearchBtn = styled(motion.button)`
 
 const HeaderSearch = () => {
     const navigate = useNavigate();
+    const menu = useRecoilValue(menuState);
 
     // 서치바 애니메이션 토글링
     const [isSearching, setSearching] = useState(false);
@@ -52,7 +55,7 @@ const HeaderSearch = () => {
     };
 
     return (
-        <SearchContainer onSubmit={handleSubmit(submitValue)}>
+        <SearchContainer onSubmit={handleSubmit(submitValue)} active={menu}>
             <SearchIcon
                 onClick={toggleSearching}
                 initial={{

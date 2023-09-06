@@ -8,8 +8,12 @@ import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import HeaderSearch from './HeaderSearch';
 import HeaderItems from './HeaderItems';
+import { FaSortDown, FaSortUp } from 'react-icons/fa';
+import { useRecoilState } from 'recoil';
+import { menuState } from '../../atom';
 
 const HeaderWrapper = styled(motion.nav)`
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,11 +24,18 @@ const HeaderWrapper = styled(motion.nav)`
     padding: var(--padding-double-large);
     color: white;
     z-index: 999;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        flex-direction: column;
+    }
 `;
 
 const Col = styled.div`
     display: flex;
     align-items: center;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        flex-direction: column;
+        margin-bottom: var(--margin-very-large);
+    }
 `;
 
 const Logo = styled(motion.svg)`
@@ -37,6 +48,16 @@ const Logo = styled(motion.svg)`
         stroke-width: 12px;
         stroke: ${(props) => props.theme.white.darker};
     }
+`;
+
+const MenuToggleBtn = styled.button`
+    font-size: 24px;
+    color: ${(props) => props.theme.red};
+    background: none;
+    outline: none;
+    position: absolute;
+    top: 25%;
+    right: 10%;
 `;
 
 const navVariants = {
@@ -77,6 +98,11 @@ export default function Header() {
             navAnimation.start('top');
         }
     });
+    // 모바일 미디어 쿼리 메뉴버튼 토글링
+    const [menu, setMenu] = useRecoilState(menuState);
+    const toggleMenu = () => {
+        setMenu((prev) => !prev);
+    };
 
     return (
         <HeaderWrapper
@@ -102,6 +128,9 @@ export default function Header() {
                 <HeaderItems />
             </Col>
             <HeaderSearch />
+            <MenuToggleBtn onClick={toggleMenu}>
+                {menu === false ? <FaSortDown /> : <FaSortUp />}
+            </MenuToggleBtn>
         </HeaderWrapper>
     );
 }

@@ -21,7 +21,8 @@ export const SliderBox = styled(motion.div)`
 
 export default function Slider({ data, sliderTitle, mediaType }) {
     // 슬라이더
-    const offset = 6;
+    const offset =
+        window.innerWidth > 1024 ? 6 : window.innerWidth > 768 ? 3 : 2;
     const maxPage = Math.floor(data?.results.length / offset) - 1;
     const [sliderPage, setSliderPage] = useState(0);
     const [back, setBack] = useState(false);
