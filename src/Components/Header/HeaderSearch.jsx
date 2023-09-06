@@ -15,24 +15,24 @@ const SearchIcon = styled(motion.svg)`
     width: 25px;
     height: 25px;
     cursor: pointer;
-    margin-right: 12px;
+    margin-right: var(--margin-medium);
 `;
 
 const SearchBox = styled(motion.input)`
     width: 200px;
     transform-origin: left center;
-    padding: 5px 10px;
+    padding: var(--padding-double-small);
     color: white;
-    font-size: 16px;
+    font-size: var(--font-size-micro);
     background-color: transparent;
     border: 1px solid ${(props) => props.theme.white.lighter};
 `;
 
 const SearchBtn = styled(motion.button)`
     color: rgba(255, 255, 255, 1);
-    margin-left: 12px;
+    margin-left: var(--margin-medium);
     background: none;
-    font-size: 20px;
+    font-size: var(--font-size-small);
 `;
 
 const HeaderSearch = () => {

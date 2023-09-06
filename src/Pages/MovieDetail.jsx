@@ -8,20 +8,20 @@ import { motion } from 'framer-motion';
 import { Loader } from './Movie';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
-const DetailWrapper = styled.div`
+export const DetailWrapper = styled.div`
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    padding: 24px 48px;
+    padding: var(--padding-double-large);
     div {
-        margin: 24px;
+        margin: var(--margin-medium-large);
     }
 `;
 
-const DetailImgBox = styled(motion.div)`
+export const DetailImgBox = styled(motion.div)`
     transform: translateY(10%);
     height: 80%;
     width: 33%;
@@ -30,8 +30,8 @@ const DetailImgBox = styled(motion.div)`
         position: absolute;
         top: 10px;
         left: 10px;
-        font-size: 16px;
-        padding: 6px 10px;
+        font-size: var(--font-size-micro);
+        padding: var(--padding-double-small);
         border-radius: 4px;
         background: none;
         background-color: ${(props) => props.theme.red};
@@ -40,7 +40,7 @@ const DetailImgBox = styled(motion.div)`
     }
 `;
 
-const DetailImg = styled(motion.img)`
+export const DetailImg = styled(motion.img)`
     position: absolute;
     top: 0;
     left: 0;
@@ -52,44 +52,49 @@ const DetailImg = styled(motion.img)`
     transition: 700ms all;
 `;
 
-const DetailOverView = styled(motion.div)`
+export const DetailOverView = styled(motion.div)`
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 24px 48px;
+    padding: var(--padding-double-large);
     display: flex;
     flex-direction: column;
     z-index: 2;
     h2 {
-        font-size: 28px;
+        font-size: var(--font-size-medium);
         text-align: center;
     }
     p {
-        font-size: 24px;
+        font-size: var(--font-size-medium);
         line-height: 1.5;
         max-height: 65%;
         overflow-y: scroll;
     }
 `;
 
-const DetailDescription = styled.div`
+export const HorizontalLine = styled.hr`
+    margin: var(--margin-medium-large) 0;
+    width: 100%;
+`;
+
+export const DetailDescription = styled.div`
     position: relative;
     transform: translateY(10%);
     height: 80%;
     width: 33%;
-    padding: 24px 48px;
+    padding: var(--padding-double-large);
     background-color: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.95));
     h2 {
         text-align: center;
-        font-size: 32px;
+        font-size: var(--font-size-medium-large);
         font-weight: 700;
         font-style: italic;
     }
     p {
-        font-size: 20px;
-        margin-bottom: 24px;
+        font-size: var(--font-size-small);
+        margin-bottom: var(--margin-medium-large);
     }
     p.vote {
         display: flex;
@@ -97,13 +102,13 @@ const DetailDescription = styled.div`
     }
 `;
 
-const Stars = styled.div`
+export const Stars = styled.div`
     display: flex;
     align-items: center;
     margin: 0;
 `;
 
-const Star = styled(motion.span)`
+export const Star = styled(motion.span)`
     width: 8px;
     height: 20px;
     margin-right: 2px;
@@ -112,7 +117,7 @@ const Star = styled(motion.span)`
         props.colored >= props.index + 1 ? 'yellow' : 'white'};
 `;
 
-const VideoBox = styled.div`
+export const VideoBox = styled.div`
     width: 33%;
     height: 80%;
     transform: translateY(10%);
@@ -122,37 +127,37 @@ const VideoBox = styled.div`
     align-items: center;
 `;
 
-const NoVideo = styled.p`
-    font-size: 24px;
+export const NoVideo = styled.p`
+    font-size: var(--font-size-medium);
 `;
 
-const VideoContents = styled.div`
+export const VideoContents = styled.div`
     width: 100%;
     height: 100%;
 `;
 
-const VideoTitle = styled.div`
+export const VideoTitle = styled.div`
     width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 24px;
+    font-size: var(--font-size-medium);
     h2 {
         text-align: center;
         font-weight: 700;
     }
 `;
 
-const VideoSliderBtn = styled.button`
+export const VideoSliderBtn = styled.button`
     background: none;
     color: ${(props) => props.theme.white.lighter};
-    font-size: 24px;
+    font-size: var(--font-size-medium);
     &:hover {
         color: ${(props) => props.theme.red};
     }
 `;
 
-const Videos = styled.iframe`
+export const Videos = styled.iframe`
     width: 100%;
     height: 85%;
     border-radius: 20px;
@@ -186,13 +191,13 @@ export default function Detail() {
         setOnStory((prev) => !prev);
     };
     // 비디오 슬라이더
-    const videoOffset = videosData?.results.length - 1;
+    const videoMaxPage = videosData?.results.length;
     const [videoIndex, setVideoIndex] = useState(0);
     const goPrev = () => {
-        setVideoIndex((prev) => (prev === 0 ? videoOffset : prev - 1));
+        setVideoIndex((prev) => (prev === 0 ? videoMaxPage : prev - 1));
     };
     const goNext = () => {
-        setVideoIndex((prev) => (prev === videoOffset ? 0 : prev + 1));
+        setVideoIndex((prev) => (prev === videoMaxPage ? 0 : prev + 1));
     };
 
     return (
@@ -218,24 +223,13 @@ export default function Detail() {
                                     : detailData.title}
                                 "
                             </h2>
-                            <hr
-                                style={{
-                                    marginTop: '24px',
-                                    marginBottom: '24px',
-                                    width: '100%',
-                                }}
-                            />
+                            <HorizontalLine />
                             <p>{detailData.overview}</p>
                         </DetailOverView>
                     </DetailImgBox>
                     <DetailDescription>
                         <h2>{detailData.title}</h2>
-                        <hr
-                            style={{
-                                marginTop: '24px',
-                                marginBottom: '24px',
-                            }}
-                        />
+                        <HorizontalLine />
                         <p>원제 : {detailData.original_title}</p>
                         <p>
                             장르 :

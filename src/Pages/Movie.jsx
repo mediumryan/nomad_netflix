@@ -14,7 +14,7 @@ export const MovieWrapper = styled.div`
 `;
 
 export const Loader = styled.div`
-    font-size: 48px;
+    font-size: var(--font-size-large);
     text-align: center;
 `;
 
@@ -35,6 +35,11 @@ export default function Movie() {
 
     const MEDIA_TYPE = 'movie';
 
+    // 슬라이더 불러오기
+    const renderSlider = (data, title) => (
+        <Slider data={data} sliderTitle={title} mediaType={MEDIA_TYPE} />
+    );
+
     return (
         <MovieWrapper>
             {nowPlayingLoading || topRatedLoading || popularLoading ? (
@@ -45,21 +50,9 @@ export default function Movie() {
                         bigPosterValues={nowPlayingMovies.results[0]}
                         mediaType={MEDIA_TYPE}
                     />
-                    <Slider
-                        data={nowPlayingMovies}
-                        sliderTitle="Now_Playing"
-                        mediaType={MEDIA_TYPE}
-                    />
-                    <Slider
-                        data={topRatedMovies}
-                        sliderTitle="Top_Rated"
-                        mediaType={MEDIA_TYPE}
-                    />
-                    <Slider
-                        data={popularMovies}
-                        sliderTitle="Up_Coming"
-                        mediaType={MEDIA_TYPE}
-                    />
+                    {renderSlider(nowPlayingMovies, 'Now_Playing')}
+                    {renderSlider(topRatedMovies, 'Top_Rated')}
+                    {renderSlider(popularMovies, 'Up_Coming')}
                 </>
             )}
         </MovieWrapper>

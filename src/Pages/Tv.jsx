@@ -28,6 +28,10 @@ export default function Tv() {
     );
 
     const MEDIA_TYPE = 'tv';
+    // 슬라이더 불러오기
+    const renderSlider = (data, title) => (
+        <Slider data={data} sliderTitle={title} mediaType={MEDIA_TYPE} />
+    );
 
     return (
         <TvWrapper>
@@ -39,21 +43,9 @@ export default function Tv() {
                         bigPosterValues={popularTvShows.results[0]}
                         mediaType={MEDIA_TYPE}
                     />
-                    <Slider
-                        data={popularTvShows}
-                        sliderTitle="Popular"
-                        mediaType={MEDIA_TYPE}
-                    />
-                    <Slider
-                        data={airingTodayTvShows}
-                        sliderTitle="Airing_Today"
-                        mediaType={MEDIA_TYPE}
-                    />
-                    <Slider
-                        data={topRatedTvShows}
-                        sliderTitle="Top_Rated"
-                        mediaType={MEDIA_TYPE}
-                    />
+                    {renderSlider(popularTvShows, 'Popular')}
+                    {renderSlider(airingTodayTvShows, 'Airing_Today')}
+                    {renderSlider(topRatedTvShows, 'Top_Rated')}
                 </>
             )}
         </TvWrapper>

@@ -16,7 +16,7 @@ const SearchWrapper = styled.div`
     justify-content: center;
     align-items: center;
     color: white;
-    padding: 24px 48px;
+    padding: var(--padding-double-large);
 `;
 
 const SearchItems = styled.div`
@@ -25,7 +25,7 @@ const SearchItems = styled.div`
     transform: translateY(15%);
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 24px;
+    grid-gap: var(--margin-medium-large);
     justify-content: center;
     align-items: center;
 `;

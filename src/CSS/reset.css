@@ -127,3 +127,13 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+input,
+button {
+    font-family: 'Cafe24Supermagic-Bold-v1.0';
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+* {
+    box-sizing: border-box;
+}
