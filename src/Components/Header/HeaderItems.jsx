@@ -6,8 +6,11 @@ import { styled } from 'styled-components';
 import { menuState } from '../../atom';
 
 const Items = styled(motion.div)`
-    display: ${(props) => (props.active === true ? 'flex' : 'none')};
+    display: flex;
     align-items: center;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        display: ${(props) => (props.active === true ? 'flex' : 'none')};
+    }
 `;
 
 const Item = styled(Link)`

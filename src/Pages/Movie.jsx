@@ -36,6 +36,7 @@ export default function Movie() {
     const MEDIA_TYPE = 'movie';
 
     // 슬라이더 불러오기
+
     const renderSlider = (data, title) => (
         <Slider data={data} sliderTitle={title} mediaType={MEDIA_TYPE} />
     );

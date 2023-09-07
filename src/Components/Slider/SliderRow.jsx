@@ -3,6 +3,8 @@ import { styled } from 'styled-components';
 import { getImages } from '../../helper';
 import { useNavigate } from 'react-router-dom';
 import BoxInfo from './BoxInfo';
+import { useRecoilValue } from 'recoil';
+import { offsetState } from '../../atom';
 
 export const Row = styled(motion.div)`
     display: grid;
@@ -71,11 +73,12 @@ export default function SliderRow({
     back,
     sliderPage,
     data,
-    offset,
     mediaType,
     setLeaving,
 }) {
     const navigate = useNavigate();
+    const offset = useRecoilValue(offsetState);
+
     return (
         <AnimatePresence
             onExitComplete={() => setTimeout(setLeaving(false), 100)}
