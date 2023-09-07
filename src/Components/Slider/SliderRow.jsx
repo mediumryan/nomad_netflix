@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import BoxInfo from './BoxInfo';
 import { useRecoilValue } from 'recoil';
 import { offsetState } from '../../atom';
+import { useState } from 'react';
 
 export const Row = styled(motion.div)`
     display: grid;
@@ -21,9 +22,6 @@ export const Row = styled(motion.div)`
 `;
 
 export const Box = styled(motion.div)`
-    background-image: url(${(props) => props.bg});
-    background-size: cover;
-    background-position: center center;
     min-height: 320px;
     max-height: 320px;
     overflow-y: scroll;
@@ -37,6 +35,17 @@ export const Box = styled(motion.div)`
     &:last-child {
         transform-origin: center right;
     }
+`;
+
+export const BoxImg = styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+`;
+
+export const BoxImgLoader = styled.div`
+    color: ${(props) => props.theme.white.darker};
 `;
 
 // framer-motion variants
@@ -79,6 +88,11 @@ export default function SliderRow({
     const navigate = useNavigate();
     const offset = useRecoilValue(offsetState);
 
+    const [boxIsLoading, setBoxIsLoading] = useState(true);
+    const handleImageLoad = () => {
+        setBoxIsLoading(false);
+    };
+
     return (
         <AnimatePresence
             onExitComplete={() => setTimeout(setLeaving(false), 100)}
@@ -110,11 +124,17 @@ export default function SliderRow({
                                     delay: 0.3,
                                 }}
                                 key={item.id}
-                                bg={getImages(item.poster_path)}
                                 onClick={() => {
                                     navigate(`/${mediaType}/${item.id}`);
                                 }}
                             >
+                                {boxIsLoading ? (
+                                    <BoxImgLoader>'Loading...'</BoxImgLoader>
+                                ) : null}
+                                <BoxImg
+                                    src={getImages(item.poster_path)}
+                                    onLoad={handleImageLoad}
+                                />
                                 <BoxInfo item={item} mediaType={mediaType} />
                             </Box>
                         );
