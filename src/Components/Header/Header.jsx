@@ -8,7 +8,7 @@ import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import HeaderSearch from './HeaderSearch';
 import HeaderItems from './HeaderItems';
-import { FaSortDown, FaSortUp } from 'react-icons/fa';
+import { FaBackward, FaBars } from 'react-icons/fa';
 import { useRecoilState } from 'recoil';
 import { menuState } from '../../atom';
 
@@ -23,7 +23,7 @@ const HeaderWrapper = styled(motion.nav)`
     font-size: var(--font-size-micro);
     padding: var(--padding-double-large);
     color: white;
-    z-index: 999;
+    z-index: 10;
     @media only screen and (max-width: 820px) {
         flex-direction: column;
         height: ${(props) => (props.active ? '20%' : '10%')};
@@ -51,17 +51,40 @@ const Logo = styled(motion.svg)`
     }
 `;
 
-const MenuToggleBtn = styled.button`
-    display: none;
-    font-size: 24px;
+const GoBackBtn = styled(motion.button)`
+    font-size: 18px;
     color: ${(props) => props.theme.red};
     background: none;
     outline: none;
     position: absolute;
-    top: 25%;
-    right: 10%;
+    top: 85px;
+    left: 65px;
     @media only screen and (max-width: 820px) {
+        top: 45px;
+        left: 35px;
+    }
+    @media only screen and (max-width: 390px) {
+        top: 35px;
+    }
+`;
+
+const MenuToggleBtn = styled.button`
+    display: none;
+    font-size: 24px;
+    color: ${(props) =>
+        props.active ? props.theme.white.lighter : props.theme.red};
+    background: none;
+    outline: none;
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    transition: 1s cubic-bezier(0.29, 1.01, 1, -0.68);
+    @media only screen and (max-width: 820px) {
+        top: 45px;
         display: block;
+    }
+    @media only screen and (max-width: 390px) {
+        top: 30px;
     }
 `;
 
@@ -134,8 +157,11 @@ export default function Header() {
                 <HeaderItems />
             </Col>
             <HeaderSearch />
-            <MenuToggleBtn onClick={toggleMenu}>
-                {menu === false ? <FaSortDown /> : <FaSortUp />}
+            <GoBackBtn onClick={() => navigate(-1)}>
+                <FaBackward />
+            </GoBackBtn>
+            <MenuToggleBtn onClick={toggleMenu} active={menu}>
+                <FaBars />
             </MenuToggleBtn>
         </HeaderWrapper>
     );

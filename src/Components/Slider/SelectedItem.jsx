@@ -18,7 +18,7 @@ export const SelectedBox = styled(motion.div)`
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)),
         url(${(props) => props.bg});
     color: ${(props) => props.theme.white.lighter};
-    z-index: 2;
+    z-index: 11;
     -webkit-box-shadow: 8px 8px 8px 4px #8ea292;
     box-shadow: 8px 8px 8px 4px #8ea292;
     h2 {
