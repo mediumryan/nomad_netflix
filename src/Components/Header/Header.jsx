@@ -24,15 +24,16 @@ const HeaderWrapper = styled(motion.nav)`
     padding: var(--padding-double-large);
     color: white;
     z-index: 999;
-    @media only screen and (min-width: 320px) and (max-width: 768px) {
+    @media only screen and (max-width: 820px) {
         flex-direction: column;
+        height: ${(props) => (props.active ? '20%' : '10%')};
     }
 `;
 
 const Col = styled.div`
     display: flex;
     align-items: center;
-    @media only screen and (min-width: 320px) and (max-width: 768px) {
+    @media only screen and (max-width: 820px) {
         flex-direction: column;
         margin-bottom: var(--margin-very-large);
     }
@@ -59,7 +60,7 @@ const MenuToggleBtn = styled.button`
     position: absolute;
     top: 25%;
     right: 10%;
-    @media only screen and (min-width: 320px) and (max-width: 768px) {
+    @media only screen and (max-width: 820px) {
         display: block;
     }
 `;
@@ -113,6 +114,7 @@ export default function Header() {
             variants={navVariants}
             animate={navAnimation}
             initial={'top'}
+            active={menu}
         >
             <Col>
                 <Logo

@@ -8,7 +8,7 @@ import { menuState } from '../../atom';
 const Items = styled(motion.div)`
     display: flex;
     align-items: center;
-    @media only screen and (min-width: 320px) and (max-width: 768px) {
+    @media only screen and (min-width: 320px) and (max-width: 820px) {
         display: ${(props) => (props.active === true ? 'flex' : 'none')};
     }
 `;

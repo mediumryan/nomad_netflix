@@ -19,6 +19,10 @@ export const DetailWrapper = styled.div`
     div {
         margin: var(--margin-medium-large);
     }
+    @media only screen and (max-width: 820px) {
+        flex-direction: column;
+        height: 100%;
+    }
 `;
 
 export const DetailImgBox = styled(motion.div)`
@@ -37,6 +41,10 @@ export const DetailImgBox = styled(motion.div)`
         background-color: ${(props) => props.theme.red};
         color: ${(props) => props.theme.white.lighter};
         z-index: 5;
+    }
+    @media only screen and (max-width: 820px) {
+        width: 100%;
+        height: 50vh;
     }
 `;
 
@@ -100,6 +108,9 @@ export const DetailDescription = styled.div`
         display: flex;
         align-items: center;
     }
+    @media only screen and (max-width: 820px) {
+        width: 100%;
+    }
 `;
 
 export const Stars = styled.div`
@@ -125,6 +136,10 @@ export const VideoBox = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media only screen and (max-width: 820px) {
+        width: 100%;
+        height: 100vh;
+    }
 `;
 
 export const NoVideo = styled.p`
@@ -224,7 +239,11 @@ export default function Detail() {
                                 "
                             </h2>
                             <HorizontalLine />
-                            <p>{detailData.overview}</p>
+                            <p>
+                                {detailData.overview
+                                    ? detailData.overview
+                                    : 'Can not found Overview Data'}
+                            </p>
                         </DetailOverView>
                     </DetailImgBox>
                     <DetailDescription>

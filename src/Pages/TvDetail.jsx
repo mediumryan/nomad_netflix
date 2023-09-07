@@ -23,10 +23,16 @@ import {
     Videos,
 } from './MovieDetail';
 
+const TvLogoWrapper = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 const TvLogo = styled.img`
-    width: 50px;
+    color: ${(props) => props.theme.black.lighter};
+    width: 120px;
     height: 50px;
-    margin-right: var(--margin-medium);
+    margin-right: var(--margin-large);
     padding: var(--padding-small);
     border-radius: 8px;
     -webkit-box-shadow: 4px 4px 4px 2px #8ea292;
@@ -96,7 +102,11 @@ export default function Detail() {
                                 "
                             </h2>
                             <HorizontalLine />
-                            <p>{detailData.overview}</p>
+                            <p>
+                                {detailData.overview
+                                    ? detailData.overview
+                                    : 'Can not found Overview Data'}
+                            </p>
                         </DetailOverView>
                     </DetailImgBox>
                     <DetailDescription>
@@ -144,18 +154,19 @@ export default function Detail() {
                                 )}
                             </Stars>
                         </p>
-                        <p>
+                        <TvLogoWrapper>
                             {detailData.production_companies.length > 0 &&
                                 detailData.production_companies[0].logo_path &&
-                                detailData.production_companies.map(
-                                    (company) => (
+                                detailData.production_companies
+                                    .slice(0, 2)
+                                    .map((company) => (
                                         <TvLogo
                                             src={`https://image.tmdb.org/t/p/w500${company.logo_path}`}
                                             key={company.id}
+                                            alt={company.name}
                                         />
-                                    )
-                                )}
-                        </p>
+                                    ))}
+                        </TvLogoWrapper>
                     </DetailDescription>
                     <VideoBox>
                         {videosData.results.length === 0 ? (
