@@ -5,6 +5,11 @@ export const menuState = atom({
     default: false,
 });
 
+export const boxState = atom({
+    key: 'box-is-loading',
+    default: true,
+});
+
 export const offsetState = selector({
     key: 'media_query_offset',
     get: ({ get }) => {

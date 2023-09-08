@@ -3,9 +3,8 @@ import { styled } from 'styled-components';
 import { getImages } from '../../helper';
 import { useNavigate } from 'react-router-dom';
 import BoxInfo from './BoxInfo';
-import { useRecoilValue } from 'recoil';
-import { offsetState } from '../../atom';
-import { useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { boxState, offsetState } from '../../atom';
 
 export const Row = styled(motion.div)`
     display: grid;
@@ -88,7 +87,7 @@ export default function SliderRow({
     const navigate = useNavigate();
     const offset = useRecoilValue(offsetState);
 
-    const [boxIsLoading, setBoxIsLoading] = useState(true);
+    const [boxIsLoading, setBoxIsLoading] = useRecoilState(boxState);
     const handleImageLoad = () => {
         setBoxIsLoading(false);
     };

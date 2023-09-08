@@ -9,8 +9,11 @@ import { menuState } from '../../atom';
 
 const SearchContainer = styled(motion.form)`
     color: white;
-    display: ${(props) => (props.active === true ? 'flex' : 'none')};
+    display: flex;
     align-items: center;
+    @media only screen and (max-width: 820px) {
+        display: ${(props) => (props.active === true ? 'flex' : 'none')};
+    }
 `;
 
 const SearchIcon = styled(motion.svg)`
