@@ -14,6 +14,8 @@ export const MovieWrapper = styled.div`
 `;
 
 export const Loader = styled.div`
+    position: absolute;
+    top: 30%;
     font-size: var(--font-size-large);
     text-align: center;
 `;

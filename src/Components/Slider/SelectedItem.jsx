@@ -37,6 +37,16 @@ export const SelectedBox = styled(motion.div)`
         margin-bottom: var(--margin-medium-large);
         font-size: var(--font-size-small);
     }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 50%;
+        height: 50vh;
+        top: 20%;
+    }
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        width: 80%;
+        height: 75vh;
+        top: 20%;
+    }
 `;
 
 export const CloseBtn = styled.button`
