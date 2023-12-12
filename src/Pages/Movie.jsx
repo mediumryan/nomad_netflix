@@ -7,11 +7,7 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import BigPoster from '../Components/BigPoster';
 import Slider from '../Components/Slider/Slider';
-
-export const MovieWrapper = styled.div`
-    height: 100%;
-    background-color: ${(props) => props.theme.black.darker};
-`;
+import { PageWrapper } from './Home';
 
 export const Loader = styled.div`
     position: absolute;
@@ -44,7 +40,7 @@ export default function Movie() {
     );
 
     return (
-        <MovieWrapper>
+        <PageWrapper>
             {nowPlayingLoading || topRatedLoading || popularLoading ? (
                 <Loader>Loading ...</Loader>
             ) : (
@@ -58,6 +54,6 @@ export default function Movie() {
                     {renderSlider(popularMovies, 'Up_Coming')}
                 </>
             )}
-        </MovieWrapper>
+        </PageWrapper>
     );
 }

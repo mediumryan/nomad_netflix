@@ -8,6 +8,7 @@ import Search from './Pages/Search';
 import NotFound from './Pages/NotFound';
 import MovieDetail from './Pages/MovieDetail';
 import TvDetail from './Pages/TvDetail';
+import Home from './Pages/Home';
 
 const MainWrapper = styled.div``;
 
@@ -16,7 +17,8 @@ function App() {
         <MainWrapper>
             <Header />
             <Routes>
-                <Route path="/" element={<Movie />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/movie" element={<Movie />} />
                 <Route path="/movie/:id" element={<Movie />} />
                 <Route path="/tv" element={<Tv />} />
                 <Route path="/tv/:id" element={<Tv />} />

@@ -35,13 +35,18 @@ const IsHere = styled(motion.div)`
 
 export default function HeaderItems() {
     // 빨간 원 (isHere) 위치 조작을 위한 라우트 매칭
-    const movieMatch = useMatch('/');
+    const homeMatch = useMatch('/');
+    const movieMatch = useMatch('/movie');
     const tvMatch = useMatch('/tv');
     const menu = useRecoilValue(menuState);
 
     return (
         <Items active={menu}>
             <Item to="/">
+                Home
+                {homeMatch && <IsHere layoutId="isHere" />}
+            </Item>
+            <Item to="/movie">
                 Movies
                 {movieMatch && <IsHere layoutId="isHere" />}
             </Item>

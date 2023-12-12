@@ -1,18 +1,13 @@
-import { styled } from 'styled-components';
 import {
     getAiringTodayTvShows,
     getPopularTvShows,
     getTopRatedTvShows,
 } from '../api';
 import { useQuery } from '@tanstack/react-query';
-import { Loader, MovieWrapper } from './Movie';
+import { Loader } from './Movie';
 import BigPoster from '../Components/BigPoster';
 import Slider from '../Components/Slider/Slider';
-
-const TvWrapper = styled(MovieWrapper)`
-    height: 100%;
-    background-color: ${(props) => props.theme.black.darker};
-`;
+import { PageWrapper } from './Home';
 
 export default function Tv() {
     // TV 데이터 받아오기
@@ -33,10 +28,8 @@ export default function Tv() {
         <Slider data={data} sliderTitle={title} mediaType={MEDIA_TYPE} />
     );
 
-    console.log(popularTvShows && popularTvShows);
-
     return (
-        <TvWrapper>
+        <PageWrapper>
             {popularLoading || airingTodayLoading || topRatedLoading ? (
                 <Loader>Loading ...</Loader>
             ) : (
@@ -50,6 +43,6 @@ export default function Tv() {
                     {renderSlider(topRatedTvShows, 'Top_Rated')}
                 </>
             )}
-        </TvWrapper>
+        </PageWrapper>
     );
 }
