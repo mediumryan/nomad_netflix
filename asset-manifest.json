@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/nomad_netflix/static/css/main.25a534c4.css",
-    "main.js": "/nomad_netflix/static/js/main.10531789.js",
+    "main.css": "/nomad_netflix/static/css/main.958a4adb.css",
+    "main.js": "/nomad_netflix/static/js/main.896fa11b.js",
     "index.html": "/nomad_netflix/index.html",
-    "main.25a534c4.css.map": "/nomad_netflix/static/css/main.25a534c4.css.map",
-    "main.10531789.js.map": "/nomad_netflix/static/js/main.10531789.js.map"
+    "main.958a4adb.css.map": "/nomad_netflix/static/css/main.958a4adb.css.map",
+    "main.896fa11b.js.map": "/nomad_netflix/static/js/main.896fa11b.js.map"
   },
   "entrypoints": [
-    "static/css/main.25a534c4.css",
-    "static/js/main.10531789.js"
+    "static/css/main.958a4adb.css",
+    "static/js/main.896fa11b.js"
   ]
 }
