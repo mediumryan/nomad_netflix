@@ -20,6 +20,10 @@ const HomeInner = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 3rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)),
+        url('https://image.tmdb.org/t/p/original//7IEjgGVcOT3kTIb42yFLPVjSvot.jpg')
+            center no-repeat;
+    background-size: cover;
 `;
 
 const HomeCardWrapper = styled.div`
