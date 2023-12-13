@@ -13,17 +13,16 @@ import { useRecoilState } from 'recoil';
 import { menuState } from '../../atom';
 
 const HeaderWrapper = styled(motion.nav)`
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    width: 100%;
     top: 0;
+    width: 100%;
     font-size: var(--font-size-micro);
     padding: var(--padding-double-large);
     color: white;
-    z-index: 10;
+    z-index: 2;
     @media only screen and (max-width: 820px) {
         flex-direction: column;
         height: ${(props) => (props.active ? '20%' : '10%')};
@@ -90,7 +89,7 @@ const MenuToggleBtn = styled.button`
 
 const navVariants = {
     top: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
     },
     scroll: {
         backgroundColor: 'rgba(0, 0, 0, 1)',

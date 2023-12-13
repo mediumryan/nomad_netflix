@@ -1,11 +1,10 @@
 import { styled } from 'styled-components';
 // carousel
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Carousel } from 'react-responsive-carousel';
 // import data
 import { useQuery } from '@tanstack/react-query';
 import { getNowPlayingMovies, getPopularTvShows } from '../api';
-import { getImages } from '../helper';
+import { Link } from 'react-router-dom';
+import HomeCard from '../Components/Home/HomeCard';
 
 export const PageWrapper = styled.div`
     height: 100%;
@@ -13,38 +12,42 @@ export const PageWrapper = styled.div`
 `;
 
 const HomeInner = styled.div`
-    display: flex;
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 3rem;
     background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)),
         url('https://image.tmdb.org/t/p/original//7IEjgGVcOT3kTIb42yFLPVjSvot.jpg')
             center no-repeat;
     background-size: cover;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        height: 100%;
+        flex-direction: column;
+        padding-bottom: 5rem;
+    }
 `;
 
-const HomeCardWrapper = styled.div`
+const HomeCardBox = styled(Link)`
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0 1rem;
+    text-decoration: none;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        &:first-child {
+            margin-top: 7.5rem;
+            margin-bottom: 2rem;
+        }
+    }
 `;
 
 const HomeTitle = styled.h3`
-    color: red;
-    font-size: 1.5rem;
-    margin: 1rem 0;
-`;
-
-const HomeCard = styled(Carousel)`
-    width: 350px;
-    img {
-        width: 100%;
-        border-radius: 20px;
-    }
+    color: ${(props) => props.theme.white.lighter};
+    font-size: 1.75rem;
+    font-weight: 700;
+    font-style: italic;
+    margin: 2rem 0;
 `;
 
 export default function Home() {
@@ -59,49 +62,19 @@ export default function Home() {
         getPopularTvShows
     );
 
+    console.log(homeMovieData && homeMovieData);
+
     return (
         <PageWrapper>
             <HomeInner>
-                <HomeCardWrapper>
+                <HomeCardBox to="/movie">
                     <HomeTitle>Movies</HomeTitle>
-                    <HomeCard
-                        autoPlay={true}
-                        infiniteLoop={true}
-                        interval={1500}
-                        showIndicators={false}
-                        showArrows={false}
-                        showThumbs={false}
-                        showStatus={false}
-                        dynamicHeight={true}
-                    >
-                        {homeMovieData &&
-                            homeMovieData.results.map((item) => {
-                                return (
-                                    <img src={getImages(item.poster_path)} />
-                                );
-                            })}
-                    </HomeCard>
-                </HomeCardWrapper>
-                <HomeCardWrapper>
+                    <HomeCard data={homeMovieData} loading={homeMovieLoading} />
+                </HomeCardBox>
+                <HomeCardBox to="/tv">
                     <HomeTitle>Tv Shows</HomeTitle>
-                    <HomeCard
-                        autoPlay={true}
-                        infiniteLoop={true}
-                        interval={1500}
-                        showIndicators={false}
-                        showArrows={false}
-                        showThumbs={false}
-                        showStatus={false}
-                        dynamicHeight={true}
-                    >
-                        {homeTvData &&
-                            homeTvData.results.map((item) => {
-                                return (
-                                    <img src={getImages(item.poster_path)} />
-                                );
-                            })}
-                    </HomeCard>
-                </HomeCardWrapper>
+                    <HomeCard data={homeTvData} loading={homeTvLoading} />
+                </HomeCardBox>
             </HomeInner>
         </PageWrapper>
     );

@@ -11,7 +11,7 @@ const headers = {
 
 // Movies
 export const getNowPlayingMovies = async () => {
-    const params = { language: 'ko-KR', page: 1, region: 'KR' };
+    const params = { language: 'ja-JP', page: 1, region: 'JP' };
     const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
         params,
         headers,
@@ -20,7 +20,7 @@ export const getNowPlayingMovies = async () => {
 };
 
 export const getPopularMovies = async () => {
-    const params = { language: 'ko-KR', page: 1, region: 'KR' };
+    const params = { language: 'ja-JP', page: 1, region: 'JP' };
     const response = await axios.get(`${BASE_URL}/movie/popular`, {
         params,
         headers,

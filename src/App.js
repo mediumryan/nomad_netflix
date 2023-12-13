@@ -10,7 +10,7 @@ import MovieDetail from './Pages/MovieDetail';
 import TvDetail from './Pages/TvDetail';
 import Home from './Pages/Home';
 
-const MainWrapper = styled.div``;
+const MainWrapper = styled.main``;
 
 function App() {
     return (
