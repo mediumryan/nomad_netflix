@@ -132,6 +132,7 @@ button {
     font-family: 'Cafe24Supermagic-Bold-v1.0';
     border: none;
     outline: none;
+    background: none;
     cursor: pointer;
 }
 * {

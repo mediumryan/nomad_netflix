@@ -8,36 +8,38 @@ import { useRecoilValue } from 'recoil';
 import { menuState } from '../../atom';
 
 const SearchContainer = styled(motion.form)`
-    color: white;
+    color: ${(props) => props.theme.white.lighter};
     display: flex;
     align-items: center;
-    @media only screen and (max-width: 820px) {
-        display: ${(props) => (props.active === true ? 'flex' : 'none')};
-        }
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        display: ${(props) => (props.active ? 'flex' : 'none')};
+        margin-top: 2rem;
+        padding-bottom: 2rem;
+    }
 `;
 
 const SearchIcon = styled(motion.svg)`
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
-    margin-right: var(--margin-medium);
+    margin-right: 0.75rem;
 `;
 
 const SearchBox = styled(motion.input)`
-    width: 200px;
-    transform-origin: left center;
-    padding: var(--padding-double-small);
-    color: white;
-    font-size: var(--font-size-micro);
+    width: 275px;
+    padding: 0.5rem 0.75rem;
+    color: ${(props) => props.theme.white.lighter};
+    font-size: 1.15rem;
     background-color: transparent;
     border: 1px solid ${(props) => props.theme.white.lighter};
+    border-radius: 4px;
+    transform-origin: left center;
 `;
 
-const SearchBtn = styled(motion.button)`
-    color: rgba(255, 255, 255, 1);
-    margin-left: var(--margin-medium);
-    background: none;
-    font-size: var(--font-size-small);
+const SearchSubmit = styled(motion.button)`
+    color: ${(props) => props.theme.white.lighter};
+    margin-left: 0.75rem;
+    font-size: 1.15rem;
 `;
 
 const HeaderSearch = () => {
@@ -93,7 +95,7 @@ const HeaderSearch = () => {
                     type: 'linear',
                 }}
             />
-            <SearchBtn
+            <SearchSubmit
                 initial={{
                     opacity: isSearching ? 0 : 1,
                     rotateZ: isSearching ? 0 : 360,
@@ -110,7 +112,7 @@ const HeaderSearch = () => {
                 }}
             >
                 <FaCheck />
-            </SearchBtn>
+            </SearchSubmit>
         </SearchContainer>
     );
 };
