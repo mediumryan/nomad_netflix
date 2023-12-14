@@ -7,11 +7,7 @@ import SearchSelectedItem from '../Components/Search/SearchSelectedItem';
 import { AnimatePresence, motion } from 'framer-motion';
 import BoxInfo from '../Components/Slider/BoxInfo';
 import { getImages } from '../helper';
-import {
-    BoxImg,
-    BoxImgLoader,
-    boxVariants,
-} from '../Components/Slider/SliderRow';
+
 import { useRecoilState } from 'recoil';
 import { boxState } from '../atom';
 
@@ -86,7 +82,7 @@ export default function Search() {
                         return (
                             <Box
                                 layoutId={item.id + ''}
-                                variants={boxVariants}
+                                // variants={boxVariants}
                                 initial="initial"
                                 whileHover="hover"
                                 transition={{
@@ -103,13 +99,13 @@ export default function Search() {
                                     navigate(`/search/${query}/${item.id}`);
                                 }}
                             >
-                                {boxIsLoading ? (
+                                {/* {boxIsLoading && (
                                     <BoxImgLoader>'Loading...'</BoxImgLoader>
-                                ) : null}
-                                <BoxImg
+                                ) } */}
+                                {/* <BoxImg
                                     src={getImages(item.poster_path)}
                                     onLoad={handleImageLoad}
-                                />
+                                /> */}
                                 <BoxInfo
                                     item={item}
                                     mediaType={item.media_type}

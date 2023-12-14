@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 import { getImages } from '../helper';
-import { GoToDetail } from './Slider/SelectedItem';
 import { useNavigate } from 'react-router-dom';
 import { FaInfoCircle, FaPlayCircle } from 'react-icons/fa';
 
@@ -38,17 +37,6 @@ export const BigBtnBox = styled.div`
     }
 `;
 
-export const BigGoToDetail = styled(GoToDetail)`
-    margin: var(--margin-medium-large) 0 0 var(--margin-medium-large);
-    width: 180px;
-    transition: 300ms all;
-    &:hover {
-        opacity: 0.77;
-    }
-`;
-
-export const BigPlayBtn = styled(BigGoToDetail)``;
-
 export default function BigPoster({ bigPosterValues, mediaType }) {
     const navigate = useNavigate();
 
@@ -64,20 +52,6 @@ export default function BigPoster({ bigPosterValues, mediaType }) {
                     ? bigPosterValues.overview
                     : 'Overview not found'}
             </BigStory>
-            <BigBtnBox>
-                <BigPlayBtn>
-                    <FaPlayCircle />
-                </BigPlayBtn>
-                <BigGoToDetail
-                    onClick={() => {
-                        mediaType === 'movie'
-                            ? navigate(`/movie/detail/${bigPosterValues.id}`)
-                            : navigate(`/tv/detail/${bigPosterValues.id}`);
-                    }}
-                >
-                    <FaInfoCircle />
-                </BigGoToDetail>
-            </BigBtnBox>
         </BigPosterContainer>
     );
 }

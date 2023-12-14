@@ -1,7 +1,7 @@
 export const theme = {
     red: '#E51013',
     black: {
-        veryDark: '#141414',
+        veryDark: '#000',
         darker: '#181818',
         lighter: '#2F2F2F',
     },

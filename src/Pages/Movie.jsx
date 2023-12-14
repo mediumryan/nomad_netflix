@@ -16,6 +16,11 @@ export const Loader = styled.div`
     text-align: center;
 `;
 
+const MovieInner = styled.div`
+    background-color: ${(props) => props.theme.black.darker};
+    padding: 0 1rem 3rem 1rem;
+`;
+
 export default function Movie() {
     // 영화 데이터 받아오기
     const { data: nowPlayingMovies, isLoading: nowPlayingLoading } = useQuery(
@@ -31,29 +36,29 @@ export default function Movie() {
         getPopularMovies
     );
 
-    const MEDIA_TYPE = 'movie';
-
     // 슬라이더 불러오기
 
     const renderSlider = (data, title) => (
-        <Slider data={data} sliderTitle={title} mediaType={MEDIA_TYPE} />
+        <Slider data={data} sliderTitle={title} mediaType="movie" />
     );
 
     return (
         <PageWrapper>
-            {nowPlayingLoading || topRatedLoading || popularLoading ? (
-                <Loader>Loading ...</Loader>
-            ) : (
-                <>
-                    <BigPoster
-                        bigPosterValues={nowPlayingMovies.results[0]}
-                        mediaType={MEDIA_TYPE}
-                    />
-                    {renderSlider(nowPlayingMovies, 'Now_Playing')}
-                    {renderSlider(topRatedMovies, 'Top_Rated')}
-                    {renderSlider(popularMovies, 'Up_Coming')}
-                </>
-            )}
+            <MovieInner>
+                {nowPlayingLoading || topRatedLoading || popularLoading ? (
+                    <Loader>Loading ...</Loader>
+                ) : (
+                    <>
+                        <BigPoster
+                            bigPosterValues={nowPlayingMovies.results[0]}
+                            mediaType="movie"
+                        />
+                        {renderSlider(nowPlayingMovies, 'Now_Playing')}
+                        {renderSlider(topRatedMovies, 'Top_Rated')}
+                        {renderSlider(popularMovies, 'Upcoming')}
+                    </>
+                )}
+            </MovieInner>
         </PageWrapper>
     );
 }

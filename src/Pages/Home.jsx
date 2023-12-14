@@ -5,6 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getNowPlayingMovies, getPopularTvShows } from '../api';
 import { Link } from 'react-router-dom';
 import HomeCard from '../Components/Home/HomeCard';
+import { useRecoilValue } from 'recoil';
+import { menuState } from '../atom';
 
 export const PageWrapper = styled.div`
     height: 100%;
@@ -36,7 +38,7 @@ const HomeCardBox = styled(Link)`
     text-decoration: none;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         &:first-child {
-            margin-top: 7.5rem;
+            margin-top: ${(props) => (props.menu ? '15rem' : '7.5rem')};
             margin-bottom: 2rem;
         }
     }
@@ -62,12 +64,13 @@ export default function Home() {
         getPopularTvShows
     );
 
-    console.log(homeMovieData && homeMovieData);
+    // menu active state
+    const menu = useRecoilValue(menuState);
 
     return (
         <PageWrapper>
             <HomeInner>
-                <HomeCardBox to="/movie">
+                <HomeCardBox to="/movie" menu={menu}>
                     <HomeTitle>Movies</HomeTitle>
                     <HomeCard data={homeMovieData} loading={homeMovieLoading} />
                 </HomeCardBox>
