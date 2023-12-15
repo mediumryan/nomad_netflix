@@ -9,9 +9,10 @@ const headers = {
     Authorization: `Bearer ${API_KEY}`,
 };
 
+const params = { language: 'ja-JP', page: 1, region: 'JP' };
+
 // Movies
 export const getNowPlayingMovies = async () => {
-    const params = { language: 'ja-JP', page: 1, region: 'JP' };
     const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
         params,
         headers,
@@ -20,7 +21,6 @@ export const getNowPlayingMovies = async () => {
 };
 
 export const getPopularMovies = async () => {
-    const params = { language: 'ja-JP', page: 1, region: 'JP' };
     const response = await axios.get(`${BASE_URL}/movie/popular`, {
         params,
         headers,
@@ -29,7 +29,6 @@ export const getPopularMovies = async () => {
 };
 
 export const getTopRatedMovies = async () => {
-    const params = { language: 'ko-KR', page: 1, region: 'KR' };
     const response = await axios.get(`${BASE_URL}/movie/top_rated`, {
         params,
         headers,
@@ -39,7 +38,7 @@ export const getTopRatedMovies = async () => {
 
 export const getMovieDetails = async (movieId) => {
     const response = await axios.get(`${BASE_URL}/movie/${movieId}`, {
-        params: { language: 'ko-KR' },
+        params,
         headers,
     });
     return response.data;
@@ -47,7 +46,7 @@ export const getMovieDetails = async (movieId) => {
 
 export const getMovieCredits = async (movieId) => {
     const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits`, {
-        params: { language: 'ko-KR' },
+        params,
         headers,
     });
     return response.data;
@@ -55,7 +54,7 @@ export const getMovieCredits = async (movieId) => {
 
 export const getMovieVideos = async (movieId) => {
     const response = await axios.get(`${BASE_URL}/movie/${movieId}/videos`, {
-        params: { language: 'ko-KR' },
+        params,
         headers,
     });
     return response.data;
@@ -63,7 +62,6 @@ export const getMovieVideos = async (movieId) => {
 
 // TV Shows
 export const getPopularTvShows = async () => {
-    const params = { language: 'ko-KR', page: 1, region: 'KR' };
     const response = await axios.get(`${BASE_URL}/tv/popular`, {
         params,
         headers,
@@ -72,7 +70,6 @@ export const getPopularTvShows = async () => {
 };
 
 export const getAiringTodayTvShows = async () => {
-    const params = { language: 'ko-KR', page: 1, region: 'KR' };
     const response = await axios.get(`${BASE_URL}/tv/airing_today`, {
         params,
         headers,
@@ -81,7 +78,6 @@ export const getAiringTodayTvShows = async () => {
 };
 
 export const getTopRatedTvShows = async () => {
-    const params = { language: 'ko-KR', page: 1, region: 'KR' };
     const response = await axios.get(`${BASE_URL}/tv/top_rated`, {
         params,
         headers,
@@ -91,7 +87,7 @@ export const getTopRatedTvShows = async () => {
 
 export const getTvShowDetails = async (tvShowId) => {
     const response = await axios.get(`${BASE_URL}/tv/${tvShowId}`, {
-        params: { language: 'ko-KR' },
+        params,
         headers,
     });
     return response.data;
@@ -99,7 +95,7 @@ export const getTvShowDetails = async (tvShowId) => {
 
 export const getTvShowCredits = async (tvShowId) => {
     const response = await axios.get(`${BASE_URL}/tv/${tvShowId}/credits`, {
-        params: { language: 'ko-KR' },
+        params,
         headers,
     });
     return response.data;
@@ -107,7 +103,7 @@ export const getTvShowCredits = async (tvShowId) => {
 
 export const getTvShowVideos = async (tvShowId) => {
     const response = await axios.get(`${BASE_URL}/tv/${tvShowId}/videos`, {
-        params: { language: 'ko-KR' },
+        params,
         headers,
     });
     return response.data;
@@ -119,7 +115,7 @@ export const getSearch = async (query) => {
     const response = await axios.get(
         `${BASE_URL}/search/multi?query=${query}`,
         {
-            params: { language: 'ko-KR' },
+            params,
             headers,
         }
     );
