@@ -2,8 +2,6 @@ import { styled } from 'styled-components';
 // import images
 import { getImages } from '../../helper';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { getMovieVideos, getTvShowVideos } from '../../api';
 
 const SliderDescription = styled.div`
     position: absolute;
@@ -46,50 +44,34 @@ const DescriptionTitle = styled.p`
     cursor: default;
 `;
 
-const DescriptionButtons = styled.div`
+const GoDetail = styled(Link)`
     position: absolute;
-    bottom: 15%;
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    a {
-        color: ${(props) => props.theme.red};
-        text-decoration: none;
-        cursor: pointer;
-        padding: 1rem;
-        transition: 300ms all;
-        &:hover {
-            color: ${(props) => props.theme.white.lighter};
-            transform: translateY(-10px);
-        }
+    color: red;
+    text-decoration: none;
+    bottom: 7.5%;
+    padding: 1rem 2rem;
+    transition: 300ms all;
+    &:hover {
+        opacity: 0.75;
+        transform: scale(1.15);
     }
 `;
 
 export default function SliderItem({ item, mediaType }) {
-    const { data, loading } = useQuery(['video', 'video_data'], () => {
-        return mediaType === 'movie'
-            ? getMovieVideos(item.id)
-            : getTvShowVideos(item.id);
-    });
-
     return (
         <SliderItemWrapper>
             <img src={getImages(item.poster_path)} alt={item.title} />
             <SliderDescription>
                 <DescriptionTitle>{item.title}</DescriptionTitle>
-                <DescriptionButtons>
-                    <a
-                        href={
-                            data && data.results !== []
-                                ? `https://www.youtube.com/embed/${data.results[0].key}`
-                                : '#'
-                        }
-                    >
-                        Trailer
-                    </a>
-                    <Link>Detail</Link>
-                </DescriptionButtons>
+                <GoDetail
+                    to={
+                        mediaType === 'movie'
+                            ? `/movie/detail/${item.id}`
+                            : `/tv/detail/${item.id}`
+                    }
+                >
+                    Go Detail / Trailer
+                </GoDetail>
             </SliderDescription>
         </SliderItemWrapper>
     );

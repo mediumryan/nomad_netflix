@@ -1,7 +1,6 @@
 import { styled } from 'styled-components';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { getImages } from '../../helper';
 import SliderItem from './SliderItem';
 
 const responsive = {

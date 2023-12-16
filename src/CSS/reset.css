@@ -135,6 +135,9 @@ button {
     background: none;
     cursor: pointer;
 }
+a {
+    text-decoration: none;
+}
 * {
     box-sizing: border-box;
 }

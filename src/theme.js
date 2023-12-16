@@ -7,6 +7,6 @@ export const theme = {
     },
     white: {
         lighter: '#fff',
-        darker: '#e5e5e5',
+        darker: '#ccc',
     },
 };

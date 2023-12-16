@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom } from 'recoil';
 
 export const menuState = atom({
     key: 'menu-state',
@@ -8,17 +8,4 @@ export const menuState = atom({
 export const boxState = atom({
     key: 'box-is-loading',
     default: true,
-});
-
-export const offsetState = selector({
-    key: 'media_query_offset',
-    get: ({ get }) => {
-        if (window.innerWidth > 1024) {
-            return 6;
-        } else if (window.innerWidth > 768) {
-            return 3;
-        } else if (window.innerWidth > 320) {
-            return 2;
-        }
-    },
 });

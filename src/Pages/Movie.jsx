@@ -50,7 +50,7 @@ export default function Movie() {
                 ) : (
                     <>
                         <BigPoster
-                            bigPosterValues={nowPlayingMovies.results[0]}
+                            bigPosterItem={nowPlayingMovies.results[0]}
                             mediaType="movie"
                         />
                         {renderSlider(nowPlayingMovies, 'Now_Playing')}

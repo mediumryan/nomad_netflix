@@ -9,7 +9,7 @@ const headers = {
     Authorization: `Bearer ${API_KEY}`,
 };
 
-const params = { language: 'ja-JP', page: 1, region: 'JP' };
+const params = { language: 'ko-KR', page: 1, region: 'KR' };
 
 // Movies
 export const getNowPlayingMovies = async () => {
