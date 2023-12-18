@@ -32,6 +32,7 @@ const BigPosterInner = styled.div`
 const BigTitle = styled.h2`
     font-size: 2.5rem;
     letter-spacing: 2px;
+    text-shadow: #fc0 1px 0 10px;
 `;
 
 const BigStory = styled.p`

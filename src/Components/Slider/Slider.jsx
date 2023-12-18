@@ -30,6 +30,9 @@ const SliderTitle = styled.h5`
     color: ${(props) => props.theme.white.lighter};
     font-size: 1.5rem;
     font-style: italic;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px violet, 0 0 1em violet, 0 0 0.2em crimson;
 `;
 
 const SliderRow = styled(Carousel)`
