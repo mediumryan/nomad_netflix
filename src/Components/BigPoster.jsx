@@ -15,11 +15,17 @@ const BigPosterContainer = styled(motion.div)`
     background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)),
         url(${(props) => props.bigPoster}) center;
     background-size: cover;
+    color: ${(props) => props.theme.white.lighter};
     height: 120vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: ${(props) => props.theme.white.lighter};
+    margin-bottom: 2rem;
+
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        height: 100vh;
+        justify-content: baseline;
+    }
 `;
 
 const BigPosterInner = styled.div`
@@ -27,6 +33,10 @@ const BigPosterInner = styled.div`
     margin: 0 30% 0 2rem;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 20px;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        padding: 1rem;
+        margin: 50% 15% 0 2rem;
+    }
 `;
 
 const BigTitle = styled.h2`
@@ -73,12 +83,9 @@ const BigGoDetail = styled.div`
 `;
 
 export default function BigPoster({ bigPosterItem, mediaType }) {
-    const { data: videosData, isLoading: videosIsLoading } = useQuery(
-        ['videos', 'videoData'],
-        () => {
-            return getMovieVideos(bigPosterItem.id);
-        }
-    );
+    const { data: videosData } = useQuery(['videos', 'videoData'], () => {
+        return getMovieVideos(bigPosterItem.id);
+    });
 
     const genreNames =
         mediaType === 'movie'

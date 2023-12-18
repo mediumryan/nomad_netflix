@@ -25,7 +25,7 @@ const responsive = {
 const SliderWrapper = styled.div``;
 
 const SliderTitle = styled.h5`
-    margin: 2rem 0 1rem 0;
+    margin: 0.5rem 0 1rem 0;
     padding-left: 1rem;
     color: ${(props) => props.theme.white.lighter};
     font-size: 1.5rem;
@@ -33,6 +33,9 @@ const SliderTitle = styled.h5`
     font-weight: 700;
     letter-spacing: 2px;
     text-shadow: 1px 1px 2px violet, 0 0 1em violet, 0 0 0.2em crimson;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        margin: 0;
+    }
 `;
 
 const SliderRow = styled(Carousel)`
