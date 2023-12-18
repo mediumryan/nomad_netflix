@@ -1,9 +1,11 @@
+import { useQuery } from '@tanstack/react-query';
+// import data
 import {
     getAiringTodayTvShows,
     getPopularTvShows,
     getTopRatedTvShows,
 } from '../api';
-import { useQuery } from '@tanstack/react-query';
+// import components
 import { Loader } from './Movie';
 import BigPoster from '../Components/BigPoster';
 import Slider from '../Components/Slider/Slider';
@@ -22,11 +24,12 @@ export default function Tv() {
         getTopRatedTvShows
     );
 
-    const MEDIA_TYPE = 'tv';
     // 슬라이더 불러오기
     const renderSlider = (data, title) => (
-        <Slider data={data} sliderTitle={title} mediaType={MEDIA_TYPE} />
+        <Slider data={data} sliderTitle={title} mediaType="tv" />
     );
+
+    console.log(popularTvShows && popularTvShows.results);
 
     return (
         <PageWrapper>
@@ -35,8 +38,8 @@ export default function Tv() {
             ) : (
                 <>
                     <BigPoster
-                        bigPosterValues={popularTvShows.results[0]}
-                        mediaType={MEDIA_TYPE}
+                        bigPosterItem={popularTvShows.results[0]}
+                        mediaType="tv"
                     />
                     {renderSlider(popularTvShows, 'Popular')}
                     {renderSlider(airingTodayTvShows, 'Airing_Today')}

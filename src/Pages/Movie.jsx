@@ -1,10 +1,12 @@
 import { styled } from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
+// import data
 import {
     getNowPlayingMovies,
     getPopularMovies,
     getTopRatedMovies,
 } from '../api';
-import { useQuery } from '@tanstack/react-query';
+// import components
 import BigPoster from '../Components/BigPoster';
 import Slider from '../Components/Slider/Slider';
 import { PageWrapper } from './Home';

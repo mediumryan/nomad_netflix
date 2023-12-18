@@ -88,11 +88,13 @@ export default function SliderItem({ item, mediaType }) {
         <SliderItemWrapper>
             <img src={getImages(item.poster_path)} alt={item.title} />
             <SliderDescription>
-                <DescriptionTitle>{item.title}</DescriptionTitle>
+                <DescriptionTitle>
+                    {mediaType === 'movie' ? item.title : item.name}
+                </DescriptionTitle>
                 <DescriptionGenres>
                     {genreNames
                         .filter((name) => name !== '')
-                        .slice(0, 3)
+                        .slice(0, 2)
                         .join(', ')}
                 </DescriptionGenres>
                 <GoDetail
