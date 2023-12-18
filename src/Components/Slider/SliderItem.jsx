@@ -90,6 +90,7 @@ export default function SliderItem({ item, mediaType }) {
             <SliderDescription>
                 <DescriptionTitle>
                     {mediaType === 'movie' ? item.title : item.name}
+                    <span> ({item.vote_average.toFixed(1)})</span>
                 </DescriptionTitle>
                 <DescriptionGenres>
                     {genreNames

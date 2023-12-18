@@ -43,6 +43,9 @@ const BigTitle = styled.h2`
     font-size: 2.5rem;
     letter-spacing: 2px;
     text-shadow: #fc0 1px 0 10px;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        line-height: 1.5;
+    }
 `;
 
 const BigStory = styled.p`
@@ -107,9 +110,9 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
             <BigPosterInner>
                 <BigTitle>
                     {mediaType === 'movie'
-                        ? bigPosterItem.title +
-                          ` (${bigPosterItem.vote_average.toFixed(1)})`
+                        ? bigPosterItem.title
                         : bigPosterItem.name}
+                    <span> ({bigPosterItem.vote_average.toFixed(1)})</span>
                 </BigTitle>
                 <BigStory>
                     {bigPosterItem.overview !== ''
