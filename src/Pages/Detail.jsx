@@ -1,12 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieCredits, getMovieDetails, getMovieVideos } from '../api';
 import { styled } from 'styled-components';
-import { getImages } from '../helper';
 import { motion } from 'framer-motion';
-import { Loader } from './Movie';
+// import icons
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+// import tv and movie data
+import {
+    getMovieCredits,
+    getMovieDetails,
+    getMovieVideos,
+    getTvShowCredits,
+    getTvShowDetails,
+    getTvShowVideos,
+} from '../api';
+// import images
+import { getImages } from '../helper';
+// import components
+import { Loader } from './Movie';
+import { movieGenres, tvGenres } from '../genres';
 
 export const DetailWrapper = styled.div`
     width: 100%;
@@ -24,6 +36,8 @@ export const DetailWrapper = styled.div`
         height: 100%;
     }
 `;
+
+const DetailInner = styled.div``;
 
 export const DetailImgBox = styled(motion.div)`
     transform: translateY(10%);
@@ -181,23 +195,42 @@ export const Videos = styled.iframe`
 
 export default function Detail() {
     const { id } = useParams();
-    // 데이터 받아오기
-    const { data: detailData, isLoading: detailIsLoading } = useQuery(
+    const numericId = id.replace(/\D/g, '');
+    const mediaType = id.replace(/\d/g, '');
+    // movie data
+    const { data: movieDetailData, isLoading: movieDetailIsLoading } = useQuery(
         ['movies', 'detailData'],
         () => {
             return getMovieDetails(id);
         }
     );
-    const { data: creditsData, isLoading: creditsIsLoading } = useQuery(
-        ['movies', 'creditsData'],
-        () => {
+    const { data: movieCreditsData, isLoading: movieCreditsIsLoading } =
+        useQuery(['movies', 'creditsData'], () => {
             return getMovieCredits(id);
-        }
-    );
-    const { data: videosData, isLoading: videosIsLoading } = useQuery(
+        });
+    const { data: movieVideosData, isLoading: movieVideosIsLoading } = useQuery(
         ['movies', 'videos'],
         () => {
             return getMovieVideos(id);
+        }
+    );
+    // tv data
+    const { data: tvDetailData, isLoading: tvDetailIsLoading } = useQuery(
+        ['tv', 'detailData'],
+        () => {
+            return getTvShowDetails(id);
+        }
+    );
+    const { data: tvCreditsData, isLoading: tvCreditsIsLoading } = useQuery(
+        ['tv', 'creditsData'],
+        () => {
+            return getTvShowCredits(id);
+        }
+    );
+    const { data: tvVideosData, isLoading: tvVideosIsLoading } = useQuery(
+        ['tv', 'videos'],
+        () => {
+            return getTvShowVideos(id);
         }
     );
     // 스토리 on/off
@@ -205,26 +238,46 @@ export default function Detail() {
     const toggleStory = () => {
         setOnStory((prev) => !prev);
     };
-    // 비디오 슬라이더
-    const videoMaxPage = videosData?.results.length;
-    const [videoIndex, setVideoIndex] = useState(0);
-    const goPrev = () => {
-        setVideoIndex((prev) => (prev === 0 ? videoMaxPage : prev - 1));
-    };
-    const goNext = () => {
-        setVideoIndex((prev) => (prev === videoMaxPage ? 0 : prev + 1));
-    };
+
+    // get genre data
+    const genreNames =
+        mediaType === 'movie'
+            ? movieDetailData.genre_ids.map((id) => {
+                  const genre = movieGenres.genres.find(
+                      (genre) => genre.id === id
+                  );
+                  return genre ? genre.name : '';
+              })
+            : tvDetailData.genre_ids.map((id) => {
+                  const genre = tvGenres.genres.find(
+                      (genre) => genre.id === id
+                  );
+                  return genre ? genre.name : '';
+              });
 
     return (
         <DetailWrapper>
-            {detailIsLoading || creditsIsLoading || videosIsLoading ? (
+            {mediaType === 'movie' ? movieDetailIsLoading ||
+            movieCreditsIsLoading ||
+            movieVideosIsLoading  : mediaType === 'tv' ? tvDetailIsLoading ||
+            tvCreditsIsLoading ||
+            tvVideosIsLoading
+             ? (
                 <Loader>'Loading...'</Loader>
             ) : (
-                <>
+                <DetailInner>
                     <DetailImgBox>
                         <DetailImg
-                            src={getImages(detailData.poster_path)}
-                            alt={detailData.title}
+                            src={
+                                mediaType === 'movie'
+                                    ? getImages(movieDetailData.poster_path)
+                                    : getImages(tvDetailData.poster_path)
+                            }
+                            alt={
+                                mediaType === 'movie'
+                                    ? movieDetailData.title
+                                    : tvDetailData.name
+                            }
                             onStory={onStory}
                         />
                         <button onClick={toggleStory}>
@@ -233,30 +286,42 @@ export default function Detail() {
                         <DetailOverView>
                             <h2>
                                 "
-                                {detailData.tagline
-                                    ? detailData.tagline
-                                    : detailData.title}
+                                {mediaType === 'movie'
+                                    ? movieDetailData.tagline &&
+                                      movieDetailData.tagline
+                                    : tvDetailData.original_name}
                                 "
                             </h2>
                             <HorizontalLine />
                             <p>
-                                {detailData.overview
-                                    ? detailData.overview
+                                {mediaType === 'movie'
+                                    ? movieDetailData.overview
+                                    : mediaType === 'tv'
+                                    ? tvDetailData.overview
                                     : 'Can not found Overview Data'}
                             </p>
                         </DetailOverView>
                     </DetailImgBox>
                     <DetailDescription>
-                        <h2>{detailData.title}</h2>
+                        <h2>
+                            {mediaType === 'movie'
+                                ? movieDetailData.title
+                                : tvDetailData.name}
+                        </h2>
                         <HorizontalLine />
-                        <p>원제 : {detailData.original_title}</p>
+                        <p>
+                            원제 :{' '}
+                            {mediaType === 'movie'
+                                ? movieDetailData.original_title
+                                : tvDetailData.original_name}
+                        </p>
                         <p>
                             장르 :
-                            {detailData.genres
-                                .map((genre) => genre.name)
+                            {genreNames
+                                .filter((name) => name !== '')
                                 .join(', ')}
                         </p>
-                        <p>개봉일 : {detailData.release_date}</p>
+                        {/* <p>개봉일 : {detailData.release_date}</p>
                         <p>
                             런타임 : {Math.floor(detailData.runtime / 60)}
                             시간
@@ -286,9 +351,9 @@ export default function Detail() {
                                     }
                                 )}
                             </Stars>
-                        </p>
+                        </p> */}
                     </DetailDescription>
-                    <VideoBox>
+                    {/* <VideoBox>
                         {videosData.results.length === 0 ? (
                             <NoVideo>
                                 '동영상 샘플이 존재하지 않습니다.'
@@ -315,8 +380,8 @@ export default function Detail() {
                                 ></Videos>
                             </VideoContents>
                         )}
-                    </VideoBox>
-                </>
+                    </VideoBox> */}
+                </DetailInner>
             )}
         </DetailWrapper>
     );

@@ -1,14 +1,15 @@
-import { styled } from 'styled-components';
 import './CSS/index.css';
-import Header from './Components/Header/Header';
+import { styled } from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
+// import components
+import Header from './Components/Header/Header';
+// import pages
 import Movie from './Pages/Movie';
 import Tv from './Pages/Tv';
 import Search from './Pages/Search';
 import NotFound from './Pages/NotFound';
-import MovieDetail from './Pages/MovieDetail';
-import TvDetail from './Pages/TvDetail';
 import Home from './Pages/Home';
+import Detail from './Pages/Detail';
 
 const MainWrapper = styled.main``;
 
@@ -22,8 +23,7 @@ function App() {
                 <Route path="/tv" element={<Tv />} />
                 <Route path="/search/:query" element={<Search />} />
                 <Route path="/search/:query/:id" element={<Search />} />
-                <Route path="/movie/detail/:id" element={<MovieDetail />} />
-                <Route path="/tv/detail/:id" element={<TvDetail />} />
+                <Route path="/detail/:id" element={<Detail />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </MainWrapper>

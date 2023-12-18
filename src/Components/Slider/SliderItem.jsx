@@ -56,14 +56,14 @@ const DescriptionGenres = styled.p`
 
 const GoDetail = styled(Link)`
     position: absolute;
-    color: ${(props) => props.theme.red};
+    color: ${(props) => props.theme.white.lighter};
     text-decoration: none;
     font-size: 1.25rem;
     bottom: 7.5%;
     padding: 1rem;
     transition: 300ms all;
     &:hover {
-        color: ${(props) => props.theme.white.lighter};
+        color: ${(props) => props.theme.red};
         transform: scale(1.15);
     }
 `;
@@ -101,8 +101,8 @@ export default function SliderItem({ item, mediaType }) {
                 <GoDetail
                     to={
                         mediaType === 'movie'
-                            ? `/movie/detail/${item.id}`
-                            : `/tv/detail/${item.id}`
+                            ? `/${'movie' + item.id}`
+                            : `/detail/${'tv' + item.id}`
                     }
                 >
                     <FaInfoCircle />

@@ -86,10 +86,12 @@ const BigGoDetail = styled.div`
 `;
 
 export default function BigPoster({ bigPosterItem, mediaType }) {
+    //  get video data
     const { data: videosData } = useQuery(['videos', 'videoData'], () => {
         return getMovieVideos(bigPosterItem.id);
     });
 
+    // get genre data
     const genreNames =
         mediaType === 'movie'
             ? bigPosterItem.genre_ids.map((id) => {
@@ -126,8 +128,8 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                     <Link
                         to={
                             mediaType === 'movie'
-                                ? `/movie/detail/${bigPosterItem.id}`
-                                : `/tv/detail/${bigPosterItem.id}`
+                                ? `/${'movie' + bigPosterItem.id}`
+                                : `/detail/${'tv' + bigPosterItem.id}`
                         }
                     >
                         <FaInfoCircle />
