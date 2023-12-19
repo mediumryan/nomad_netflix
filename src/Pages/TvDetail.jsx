@@ -40,7 +40,7 @@ const TvLogo = styled.img`
     background-color: ${(props) => props.theme.white.darker};
 `;
 
-export default function Detail() {
+export default function TvDetail() {
     const { id } = useParams();
     // 데이터 받아오기
     const { data: detailData, isLoading: detailIsLoading } = useQuery(

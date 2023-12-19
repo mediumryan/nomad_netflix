@@ -128,8 +128,8 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                     <Link
                         to={
                             mediaType === 'movie'
-                                ? `/${'movie' + bigPosterItem.id}`
-                                : `/detail/${'tv' + bigPosterItem.id}`
+                                ? `/movie-detail/${bigPosterItem.id}`
+                                : `/tv-detail/${bigPosterItem.id}`
                         }
                     >
                         <FaInfoCircle />

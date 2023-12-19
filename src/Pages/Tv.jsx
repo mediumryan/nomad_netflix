@@ -29,8 +29,6 @@ export default function Tv() {
         <Slider data={data} sliderTitle={title} mediaType="tv" />
     );
 
-    console.log(popularTvShows && popularTvShows.results);
-
     return (
         <PageWrapper>
             {popularLoading || airingTodayLoading || topRatedLoading ? (
