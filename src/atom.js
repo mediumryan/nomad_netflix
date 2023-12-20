@@ -9,3 +9,8 @@ export const boxState = atom({
     key: 'box-is-loading',
     default: true,
 });
+
+export const detailIsStory = atom({
+    key: 'detail-is-story',
+    default: false,
+});
