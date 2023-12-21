@@ -1,13 +1,10 @@
 import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 // icons
-import { FaInfoCircle, FaPlayCircle } from 'react-icons/fa';
+import { FaInfoCircle } from 'react-icons/fa';
 // git images
 import { getImages } from '../helper';
-// get movie data
-import { getMovieVideos } from '../api';
 // get genres data
 import { movieGenres, tvGenres } from '../genres';
 
@@ -57,11 +54,23 @@ const BigStory = styled.p`
     margin: 2rem 0;
 `;
 
+const BigAdult = styled.div`
+    color: ${(props) => props.theme.red};
+    border: 1px solid ${(props) => props.theme.white.darker};
+    font-size: 1.25rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 const BigGenres = styled.p`
     font-size: 0.9rem;
     font-style: italic;
     color: ${(props) => props.theme.white.darker};
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 `;
 
 const BigGoDetail = styled.div`
@@ -86,11 +95,6 @@ const BigGoDetail = styled.div`
 `;
 
 export default function BigPoster({ bigPosterItem, mediaType }) {
-    //  get video data
-    const { data: videosData } = useQuery(['videos', 'videoData'], () => {
-        return getMovieVideos(bigPosterItem.id);
-    });
-
     // get genre data
     const genreNames =
         mediaType === 'movie'
@@ -107,6 +111,8 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                   return genre ? genre.name : '';
               });
 
+    console.log(bigPosterItem);
+
     return (
         <BigPosterContainer bigPoster={getImages(bigPosterItem.poster_path)}>
             <BigPosterInner>
@@ -121,6 +127,11 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                         ? bigPosterItem.overview
                         : 'The story data is not found'}
                 </BigStory>
+                {bigPosterItem.adult && (
+                    <BigAdult>
+                        <span>18</span>
+                    </BigAdult>
+                )}
                 <BigGenres>
                     {genreNames.filter((name) => name !== '').join(', ')}
                 </BigGenres>
@@ -134,14 +145,6 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                     >
                         <FaInfoCircle />
                     </Link>
-                    {videosData && videosData.results.length > 0 && (
-                        <a
-                            href={`https://www.youtube.com/embed/${videosData.results[0].key}`}
-                        >
-                            <FaPlayCircle />
-                            Trailer
-                        </a>
-                    )}
                 </BigGoDetail>
             </BigPosterInner>
         </BigPosterContainer>
