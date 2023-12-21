@@ -26,6 +26,7 @@ const BigPosterContainer = styled(motion.div)`
 `;
 
 const BigPosterInner = styled.div`
+    position: relative;
     padding: 2rem 5rem;
     margin: 0 30% 0 2rem;
     background-color: rgba(0, 0, 0, 0.5);
@@ -54,18 +55,6 @@ const BigStory = styled.p`
     margin: 2rem 0;
 `;
 
-const BigAdult = styled.div`
-    color: ${(props) => props.theme.red};
-    border: 1px solid ${(props) => props.theme.white.darker};
-    font-size: 1.25rem;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 const BigGenres = styled.p`
     font-size: 0.9rem;
     font-style: italic;
@@ -92,6 +81,21 @@ const BigGoDetail = styled.div`
             transform: scale(1.15);
         }
     }
+`;
+
+const BigAdult = styled.div`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: ${(props) => props.theme.red};
+    border: 1px solid ${(props) => props.theme.red};
+    font-size: 1.25rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export default function BigPoster({ bigPosterItem, mediaType }) {
@@ -127,11 +131,7 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                         ? bigPosterItem.overview
                         : 'The story data is not found'}
                 </BigStory>
-                {bigPosterItem.adult && (
-                    <BigAdult>
-                        <span>18</span>
-                    </BigAdult>
-                )}
+
                 <BigGenres>
                     {genreNames.filter((name) => name !== '').join(', ')}
                 </BigGenres>
@@ -146,6 +146,11 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                         <FaInfoCircle />
                     </Link>
                 </BigGoDetail>
+                {bigPosterItem.adult === false && (
+                    <BigAdult>
+                        <span>18</span>
+                    </BigAdult>
+                )}
             </BigPosterInner>
         </BigPosterContainer>
     );

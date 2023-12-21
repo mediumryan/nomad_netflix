@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import { HorizontalLine } from '../../../Pages/MovieDetail';
 import DetailVoteAverage from './DetailVoteAverage';
 import DetailCast from './DetailCast';
+import DetailAdult from './DetailAdult';
 
 export const DetailDescriptionWrapper = styled.div`
     position: relative;
@@ -27,6 +28,7 @@ export const DetailDescriptionWrapper = styled.div`
 `;
 
 export const DescriptionInner = styled.div`
+    position: relative;
     min-height: 85%;
     max-height: 85%;
     margin: 2rem;
@@ -76,6 +78,7 @@ export default function DetailDescription({ data, id }) {
                 </DescriptionItem>
                 <DetailCast data={data} id={id} />
                 <DetailVoteAverage data={data} />
+                <DetailAdult data={data} />
             </DescriptionInner>
         </DetailDescriptionWrapper>
     );
