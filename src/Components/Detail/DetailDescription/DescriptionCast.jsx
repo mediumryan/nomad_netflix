@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getMovieCredits, getTvShowCredits } from '../../../api';
 import { DescriptionItem } from './DetailDescription';
 
-export default function DetailCast({ data, id, mediaType }) {
+export default function DescriptionCast({ id, mediaType }) {
     const { data: creditData, isLoading: creditDataIsLoading } = useQuery(
         ['detail', 'credit'],
         () => {

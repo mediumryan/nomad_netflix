@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-const DetailAdultWrapper = styled.div`
+const DescriptionAdultWrapper = styled.div`
     position: absolute;
     top: 10px;
     right: 10px;
@@ -14,10 +14,12 @@ const DetailAdultWrapper = styled.div`
     font-size: 0.85rem;
 `;
 
-export default function DetailAdult({ data }) {
+export default function DescriptionAdult({ data }) {
     return (
-        <DetailAdultWrapper style={{ display: data.adult ? 'flex' : 'none' }}>
+        <DescriptionAdultWrapper
+            style={{ display: data.adult ? 'flex' : 'none' }}
+        >
             <span>18</span>
-        </DetailAdultWrapper>
+        </DescriptionAdultWrapper>
     );
 }

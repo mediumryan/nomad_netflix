@@ -2,8 +2,9 @@ import { styled } from 'styled-components';
 // import components
 import { HorizontalLine } from '../../../Pages/Detail';
 import DetailVoteAverage from './DetailVoteAverage';
-import DetailCast from './DetailCast';
-import DetailAdult from './DetailAdult';
+import DescriptionCast from './DescriptionCast';
+import DescriptionAdult from './DescriptionAdult';
+import DescriptionNetworks from './DescriptionNetworks';
 
 export const DetailDescriptionWrapper = styled.div`
     position: relative;
@@ -55,30 +56,45 @@ export const DescriptionItem = styled.p`
 export default function DetailDescription({ data, id, mediaType }) {
     return (
         <DetailDescriptionWrapper>
-            <h2>{data.title}</h2>
+            <h2>
+                {mediaType === 'movie'
+                    ? data.title
+                    : mediaType === 'tv' && data.name}
+            </h2>
             <HorizontalLine />
             <DescriptionInner>
                 <DescriptionItem>
                     <span className="sub-title">원제</span>
-                    {data.original_title}
+                    {mediaType === 'movie'
+                        ? data.original_title
+                        : mediaType === 'tv' && data.original_name}
                 </DescriptionItem>
                 <DescriptionItem>
                     <span className="sub-title">장르</span>
                     {data.genres.map((genre) => genre.name).join(', ')}
                 </DescriptionItem>
-                <DescriptionItem>
+                <DescriptionItem
+                    style={{
+                        display: mediaType === 'movie' ? 'flex' : 'none',
+                    }}
+                >
                     <span className="sub-title">개봉일</span>
                     {data.release_date}
                 </DescriptionItem>
-                <DescriptionItem>
+                <DescriptionItem
+                    style={{
+                        display: mediaType === 'movie' ? 'flex' : 'none',
+                    }}
+                >
                     <span className="sub-title">런타임</span>
                     {Math.floor(data.runtime / 60)}
                     시간
                     {Math.floor(data.runtime % 60)}분
                 </DescriptionItem>
-                <DetailCast data={data} id={id} mediaType={mediaType} />
+                <DescriptionCast id={id} mediaType={mediaType} />
+                <DescriptionNetworks data={data} mediaType={mediaType} />
                 <DetailVoteAverage data={data} />
-                <DetailAdult data={data} />
+                <DescriptionAdult data={data} />
             </DescriptionInner>
         </DetailDescriptionWrapper>
     );
