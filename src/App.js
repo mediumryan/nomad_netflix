@@ -9,8 +9,7 @@ import Tv from './Pages/Tv';
 import Search from './Pages/Search';
 import NotFound from './Pages/NotFound';
 import Home from './Pages/Home';
-import MovieDetail from './Pages/MovieDetail';
-import TvDetail from './Pages/TvDetail';
+import Detail from './Pages/Detail';
 
 const MainWrapper = styled.main``;
 
@@ -21,9 +20,9 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/movie" element={<Movie />} />
-                <Route path="/movie-detail/:id" element={<MovieDetail />} />
+                <Route path="/detail/:mediaType/:id" element={<Detail />} />
+                <Route path="/detail/:mediaType/:id" element={<Detail />} />
                 <Route path="/tv" element={<Tv />} />
-                <Route path="/tv-detail/:id" element={<TvDetail />} />
                 <Route path="/search/:query" element={<Search />} />
                 <Route path="/search/:query/:id" element={<Search />} />
                 <Route path="*" element={<NotFound />} />

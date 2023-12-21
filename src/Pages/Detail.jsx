@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 // import icons
 // import tv and movie data
-import { getMovieDetails } from '../api';
+import { getMovieDetails, getTvShowDetails } from '../api';
 // import images
 // import components
 import { Loader } from './Movie';
@@ -37,25 +37,31 @@ export const HorizontalLine = styled.div`
     opacity: 0.25;
 `;
 
-export default function MovieDetail() {
-    const { id } = useParams();
+export default function Detail() {
+    const { mediaType, id } = useParams();
+
     // movie data
-    const { data: detailData, isLoading: detailDataIsLoading } = useQuery(
-        ['detail', 'data'],
-        () => {
-            return getMovieDetails(id);
-        }
-    );
+    const { data, isLoading } = useQuery(['detail', 'data'], () => {
+        return mediaType === 'movie'
+            ? getMovieDetails(id)
+            : mediaType === 'tv'
+            ? getTvShowDetails(id)
+            : null;
+    });
 
     return (
         <DetailWrapper>
-            {detailDataIsLoading ? (
+            {isLoading ? (
                 <Loader>'Loading...'</Loader>
             ) : (
                 <DetailInner>
-                    <DetailPoster data={detailData} />
-                    <DetailDescription data={detailData} id={id} />
-                    <DetailVideo id={id} />
+                    <DetailPoster data={data} mediaType={mediaType} />
+                    <DetailDescription
+                        data={data}
+                        id={id}
+                        mediaType={mediaType}
+                    />
+                    <DetailVideo data={data} id={id} mediaType={mediaType} />
                 </DetailInner>
             )}
         </DetailWrapper>

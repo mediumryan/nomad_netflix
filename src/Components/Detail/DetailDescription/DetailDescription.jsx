@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 // import components
-import { HorizontalLine } from '../../../Pages/MovieDetail';
+import { HorizontalLine } from '../../../Pages/Detail';
 import DetailVoteAverage from './DetailVoteAverage';
 import DetailCast from './DetailCast';
 import DetailAdult from './DetailAdult';
@@ -52,7 +52,7 @@ export const DescriptionItem = styled.p`
     }
 `;
 
-export default function DetailDescription({ data, id }) {
+export default function DetailDescription({ data, id, mediaType }) {
     return (
         <DetailDescriptionWrapper>
             <h2>{data.title}</h2>
@@ -76,7 +76,7 @@ export default function DetailDescription({ data, id }) {
                     시간
                     {Math.floor(data.runtime % 60)}분
                 </DescriptionItem>
-                <DetailCast data={data} id={id} />
+                <DetailCast data={data} id={id} mediaType={mediaType} />
                 <DetailVoteAverage data={data} />
                 <DetailAdult data={data} />
             </DescriptionInner>

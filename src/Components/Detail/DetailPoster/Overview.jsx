@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 import { detailIsStory } from '../../../atom';
-import { HorizontalLine } from '../../../Pages/MovieDetail';
+import { HorizontalLine } from '../../../Pages/Detail';
 
 export const OverviewWrapper = styled(motion.div)`
     position: absolute;
@@ -29,11 +29,15 @@ export const OverviewWrapper = styled(motion.div)`
     }
 `;
 
-export default function Overview({ data }) {
+export default function Overview({ data, mediaType }) {
     const isStory = useRecoilValue(detailIsStory);
 
     return (
-        <OverviewWrapper style={{ display: isStory ? 'flex' : 'none' }}>
+        <OverviewWrapper
+            style={{
+                display: isStory ? 'flex' : 'none',
+            }}
+        >
             <h2>"{data.tagline ? data.tagline : data.title}"</h2>
             <HorizontalLine />
             <p>

@@ -3,8 +3,8 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import { useQuery } from '@tanstack/react-query';
 // import data
-import { getMovieVideos } from '../../../api';
-import { HorizontalLine } from '../../../Pages/MovieDetail';
+import { getMovieVideos, getTvShowVideos } from '../../../api';
+import { HorizontalLine } from '../../../Pages/Detail';
 
 export const VideoWrapper = styled.div`
     width: 430px;
@@ -59,11 +59,13 @@ export const VideoItem = styled.iframe`
     border-radius: 20px;
 `;
 
-export default function DetailVideo({ id }) {
+export default function DetailVideo({ data, id }) {
     const { data: videoData, isLoading: videoDataIsLoading } = useQuery(
         ['detail', 'video'],
         () => {
-            return getMovieVideos(id);
+            return data.first_air_date
+                ? getTvShowVideos(id)
+                : getMovieVideos(id);
         }
     );
 
@@ -80,7 +82,7 @@ export default function DetailVideo({ id }) {
                     <VideoContents showStatus={false}>
                         {videoData.results.map((_, index) => {
                             return (
-                                <div>
+                                <div key={index}>
                                     <VideoTitle>
                                         <h2>{videoData.results[index].name}</h2>
                                     </VideoTitle>

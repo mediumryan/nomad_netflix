@@ -101,8 +101,8 @@ export default function SliderItem({ item, mediaType }) {
                 <GoDetail
                     to={
                         mediaType === 'movie'
-                            ? `/movie-detail/${item.id}`
-                            : `/tv-detail/${item.id}`
+                            ? `/detail/movie/${item.id}`
+                            : `/detail/tv/${item.id}`
                     }
                 >
                     <FaInfoCircle />

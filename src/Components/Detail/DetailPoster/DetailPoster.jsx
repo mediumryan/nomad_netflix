@@ -20,12 +20,12 @@ export const DetailPosterWrapper = styled.div`
     }
 `;
 
-export default function DetailPoster({ data }) {
+export default function DetailPoster({ data, mediaType }) {
     return (
         <DetailPosterWrapper>
             <Poster data={data} />
-            <StoryToggle data={data} />
-            <Overview data={data} />
+            <StoryToggle data={data} mediaType={mediaType} />
+            <Overview data={data} mediaType={mediaType} />
         </DetailPosterWrapper>
     );
 }

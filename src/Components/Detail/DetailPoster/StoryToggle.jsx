@@ -16,11 +16,12 @@ export const DetailToggleButton = styled.button`
     z-index: 5;
 `;
 
-export default function StoryToggle() {
+export default function StoryToggle({ mediaType }) {
     const [isStory, setIsStory] = useRecoilState(detailIsStory);
 
     return (
         <DetailToggleButton
+            style={{ display: mediaType === 'tv' ? 'none' : 'block' }}
             onClick={() => {
                 setIsStory((prev) => {
                     return !prev;

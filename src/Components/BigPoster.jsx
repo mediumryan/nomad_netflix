@@ -46,6 +46,16 @@ const BigTitle = styled.h2`
     }
 `;
 
+const BigOriginalTitle = styled.h4`
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    text-shadow: #ffe066 0.5px 0 5px;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        line-height: 1.25;
+    }
+`;
+
 const BigStory = styled.p`
     padding-left: var(--padding-medium-large);
     font-size: var(--font-size-small);
@@ -115,8 +125,6 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                   return genre ? genre.name : '';
               });
 
-    console.log(bigPosterItem);
-
     return (
         <BigPosterContainer bigPoster={getImages(bigPosterItem.poster_path)}>
             <BigPosterInner>
@@ -126,6 +134,11 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                         : bigPosterItem.name}
                     <span> ({bigPosterItem.vote_average.toFixed(1)})</span>
                 </BigTitle>
+                <BigOriginalTitle>
+                    {mediaType === 'movie'
+                        ? bigPosterItem.original_title
+                        : bigPosterItem.original_name}
+                </BigOriginalTitle>
                 <BigStory>
                     {bigPosterItem.overview !== ''
                         ? bigPosterItem.overview
@@ -139,14 +152,14 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
                     <Link
                         to={
                             mediaType === 'movie'
-                                ? `/movie-detail/${bigPosterItem.id}`
-                                : `/tv-detail/${bigPosterItem.id}`
+                                ? `/detail/movie/${bigPosterItem.id}`
+                                : `/detail/tv/${bigPosterItem.id}`
                         }
                     >
                         <FaInfoCircle />
                     </Link>
                 </BigGoDetail>
-                {bigPosterItem.adult === false && (
+                {bigPosterItem.adult && (
                     <BigAdult>
                         <span>18</span>
                     </BigAdult>

@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { getMovieCredits } from '../../../api';
+import { getMovieCredits, getTvShowCredits } from '../../../api';
 import { DescriptionItem } from './DetailDescription';
 
-export default function DetailCast({ data, id }) {
+export default function DetailCast({ data, id, mediaType }) {
     const { data: creditData, isLoading: creditDataIsLoading } = useQuery(
         ['detail', 'credit'],
         () => {
-            return getMovieCredits(id);
+            return mediaType === 'movie'
+                ? getMovieCredits(id)
+                : mediaType === 'tv' && getTvShowCredits(id);
         }
     );
 
