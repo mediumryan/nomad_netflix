@@ -20,6 +20,10 @@ export const VideoWrapper = styled.div`
         font-style: italic;
         color: ${(props) => props.theme.red};
     }
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        width: 320px;
+        height: 450px;
+    }
 `;
 
 export const VideoInner = styled.div`
@@ -43,6 +47,9 @@ export const VideoContents = styled(Carousel)`
     display: flex;
     flex-direction: column;
     padding: 2rem;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        max-width: 320px;
+    }
 `;
 
 export const VideoTitle = styled.div`

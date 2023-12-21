@@ -23,8 +23,10 @@ export const DetailDescriptionWrapper = styled.div`
         display: flex;
         align-items: center;
     }
-    @media only screen and (max-width: 820px) {
-        width: 100%;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        width: 320px;
+        height: 450px;
+        margin: 5rem 0;
     }
 `;
 
@@ -92,7 +94,7 @@ export default function DetailDescription({ data, id, mediaType }) {
                     {Math.floor(data.runtime % 60)}분
                 </DescriptionItem>
                 <DescriptionCast id={id} mediaType={mediaType} />
-                <DescriptionNetworks data={data} mediaType={mediaType} />
+                {mediaType === 'tv' && <DescriptionNetworks data={data} />}
                 <DetailVoteAverage data={data} />
                 <DescriptionAdult data={data} />
             </DescriptionInner>

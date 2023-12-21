@@ -11,31 +11,34 @@ const NetWorkList = styled.ul`
         padding: 0.25rem 0.5rem;
         position: relative;
         display: flex;
-        background-color: rgba(255, 255, 255, 0.25);
-        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         img {
             width: 100%;
         }
     }
 `;
 
-export default function DescriptionNetworks({ data, mediaType }) {
+export default function DescriptionNetworks({ data }) {
     return (
-        <DescriptionItem
-            style={{ display: mediaType === 'tv' ? 'flex' : 'none' }}
-        >
+        <DescriptionItem>
             <span className="sub-title">방송</span>
             <NetWorkList>
-                {data.networks.map((item) => {
-                    return (
-                        <li key={item.id}>
-                            <img
-                                src={getImages(item.logo_path)}
-                                alt={item.name}
-                            />
-                        </li>
-                    );
-                })}
+                {data &&
+                    data.networks.map((item) => {
+                        return (
+                            <li key={item.id}>
+                                <img
+                                    src={getImages(item.logo_path)}
+                                    alt={item.name}
+                                />
+                            </li>
+                        );
+                    })}
             </NetWorkList>
         </DescriptionItem>
     );

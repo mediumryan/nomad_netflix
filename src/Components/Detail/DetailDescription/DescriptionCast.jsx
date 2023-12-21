@@ -12,8 +12,16 @@ export default function DescriptionCast({ id, mediaType }) {
         }
     );
 
+    console.log(creditData && creditData);
+
     return (
-        <DescriptionItem style={{ lineHeight: '1.5' }}>
+        <DescriptionItem
+            style={{
+                lineHeight: '1.5',
+                display:
+                    creditData && creditData.cast.length > 0 ? 'flex' : 'none',
+            }}
+        >
             <span className="sub-title">출연진</span>
             {creditDataIsLoading
                 ? 'Loading...'

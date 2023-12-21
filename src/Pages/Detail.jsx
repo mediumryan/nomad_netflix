@@ -19,6 +19,9 @@ export const DetailWrapper = styled.div`
     align-items: center;
     background-color: ${(props) => props.theme.black.darker};
     color: ${(props) => props.theme.white.lighter};
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        height: 100%;
+    }
 `;
 
 const DetailInner = styled.div`
@@ -27,6 +30,10 @@ const DetailInner = styled.div`
     display: flex;
     justify-content: space-evenly;
     padding: 5rem 2.5rem 0 2.5rem;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        flex-direction: column;
+        padding-bottom: 10rem;
+    }
 `;
 
 export const HorizontalLine = styled.div`

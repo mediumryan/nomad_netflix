@@ -14,9 +14,9 @@ export const DetailPosterWrapper = styled.div`
         rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     border-radius: 20px;
     overflow: hidden;
-    @media only screen and (max-width: 820px) {
-        width: 100%;
-        height: 50vh;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        width: 320px;
+        height: 450px;
     }
 `;
 
