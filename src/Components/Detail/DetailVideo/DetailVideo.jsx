@@ -66,13 +66,13 @@ export const VideoItem = styled.iframe`
     border-radius: 20px;
 `;
 
-export default function DetailVideo({ data, id }) {
+export default function DetailVideo({ id, mediaType }) {
     const { data: videoData, isLoading: videoDataIsLoading } = useQuery(
         ['detail', 'video'],
         () => {
-            return data.first_air_date
-                ? getTvShowVideos(id)
-                : getMovieVideos(id);
+            return mediaType === 'movie'
+                ? getMovieVideos(id)
+                : mediaType === 'tv' && getTvShowVideos(id);
         }
     );
 

@@ -68,7 +68,7 @@ export default function Detail() {
                         id={id}
                         mediaType={mediaType}
                     />
-                    <DetailVideo data={data} id={id} mediaType={mediaType} />
+                    <DetailVideo id={id} mediaType={mediaType} />
                 </DetailInner>
             )}
         </DetailWrapper>

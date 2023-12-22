@@ -4,7 +4,6 @@ import { HorizontalLine } from '../../../Pages/Detail';
 import DetailVoteAverage from './DetailVoteAverage';
 import DescriptionCast from './DescriptionCast';
 import DescriptionAdult from './DescriptionAdult';
-import DescriptionNetworks from './DescriptionNetworks';
 
 export const DetailDescriptionWrapper = styled.div`
     position: relative;
@@ -94,7 +93,6 @@ export default function DetailDescription({ data, id, mediaType }) {
                     {Math.floor(data.runtime % 60)}분
                 </DescriptionItem>
                 <DescriptionCast id={id} mediaType={mediaType} />
-                {mediaType === 'tv' && <DescriptionNetworks data={data} />}
                 <DetailVoteAverage data={data} />
                 <DescriptionAdult data={data} />
             </DescriptionInner>

@@ -55,7 +55,13 @@ export default function Slider({ data, sliderTitle, mediaType }) {
             >
                 {data &&
                     data.results.map((item) => {
-                        return <SliderItem item={item} mediaType={mediaType} />;
+                        return (
+                            <SliderItem
+                                item={item}
+                                mediaType={mediaType}
+                                key={item.id}
+                            />
+                        );
                     })}
             </SliderRow>
         </SliderWrapper>

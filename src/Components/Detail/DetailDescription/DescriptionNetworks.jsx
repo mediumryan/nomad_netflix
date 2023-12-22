@@ -23,22 +23,23 @@ const NetWorkList = styled.ul`
     }
 `;
 
-export default function DescriptionNetworks({ data }) {
+export default function DescriptionNetworks({ data, mediaType }) {
     return (
-        <DescriptionItem>
+        <DescriptionItem
+            style={{ display: mediaType === 'tv' ? 'flex' : 'none' }}
+        >
             <span className="sub-title">방송</span>
             <NetWorkList>
-                {data &&
-                    data.networks.map((item) => {
-                        return (
-                            <li key={item.id}>
-                                <img
-                                    src={getImages(item.logo_path)}
-                                    alt={item.name}
-                                />
-                            </li>
-                        );
-                    })}
+                {data && mediaType === 'tv' ? (
+                    <li>
+                        <img
+                            src={getImages(data.networks.logo_path)}
+                            alt={data.networks.name}
+                        />
+                    </li>
+                ) : (
+                    mediaType === 'movie' && null
+                )}
             </NetWorkList>
         </DescriptionItem>
     );

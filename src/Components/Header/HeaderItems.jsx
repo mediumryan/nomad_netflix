@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link, useMatch } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 // state
 import { menuState } from '../../atom';
@@ -43,19 +43,22 @@ export default function HeaderItems() {
     const movieMatch = useMatch('/movie');
     const tvMatch = useMatch('/tv');
     // menu toggle
-    const menu = useRecoilValue(menuState);
+    const [menu, setMenu] = useRecoilState(menuState);
+    const closeMenu = () => {
+        setMenu((prev) => !prev);
+    };
 
     return (
         <Items active={menu}>
-            <Item to="/">
+            <Item to="/" onClick={closeMenu}>
                 Home
                 {homeMatch && <IsHere layoutId="isHere" />}
             </Item>
-            <Item to="/movie">
+            <Item to="/movie" onClick={closeMenu}>
                 Movies
                 {movieMatch && <IsHere layoutId="isHere" />}
             </Item>
-            <Item to="tv">
+            <Item to="tv" onClick={closeMenu}>
                 Tv Shows
                 {tvMatch && <IsHere layoutId="isHere" />}
             </Item>

@@ -10,7 +10,7 @@ import { movieGenres, tvGenres } from '../genres';
 
 const BigPosterContainer = styled(motion.div)`
     background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)),
-        url(${(props) => props.bigPoster}) center;
+        url(${(props) => props.poster}) center;
     background-size: cover;
     color: ${(props) => props.theme.white.lighter};
     height: 120vh;
@@ -126,7 +126,7 @@ export default function BigPoster({ bigPosterItem, mediaType }) {
               });
 
     return (
-        <BigPosterContainer bigPoster={getImages(bigPosterItem.poster_path)}>
+        <BigPosterContainer poster={getImages(bigPosterItem.poster_path)}>
             <BigPosterInner>
                 <BigTitle>
                     {mediaType === 'movie'
