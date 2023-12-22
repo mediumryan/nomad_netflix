@@ -1,17 +1,21 @@
 import { motion } from 'framer-motion';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
+// get images
 import { getImages } from '../../helper';
-import BoxInfo from '../Slider/BoxInfo';
+import SearchDescription from './SearchDescription';
+// import components
 
 const SearchItemWrapper = styled(motion.div)`
     min-height: 320px;
     max-height: 320px;
     overflow-y: scroll;
-    border-radius: 4px;
+    border-radius: 20px;
     overflow: hidden;
     cursor: pointer;
+`;
+
+const SearchItemInner = styled.div`
+    position: relative;
 `;
 
 const SearchItemImg = styled.img`
@@ -20,7 +24,7 @@ const SearchItemImg = styled.img`
 `;
 
 const NoImage = styled.p`
-    font-size: var(--font-size-medium);
+    font-size: 1.25rem;
     text-align: center;
 `;
 
@@ -35,9 +39,7 @@ export const searchBoxVariants = {
     },
 };
 
-export default function SearchItem({ item, query }) {
-    const navigate = useNavigate();
-
+export default function SearchItem({ data }) {
     return (
         <SearchItemWrapper
             variants={searchBoxVariants}
@@ -47,21 +49,21 @@ export default function SearchItem({ item, query }) {
                 type: 'linear',
                 delay: 0.3,
             }}
-            key={item.id}
-            onClick={() => {
-                navigate(`/search/${query}/${item.id}`);
-            }}
+            key={data.id}
+            onClick={() => {}}
         >
-            {item.poster_path || item.backdrop_path ? (
-                <>
+            {data.poster_path || data.backdrop_path ? (
+                <SearchItemInner>
                     <SearchItemImg
-                        src={getImages(item.poster_path)}
+                        src={getImages(data.poster_path)}
                         alt={
-                            item.media_type === 'movie' ? item.title : item.name
+                            data.media_type === 'movie'
+                                ? data.title
+                                : data.mediaType === 'tv' && data.name
                         }
                     />
-                    <BoxInfo item={item} mediaType={item.media_type} />
-                </>
+                    <SearchDescription data={data} />
+                </SearchItemInner>
             ) : (
                 <NoImage>Image not found</NoImage>
             )}

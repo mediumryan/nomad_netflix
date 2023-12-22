@@ -43,9 +43,9 @@ const DescriptionTitle = styled.p`
     line-height: 1.5;
     font-size: 1.5rem;
     text-align: center;
-    margin-bottom: 1rem;
-    cursor: default;
     text-shadow: #fc0 1px 0 10px;
+    cursor: default;
+    margin-bottom: 1rem;
 `;
 
 const DescriptionGenres = styled.p`
@@ -54,7 +54,7 @@ const DescriptionGenres = styled.p`
     cursor: default;
 `;
 
-const GoDetail = styled(Link)`
+export const GoDetail = styled(Link)`
     position: absolute;
     color: ${(props) => props.theme.white.lighter};
     text-decoration: none;

@@ -53,7 +53,7 @@ export default function HomeCard({ data, loading }) {
             {data &&
                 data.results.map((item) => {
                     return (
-                        <HomePosterWrapper>
+                        <HomePosterWrapper key={item.id}>
                             {loading ? (
                                 <HomeLoading>'Loading...'</HomeLoading>
                             ) : (

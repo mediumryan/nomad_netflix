@@ -20,11 +20,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/movie" element={<Movie />} />
-                <Route path="/detail/:mediaType/:id" element={<Detail />} />
-                <Route path="/detail/:mediaType/:id" element={<Detail />} />
                 <Route path="/tv" element={<Tv />} />
                 <Route path="/search/:query" element={<Search />} />
-                <Route path="/search/:query/:id" element={<Search />} />
+                <Route path="/detail/:mediaType/:id" element={<Detail />} />
+                <Route path="/detail/:mediaType/:id" element={<Detail />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </MainWrapper>
