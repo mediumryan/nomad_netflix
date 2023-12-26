@@ -2,16 +2,20 @@ import { motion } from 'framer-motion';
 import { styled } from 'styled-components';
 // get images
 import { getImages } from '../../helper';
-import SearchDescription from './SearchDescription';
+import SearchDescription, {
+    SearchDescriptionWrapper,
+} from './SearchDescription';
 // import components
 
 const SearchItemWrapper = styled(motion.div)`
     min-height: 320px;
     max-height: 320px;
-    overflow-y: scroll;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
+    &:hover ${SearchDescriptionWrapper} {
+        display: flex;
+    }
 `;
 
 const SearchItemInner = styled.div`
@@ -20,12 +24,19 @@ const SearchItemInner = styled.div`
 
 const SearchItemImg = styled.img`
     width: 100%;
-    height: 100%;
+    height: 320px;
 `;
 
-const NoImage = styled.p`
-    font-size: 1.25rem;
-    text-align: center;
+const NoVideo = styled.div`
+    height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid ${(props) => props.theme.black.lighter};
+    border-radius: 10px;
+    p {
+        color: ${(props) => props.theme.white.darker};
+    }
 `;
 
 export const searchBoxVariants = {
@@ -35,7 +46,6 @@ export const searchBoxVariants = {
     hover: {
         scale: 1.15,
         y: -50,
-        zIndex: 2,
     },
 };
 
@@ -47,13 +57,11 @@ export default function SearchItem({ data }) {
             whileHover="hover"
             transition={{
                 type: 'linear',
-                delay: 0.3,
             }}
             key={data.id}
-            onClick={() => {}}
         >
-            {data.poster_path || data.backdrop_path ? (
-                <SearchItemInner>
+            <SearchItemInner>
+                {data.poster_path || data.backdrop_path ? (
                     <SearchItemImg
                         src={getImages(data.poster_path)}
                         alt={
@@ -62,11 +70,14 @@ export default function SearchItem({ data }) {
                                 : data.mediaType === 'tv' && data.name
                         }
                     />
-                    <SearchDescription data={data} />
-                </SearchItemInner>
-            ) : (
-                <NoImage>Image not found</NoImage>
-            )}
+                ) : (
+                    <NoVideo>
+                        <p>Image not found</p>
+                    </NoVideo>
+                )}
+
+                <SearchDescription data={data} />
+            </SearchItemInner>
         </SearchItemWrapper>
     );
 }

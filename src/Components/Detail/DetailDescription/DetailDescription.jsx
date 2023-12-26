@@ -84,7 +84,7 @@ export default function DetailDescription({ data, id, mediaType }) {
                 </DescriptionItem>
                 <DescriptionItem
                     style={{
-                        display: mediaType === 'movie' ? 'flex' : 'none',
+                        opacity: mediaType === 'movie' ? '1' : '0',
                     }}
                 >
                     <span className="sub-title">런타임</span>

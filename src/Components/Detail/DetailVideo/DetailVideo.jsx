@@ -36,7 +36,12 @@ export const VideoInner = styled.div`
 
 export const NoVideo = styled.p`
     font-size: 1.5rem;
-    padding-top: 5rem;
+    padding: 5rem 2rem 0 2rem;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        text-align: center;
+        line-height: 1.5;
+        letter-spacing: 2px;
+    }
 `;
 
 export const VideoContents = styled(Carousel)`

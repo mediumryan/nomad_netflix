@@ -5,7 +5,7 @@ const SearchGridWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: auto;
-    grid-gap: 1rem;
+    grid-gap: 1.5rem;
     @media only screen and (min-width: 768px) and (max-width: 1024px) {
         grid-template-columns: repeat(3, 1fr);
     }

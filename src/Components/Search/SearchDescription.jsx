@@ -1,11 +1,11 @@
 import { styled } from 'styled-components';
 // import genres
 import { movieGenres, tvGenres } from '../../genres';
-import { GoDetail } from '../Slider/SliderItem';
 // import icons
 import { FaInfoCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-const SearchDescriptionWrapper = styled.div`
+export const SearchDescriptionWrapper = styled.div`
     position: absolute;
     top: 0;
     left: 0;
@@ -13,23 +13,45 @@ const SearchDescriptionWrapper = styled.div`
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     color: ${(props) => props.theme.white.lighter};
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     font-size: 1.5rem;
     padding-top: 2.5rem;
+    cursor: default;
 `;
 
 const SearchDescriptionTitle = styled.h4`
-    cursor: default;
+    height: 25%;
     text-shadow: #fc0 1px 0 10px;
     text-align: center;
+    line-height: 1.15;
+    padding: 0 1rem;
+    overflow: hidden;
 `;
 
 const SearchDescriptionGenres = styled.p`
+    height: 25%;
     font-size: 0.85rem;
+    text-align: center;
+    letter-spacing: 1px;
     color: ${(props) => props.theme.white.lighter};
     margin-top: 2.5rem;
+    padding: 0 1rem;
+`;
+
+const SearchGoDetail = styled(Link)`
+    height: 50%;
+    color: ${(props) => props.theme.white.lighter};
+    text-decoration: none;
+    font-size: 1.25rem;
+    padding: 1rem;
+    transition: 300ms all;
+    cursor: pointer;
+    &:hover {
+        color: ${(props) => props.theme.red};
+        transform: scale(1.15);
+    }
 `;
 
 export default function SearchDescription({ data }) {
@@ -56,16 +78,19 @@ export default function SearchDescription({ data }) {
                 {data.media_type === 'movie'
                     ? data.title
                     : data.media_type === 'tv' && data.name}
-                <span>({data.vote_average.toFixed(1)})</span>
+                <span>({data.vote_average})</span>
             </SearchDescriptionTitle>
-            <SearchDescriptionGenres>
-                {genreNames
-                    .slice(0, 3)
-                    .filter((name) => name !== '')
-                    .join(', ')}
+            <SearchDescriptionGenres
+                style={{ display: data.genre_ids ? 'block' : 'none' }}
+            >
+                {data.genre_ids
+                    ? genreNames
+                          .slice(0, 3)
+                          .filter((name) => name !== '')
+                          .join(', ')
+                    : null}
             </SearchDescriptionGenres>
-            <GoDetail
-                style={{ bottom: '5rem' }}
+            <SearchGoDetail
                 to={
                     data.media_type === 'movie'
                         ? `/detail/movie/${data.id}`
@@ -73,7 +98,7 @@ export default function SearchDescription({ data }) {
                 }
             >
                 <FaInfoCircle />
-            </GoDetail>
+            </SearchGoDetail>
         </SearchDescriptionWrapper>
     );
 }
