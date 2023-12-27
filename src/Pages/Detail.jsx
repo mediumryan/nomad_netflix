@@ -10,6 +10,9 @@ import { Loader } from './Movie';
 import DetailPoster from '../Components/Detail/DetailPoster/DetailPoster';
 import DetailDescription from '../Components/Detail/DetailDescription/DetailDescription';
 import DetailVideo from '../Components/Detail/DetailVideo/DetailVideo';
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { detailIsStory } from '../atom';
 
 export const DetailWrapper = styled.div`
     width: 100%;
@@ -47,6 +50,12 @@ export const HorizontalLine = styled.div`
 
 export default function Detail() {
     const { mediaType, id } = useParams();
+
+    const setStory = useSetRecoilState(detailIsStory);
+
+    useEffect(() => {
+        setStory(false);
+    }, []);
 
     // movie data
     const { data, isLoading } = useQuery(['detail', 'data'], () => {

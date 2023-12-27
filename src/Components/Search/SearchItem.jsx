@@ -8,7 +8,7 @@ import SearchDescription, {
 // import components
 
 const SearchItemWrapper = styled(motion.div)`
-    height: 240px;
+    height: 325px;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
@@ -26,14 +26,14 @@ const SearchItemInner = styled.div`
 
 const SearchItemImg = styled.img`
     width: 100%;
-    height: 320px;
+    height: 325px;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         height: 240px;
     }
 `;
 
 const NoVideo = styled.div`
-    height: 320px;
+    height: 325px;
     display: flex;
     justify-content: center;
     align-items: center;
