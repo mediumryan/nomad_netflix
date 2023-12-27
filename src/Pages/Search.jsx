@@ -39,14 +39,17 @@ const SearchResults = styled.h3`
 export default function Search() {
     const { query } = useParams();
 
-    const { data, isLoading } = useQuery(['search', 'search-data'], () => {
-        return getSearch(query);
-    });
+    const { data, isLoading, refetch } = useQuery(
+        ['search', 'search-data'],
+        () => {
+            return getSearch(query);
+        }
+    );
 
     // query값 변경시 페이지 다시 로딩
-    useEffect(() => {}, [query]);
-
-    console.log(data && data);
+    useEffect(() => {
+        refetch();
+    }, [query, refetch]);
 
     return (
         <SearchWrapper>

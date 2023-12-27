@@ -22,7 +22,8 @@ export const SearchDescriptionWrapper = styled.div`
 `;
 
 const SearchDescriptionTitle = styled.h4`
-    height: 25%;
+    height: 50%;
+    font-size: 1.25rem;
     text-shadow: #fc0 1px 0 10px;
     text-align: center;
     line-height: 1.15;
@@ -41,7 +42,7 @@ const SearchDescriptionGenres = styled.p`
 `;
 
 const SearchGoDetail = styled(Link)`
-    height: 50%;
+    height: 25%;
     color: ${(props) => props.theme.white.lighter};
     text-decoration: none;
     font-size: 1.25rem;
@@ -78,7 +79,9 @@ export default function SearchDescription({ data }) {
                 {data.media_type === 'movie'
                     ? data.title
                     : data.media_type === 'tv' && data.name}
-                <span>({data.vote_average})</span>
+                <span>
+                    ({data.vote_average ? data.vote_average.toFixed(1) : 0})
+                </span>
             </SearchDescriptionTitle>
             <SearchDescriptionGenres
                 style={{ display: data.genre_ids ? 'block' : 'none' }}
