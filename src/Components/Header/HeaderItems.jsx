@@ -5,15 +5,16 @@ import { styled } from 'styled-components';
 // state
 import { menuState } from '../../atom';
 
-const Items = styled(motion.div)`
+const HeaderItemsWrapper = styled(motion.div)`
     display: flex;
     align-items: center;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         display: ${(props) => (props.active ? 'flex' : 'none')};
+        margin-top: 2rem;
     }
 `;
 
-const Item = styled(Link)`
+const HeaderItem = styled(Link)`
     position: relative;
     font-size: 1.15rem;
     text-decoration: none;
@@ -49,19 +50,19 @@ export default function HeaderItems() {
     };
 
     return (
-        <Items active={menu}>
-            <Item to="/" onClick={closeMenu}>
+        <HeaderItemsWrapper active={menu}>
+            <HeaderItem to="/" onClick={closeMenu}>
                 Home
                 {homeMatch && <IsHere layoutId="isHere" />}
-            </Item>
-            <Item to="/movie" onClick={closeMenu}>
+            </HeaderItem>
+            <HeaderItem to="/movie" onClick={closeMenu}>
                 Movies
                 {movieMatch && <IsHere layoutId="isHere" />}
-            </Item>
-            <Item to="tv" onClick={closeMenu}>
+            </HeaderItem>
+            <HeaderItem to="tv" onClick={closeMenu}>
                 Tv Shows
                 {tvMatch && <IsHere layoutId="isHere" />}
-            </Item>
-        </Items>
+            </HeaderItem>
+        </HeaderItemsWrapper>
     );
 }
