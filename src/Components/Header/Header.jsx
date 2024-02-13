@@ -39,7 +39,7 @@ const HeaderContents = styled.div`
     }
 `;
 
-const Ryan = styled(Link)`
+const Ryan = styled.button`
     margin-right: 2rem;
     font-size: 1.5rem;
     font-style: italic;
@@ -123,7 +123,7 @@ export default function Header() {
             active={menu}
         >
             <HeaderContents>
-                <Ryan>RyanFlix</Ryan>
+                <Ryan onClick={() => navigate('/')}>RyanFlix</Ryan>
                 <HeaderItems />
             </HeaderContents>
             <HeaderSearch />

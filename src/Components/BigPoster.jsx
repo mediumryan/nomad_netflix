@@ -21,12 +21,14 @@ const BigPosterContainer = styled(motion.div)`
 
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         height: 100vh;
-        justify-content: baseline;
     }
 `;
 
 const BigPosterInner = styled.div`
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 2rem 5rem;
     margin: 0 30% 0 2rem;
     background-color: rgba(0, 0, 0, 0.5);
@@ -60,6 +62,8 @@ const BigStory = styled.p`
     padding-left: var(--padding-medium-large);
     font-size: var(--font-size-small);
     width: 85%;
+    max-height: 75%;
+    overflow-y: hidden;
     letter-spacing: 2px;
     line-height: 1.5;
     margin: 2rem 0;
