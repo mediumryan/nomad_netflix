@@ -18,7 +18,6 @@ const BigPosterContainer = styled(motion.div)`
     flex-direction: column;
     justify-content: center;
     margin-bottom: 2rem;
-
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         height: 100vh;
     }
@@ -34,8 +33,9 @@ const BigPosterInner = styled.div`
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 20px;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
+        height: 75%;
         padding: 1rem;
-        margin: 50% 15% 0 2rem;
+        margin: 25% 15% 0 2rem;
     }
 `;
 
@@ -59,11 +59,10 @@ const BigOriginalTitle = styled.h4`
 `;
 
 const BigStory = styled.p`
-    padding-left: var(--padding-medium-large);
-    font-size: var(--font-size-small);
+    font-size: 0.85rem;
     width: 85%;
-    max-height: 75%;
-    overflow-y: hidden;
+    height: 100%;
+    overflow-y: scroll;
     letter-spacing: 2px;
     line-height: 1.5;
     margin: 2rem 0;
