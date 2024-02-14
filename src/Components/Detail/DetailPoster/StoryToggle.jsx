@@ -7,13 +7,17 @@ export const DetailToggleButton = styled.button`
     position: absolute;
     top: 15px;
     left: 20px;
-    font-size: var(--font-size-micro);
+    font-size: 0.85rem;
     padding: 4px 8px;
     border-radius: 4px;
     background: none;
     background-color: ${(props) => props.theme.red};
     color: ${(props) => props.theme.white.lighter};
     z-index: 5;
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        border-radius: 8px;
+        padding: 8px 16px;
+    }
 `;
 
 export default function StoryToggle({ mediaType }) {

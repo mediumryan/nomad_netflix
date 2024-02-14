@@ -23,9 +23,13 @@ export const DetailDescriptionWrapper = styled.div`
         align-items: center;
     }
     @media only screen and (min-width: 320px) and (max-width: 768px) {
-        width: 320px;
+        width: 410px;
         height: 450px;
         margin: 5rem 0;
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        grid-area: 1 / 2 / 2 / 3;
+        height: 660px;
     }
 `;
 
@@ -51,6 +55,9 @@ export const DescriptionItem = styled.p`
         font-size: 1.05rem;
         margin-bottom: 0.5rem;
         color: ${(props) => props.theme.white.darker};
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        font-size: 1.15rem;
     }
 `;
 

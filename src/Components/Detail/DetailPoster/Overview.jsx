@@ -15,21 +15,27 @@ export const OverviewWrapper = styled(motion.div)`
     flex-direction: column;
     z-index: 2;
     h2 {
-        font-size: 1.25rem;
+        font-size: 0.95rem;
         line-height: 1.5;
         text-align: center;
         text-shadow: #fc0 1px 0 10px;
+        @media only screen and (min-width: 768px) and (max-width: 1024px) {
+            font-size: 1.15rem;
+        }
     }
     p {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         line-height: 1.75;
         letter-spacing: 0.75px;
         max-height: 65%;
         overflow-y: scroll;
+        @media only screen and (min-width: 768px) and (max-width: 1024px) {
+            font-size: 1.15rem;
+        }
     }
 `;
 
-export default function Overview({ data, mediaType }) {
+export default function Overview({ data }) {
     const isStory = useRecoilValue(detailIsStory);
 
     return (

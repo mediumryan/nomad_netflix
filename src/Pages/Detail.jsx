@@ -16,15 +16,14 @@ import { detailIsStory } from '../atom';
 
 export const DetailWrapper = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: ${(props) => props.theme.black.darker};
     color: ${(props) => props.theme.white.lighter};
-    @media only screen and (min-width: 320px) and (max-width: 768px) {
-        height: 100%;
-    }
+    padding-bottom: 5rem;
 `;
 
 const DetailInner = styled.div`
@@ -37,6 +36,11 @@ const DetailInner = styled.div`
         flex-direction: column;
         align-items: center;
         padding-bottom: 10rem;
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
     }
 `;
 

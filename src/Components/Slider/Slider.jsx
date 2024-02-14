@@ -22,8 +22,6 @@ const responsive = {
     },
 };
 
-const SliderWrapper = styled.div``;
-
 const SliderTitle = styled.h5`
     margin: 0.5rem 0 1rem 0;
     padding-left: 1rem;
@@ -44,7 +42,7 @@ const SliderRow = styled(Carousel)`
 
 export default function Slider({ data, sliderTitle, mediaType }) {
     return (
-        <SliderWrapper>
+        <div>
             <SliderTitle>{sliderTitle}</SliderTitle>
             <SliderRow
                 responsive={responsive}
@@ -64,6 +62,6 @@ export default function Slider({ data, sliderTitle, mediaType }) {
                         );
                     })}
             </SliderRow>
-        </SliderWrapper>
+        </div>
     );
 }

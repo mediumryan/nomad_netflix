@@ -24,6 +24,10 @@ export const VideoWrapper = styled.div`
         width: 320px;
         height: 450px;
     }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        grid-area: 2 / 1 / 3 / 3;
+        width: 100%;
+    }
 `;
 
 export const VideoInner = styled.div`
@@ -32,6 +36,11 @@ export const VideoInner = styled.div`
     padding: 0 1rem;
     min-height: 85%;
     max-height: 85%;
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 85%;
+        display: flex;
+        justify-content: center;
+    }
 `;
 
 export const NoVideo = styled.p`
@@ -55,6 +64,9 @@ export const VideoContents = styled(Carousel)`
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         max-width: 320px;
     }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        max-width: 85%;
+    }
 `;
 
 export const VideoTitle = styled.div`
@@ -69,6 +81,12 @@ export const VideoTitle = styled.div`
 export const VideoItem = styled.iframe`
     width: 250px;
     border-radius: 20px;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        height: 200px;
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        height: 375px;
+    }
 `;
 
 export default function DetailVideo({ id, mediaType }) {
