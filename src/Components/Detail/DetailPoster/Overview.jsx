@@ -18,7 +18,7 @@ export const OverviewWrapper = styled(motion.div)`
         font-size: 0.95rem;
         line-height: 1.5;
         text-align: center;
-        text-shadow: #fc0 1px 0 10px;
+        text-shadow: var(--accent-yellow) 1px 0 10px;
         @media only screen and (min-width: 768px) and (max-width: 1024px) {
             font-size: 1.15rem;
         }

@@ -9,7 +9,7 @@ import { DetailItemWrapper } from '../DetailPoster/DetailPoster';
 export const DetailSubTitle = styled.h2`
     text-align: center;
     font-size: 1.25rem;
-    text-shadow: #fc0 1px 0 10px;
+    text-shadow: var(--accent-yellow) 1px 0 10px;
 `;
 
 export const DetailItemInner = styled.div`
@@ -18,7 +18,7 @@ export const DetailItemInner = styled.div`
     margin: 1rem;
     padding: 2rem;
     border-radius: 20px;
-    border: 2px solid ${(props) => props.theme.black.lighter};
+    border: 2px solid var(--black-200);
     overflow: scroll;
 `;
 
@@ -32,7 +32,7 @@ export const DescriptionItem = styled.p`
     span.sub-title {
         font-size: 0.95rem;
         margin-bottom: 0.25rem;
-        color: ${(props) => props.theme.white.darker};
+        color: var(--white-200);
     }
     @media only screen and (min-width: 768px) and (max-width: 1024px) {
     }

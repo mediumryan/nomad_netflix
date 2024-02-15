@@ -13,7 +13,7 @@ const SearchWrapper = styled.div`
     height: 100%;
     display: flex;
     justify-content: center;
-    background-color: ${(props) => props.theme.black.darker};
+    background-color: var(--black-100);
     padding: 8.5rem 0 5rem 0;
 `;
 
@@ -26,7 +26,7 @@ const SearchInner = styled.div`
 `;
 
 const SearchResults = styled.h3`
-    color: ${(props) => props.theme.red};
+    color: var(--accent-red);
     font-size: 1.75rem;
     font-style: italic;
     font-weight: 700;

@@ -29,8 +29,8 @@ const HomeLoading = styled.div`
     align-items: center;
     font-size: 1.5rem;
     letter-spacing: 4px;
-    background-color: ${(props) => props.theme.black.veryDark};
-    color: ${(props) => props.theme.white.lighter};
+    background-color: var(--black-200);
+    color: var(--white-100);
     height: 525px;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         height: 375px;

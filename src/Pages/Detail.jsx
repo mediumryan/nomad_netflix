@@ -20,8 +20,8 @@ export const DetailWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${(props) => props.theme.black.darker};
-    color: ${(props) => props.theme.white.lighter};
+    background-color: var(--black-100);
+    color: var(--white-100);
     padding-bottom: 2rem;
 `;
 
@@ -44,7 +44,7 @@ export const HorizontalLine = styled.div`
     margin: 2rem auto;
     width: 75%;
     height: 2px;
-    background-color: ${(props) => props.theme.white.darker};
+    background-color: var(--white-200);
     opacity: 0.25;
 `;
 

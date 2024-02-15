@@ -25,7 +25,7 @@ const responsive = {
 const SliderTitle = styled.h5`
     margin: 0.5rem 0 1rem 0;
     padding-left: 1rem;
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     font-size: 1.5rem;
     font-style: italic;
     font-weight: 700;

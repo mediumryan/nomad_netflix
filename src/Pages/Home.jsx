@@ -10,7 +10,7 @@ import { menuState } from '../atom';
 
 export const PageWrapper = styled.div`
     height: 100%;
-    background-color: ${(props) => props.theme.black.darker};
+    background-color: var(--black-100);
 `;
 
 const HomeInner = styled.div`
@@ -45,7 +45,7 @@ const HomeCardBox = styled(Link)`
 `;
 
 const HomeTitle = styled.h3`
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     font-size: 1.75rem;
     font-weight: 700;
     font-style: italic;

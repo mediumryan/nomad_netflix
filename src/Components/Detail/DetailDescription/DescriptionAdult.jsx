@@ -9,8 +9,8 @@ const DescriptionAdultWrapper = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    border: 1px solid ${(props) => props.theme.red};
-    color: ${(props) => props.theme.red};
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red);
     font-size: 0.85rem;
 `;
 

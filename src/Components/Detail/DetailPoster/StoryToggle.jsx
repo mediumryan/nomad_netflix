@@ -11,8 +11,8 @@ export const DetailToggleButton = styled.button`
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
     background: none;
-    background-color: ${(props) => props.theme.red};
-    color: ${(props) => props.theme.white.lighter};
+    background-color: var(--accent-red);
+    color: var(--white-100);
     z-index: 3;
     @media only screen and (min-width: 768px) and (max-width: 1024px) {
         border-radius: 8px;

@@ -18,7 +18,7 @@ const HeaderItem = styled(Link)`
     position: relative;
     font-size: 0.85rem;
     text-decoration: none;
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     margin: 0 0.5rem;
     padding: 0.25rem;
 `;
@@ -32,7 +32,7 @@ const IsHere = styled(motion.div)`
     height: 7.5px;
     margin: 0 auto;
     border-radius: 50%;
-    background-color: ${(props) => props.theme.red};
+    background-color: var(--accent-red);
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         bottom: -15px;
     }

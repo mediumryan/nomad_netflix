@@ -14,12 +14,12 @@ import { PageWrapper } from './Home';
 export const Loader = styled.div`
     position: absolute;
     top: 30%;
-    font-size: var(--font-size-large);
+    font-size: 1.5rem;
     text-align: center;
 `;
 
 const MovieInner = styled.div`
-    background-color: ${(props) => props.theme.black.darker};
+    background-color: var(--black-100);
     padding: 0 1rem 3rem 1rem;
 `;
 

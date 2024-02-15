@@ -12,7 +12,7 @@ const BigPosterContainer = styled(motion.div)`
     background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75)),
         url(${(props) => props.poster}) center;
     background-size: cover;
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     height: 120vh;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@ const BigPosterInner = styled.div`
 const BigTitle = styled.h2`
     font-size: 2.5rem;
     letter-spacing: 2px;
-    text-shadow: #fc0 1px 0 10px;
+    text-shadow: var(--accent-yellow) 1px 0 10px;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         line-height: 1.5;
     }
@@ -52,7 +52,7 @@ const BigOriginalTitle = styled.h4`
     margin-top: 1rem;
     font-size: 1.5rem;
     letter-spacing: 1px;
-    text-shadow: #ffe066 0.5px 0 5px;
+    text-shadow: var(--accent-yellow) 0.5px 0 5px;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         line-height: 1.25;
     }
@@ -71,7 +71,7 @@ const BigStory = styled.p`
 const BigGenres = styled.p`
     font-size: 0.9rem;
     font-style: italic;
-    color: ${(props) => props.theme.white.darker};
+    color: var(--white-200);
     margin: 2rem 0;
 `;
 
@@ -82,14 +82,14 @@ const BigGoDetail = styled.div`
     display: flex;
     align-items: center;
     a {
-        color: ${(props) => props.theme.red};
+        color: var(--accent-red);
         margin: 0 1rem;
         transition: 300ms all;
         &:last-child {
-            color: ${(props) => props.theme.white.lighter};
+            color: var(--white-100);
         }
         &:hover {
-            color: ${(props) => props.theme.red};
+            color: var(--accent-red);
             opacity: 0.75;
             transform: scale(1.15);
         }
@@ -100,8 +100,8 @@ const BigAdult = styled.div`
     position: absolute;
     top: 10px;
     right: 10px;
-    color: ${(props) => props.theme.red};
-    border: 1px solid ${(props) => props.theme.red};
+    color: var(--accent-red);
+    border: 1px solid var(--accent-red);
     font-size: 1.25rem;
     border-radius: 50%;
     width: 40px;

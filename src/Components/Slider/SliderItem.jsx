@@ -12,7 +12,7 @@ const SliderDescription = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -43,27 +43,27 @@ const DescriptionTitle = styled.p`
     line-height: 1.5;
     font-size: 1.5rem;
     text-align: center;
-    text-shadow: #fc0 1px 0 10px;
+    text-shadow: var(--accent-yellow) 1px 0 10px;
     cursor: default;
     margin-bottom: 1rem;
 `;
 
 const DescriptionGenres = styled.p`
-    color: ${(props) => props.theme.white.darker};
+    color: var(--white-200);
     font-size: 0.85rem;
     cursor: default;
 `;
 
 export const GoDetail = styled(Link)`
     position: absolute;
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     text-decoration: none;
     font-size: 1.25rem;
     bottom: 7.5%;
     padding: 1rem;
     transition: 300ms all;
     &:hover {
-        color: ${(props) => props.theme.red};
+        color: var(--accent-red);
         transform: scale(1.15);
     }
 `;

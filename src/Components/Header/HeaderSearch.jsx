@@ -10,7 +10,7 @@ import { FaCheck } from 'react-icons/fa';
 import { menuState } from '../../atom';
 
 const SearchContainer = styled(motion.form)`
-    color: ${(props) => props.theme.white};
+    color: var(--white-100);
     display: flex;
     align-items: center;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
@@ -21,27 +21,28 @@ const SearchContainer = styled(motion.form)`
 `;
 
 const SearchIcon = styled(motion.svg)`
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
+    width: 20px;
+    height: 20px;
     margin-right: 0.75rem;
+    cursor: pointer;
 `;
 
 const SearchBox = styled(motion.input)`
     width: 275px;
     padding: 0.5rem 0.75rem;
-    color: ${(props) => props.theme.white.lighter};
-    font-size: 1.15rem;
-    background-color: transparent;
-    border: 1px solid ${(props) => props.theme.white.lighter};
+    border: 1px solid var(--white-100);
     border-radius: 4px;
+    color: var(--white-100);
+    background-color: transparent;
+    font-size: 0.85rem;
     transform-origin: left center;
 `;
 
 const SearchSubmit = styled(motion.button)`
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     margin-left: 0.75rem;
-    font-size: 1.15rem;
+    width: 20px;
+    height: 20px;
 `;
 
 const HeaderSearch = () => {

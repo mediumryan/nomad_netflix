@@ -1,11 +1,12 @@
 @import './reset.css';
 
 :root {
-    --accent-100: rgb(198, 40, 40);
-    --black-100: #000;
-    --black-200: #999;
-    --white-100: #fff;
-    --white-200: #eee;
+    --accent-red: rgb(198, 40, 40);
+    --accent-yellow: rgb(255, 204, 0);
+    --black-100: rgb(0, 0, 0);
+    --black-200: rgb(153, 153, 153);
+    --white-100: rgb(255, 255, 255);
+    --white-200: rgb(238, 238, 238);
 }
 
 html,

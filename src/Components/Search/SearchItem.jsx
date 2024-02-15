@@ -37,10 +37,10 @@ const NoVideo = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid ${(props) => props.theme.black.lighter};
+    border: 1px solid var(--black-200);
     border-radius: 10px;
     p {
-        color: ${(props) => props.theme.white.darker};
+        color: var(--white-200);
     }
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         height: 240px;

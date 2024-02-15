@@ -11,11 +11,9 @@ import NotFound from './Pages/NotFound';
 import Home from './Pages/Home';
 import Detail from './Pages/Detail';
 
-const MainWrapper = styled.main``;
-
 function App() {
     return (
-        <MainWrapper>
+        <main>
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -26,7 +24,7 @@ function App() {
                 <Route path="/detail/:mediaType/:id" element={<Detail />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
-        </MainWrapper>
+        </main>
     );
 }
 

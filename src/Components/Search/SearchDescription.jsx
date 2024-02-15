@@ -12,7 +12,7 @@ export const SearchDescriptionWrapper = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -24,7 +24,7 @@ export const SearchDescriptionWrapper = styled.div`
 const SearchDescriptionTitle = styled.h4`
     height: 50%;
     font-size: 1.25rem;
-    text-shadow: #fc0 1px 0 10px;
+    text-shadow: var(--accent-yellow) 1px 0 10px;
     text-align: center;
     line-height: 1.15;
     padding: 0 1rem;
@@ -36,21 +36,21 @@ const SearchDescriptionGenres = styled.p`
     font-size: 0.85rem;
     text-align: center;
     letter-spacing: 1px;
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     margin-top: 2.5rem;
     padding: 0 1rem;
 `;
 
 const SearchGoDetail = styled(Link)`
     height: 25%;
-    color: ${(props) => props.theme.white.lighter};
+    color: var(--white-100);
     text-decoration: none;
     font-size: 1.25rem;
     padding: 1rem;
     transition: 300ms all;
     cursor: pointer;
     &:hover {
-        color: ${(props) => props.theme.red};
+        color: var(--accent-red);
         transform: scale(1.15);
     }
 `;

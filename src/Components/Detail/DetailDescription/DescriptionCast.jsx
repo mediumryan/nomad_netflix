@@ -12,8 +12,6 @@ export default function DescriptionCast({ id, mediaType }) {
         }
     );
 
-    console.log(creditData && creditData);
-
     return (
         <DescriptionItem
             style={{

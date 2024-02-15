@@ -22,7 +22,7 @@ const HeaderWrapper = styled(motion.nav)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 2rem 1.5rem 2rem;
+    padding: 1.5rem 2rem;
     color: var(--white-100);
     z-index: 4;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
@@ -65,7 +65,7 @@ const Ryan = styled.button`
 
 const GoBackBtn = styled(FaBackward)`
     display: none;
-    color: ${(props) => props.theme.red};
+    color: var(--accent-red);
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         display: block;
     }
@@ -74,7 +74,7 @@ const GoBackBtn = styled(FaBackward)`
 const MenuToggleBtn = styled(FaBars)`
     display: none;
     color: ${(props) =>
-        props.active ? props.theme.white.lighter : props.theme.red};
+        props.active ? 'var(--white-100)' : 'var(--accent-red)'};
     transition: 1s cubic-bezier(0.29, 1.01, 1, -0.68);
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         display: block;
