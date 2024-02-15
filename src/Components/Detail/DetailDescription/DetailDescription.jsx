@@ -31,7 +31,7 @@ export const DescriptionItem = styled.p`
     margin-bottom: 1rem;
     span.sub-title {
         font-size: 0.95rem;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
         color: var(--white-200);
     }
     @media only screen and (min-width: 768px) and (max-width: 1024px) {

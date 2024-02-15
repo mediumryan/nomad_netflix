@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 // import icons
 import { FaCheck } from 'react-icons/fa';
 // import state data
@@ -47,7 +47,8 @@ const SearchSubmit = styled(motion.button)`
 
 const HeaderSearch = () => {
     const navigate = useNavigate();
-    const menu = useRecoilValue(menuState);
+    const { pathname } = useLocation();
+    const [menu, setMenu] = useRecoilState(menuState);
 
     // 서치바 애니메이션 토글링
     const [isSearching, setSearching] = useState(false);
@@ -58,9 +59,19 @@ const HeaderSearch = () => {
     // 서치값 받기
     const { register, handleSubmit, setValue } = useForm();
     const submitValue = (data) => {
+        toggleSearching();
+        setMenu((prev) => !prev);
         navigate(`/search/${data.query}`);
         setValue('query', '');
     };
+
+    // 리로딩 시 서치 창 닫기
+    useEffect(() => {
+        if (isSearching) {
+            toggleSearching();
+        }
+        return;
+    }, [pathname]);
 
     return (
         <SearchContainer onSubmit={handleSubmit(submitValue)} active={menu}>

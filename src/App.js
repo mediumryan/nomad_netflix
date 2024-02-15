@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 // import components
 import Header from './Components/Header/Header';
+import GoToTop from './Components/GoToTop';
 // import pages
 import Movie from './Pages/Movie';
 import Tv from './Pages/Tv';
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/detail/:mediaType/:id" element={<Detail />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
+            <GoToTop />
         </main>
     );
 }
