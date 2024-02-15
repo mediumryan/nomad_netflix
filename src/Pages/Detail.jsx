@@ -1,17 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
-// import icons
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 // import tv and movie data
 import { getMovieDetails, getTvShowDetails } from '../api';
-// import images
 // import components
 import { Loader } from './Movie';
 import DetailPoster from '../Components/Detail/DetailPoster/DetailPoster';
 import DetailDescription from '../Components/Detail/DetailDescription/DetailDescription';
 import DetailVideo from '../Components/Detail/DetailVideo/DetailVideo';
-import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
+// import state data
 import { detailIsStory } from '../atom';
 
 export const DetailWrapper = styled.div`
@@ -23,7 +22,7 @@ export const DetailWrapper = styled.div`
     align-items: center;
     background-color: ${(props) => props.theme.black.darker};
     color: ${(props) => props.theme.white.lighter};
-    padding-bottom: 5rem;
+    padding-bottom: 2rem;
 `;
 
 const DetailInner = styled.div`
@@ -32,15 +31,12 @@ const DetailInner = styled.div`
     display: flex;
     justify-content: space-evenly;
     padding: 5rem 2.5rem 0 2.5rem;
+    margin-top: 5rem;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
+        margin: 0;
         flex-direction: column;
-        align-items: center;
-        padding-bottom: 10rem;
     }
     @media only screen and (min-width: 768px) and (max-width: 1024px) {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
     }
 `;
 

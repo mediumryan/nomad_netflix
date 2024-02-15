@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { FaCheck } from 'react-icons/fa';
 import { useRecoilValue } from 'recoil';
+// import icons
+import { FaCheck } from 'react-icons/fa';
+// import state data
 import { menuState } from '../../atom';
 
 const SearchContainer = styled(motion.form)`
-    color: ${(props) => props.theme.white.lighter};
+    color: ${(props) => props.theme.white};
     display: flex;
     align-items: center;
     @media only screen and (min-width: 320px) and (max-width: 768px) {

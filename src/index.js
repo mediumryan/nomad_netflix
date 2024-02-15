@@ -4,9 +4,7 @@ import './CSS/index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import { ThemeProvider } from 'styled-components';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { theme } from './theme';
 
 const client = new QueryClient();
 
@@ -15,11 +13,9 @@ root.render(
     <React.StrictMode>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <RecoilRoot>
-                <ThemeProvider theme={theme}>
-                    <QueryClientProvider client={client}>
-                        <App />
-                    </QueryClientProvider>
-                </ThemeProvider>
+                <QueryClientProvider client={client}>
+                    <App />
+                </QueryClientProvider>
             </RecoilRoot>
         </BrowserRouter>
     </React.StrictMode>

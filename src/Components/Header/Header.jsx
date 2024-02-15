@@ -5,14 +5,14 @@ import {
     useAnimation,
 } from 'framer-motion';
 import { styled } from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-// components
+// import components
 import HeaderSearch from './HeaderSearch';
 import HeaderItems from './HeaderItems';
-// icons
+// import icons
 import { FaBackward, FaBars } from 'react-icons/fa';
-// state
+// import state data
 import { menuState } from '../../atom';
 
 const HeaderWrapper = styled(motion.nav)`
@@ -22,10 +22,9 @@ const HeaderWrapper = styled(motion.nav)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.15rem;
-    padding: 1.5rem 3rem;
-    color: white;
-    z-index: 2;
+    padding: 0.5rem 2rem 1.5rem 2rem;
+    color: var(--white-100);
+    z-index: 4;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         flex-direction: column;
     }
@@ -36,6 +35,16 @@ const HeaderContents = styled.div`
     align-items: center;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         flex-direction: column;
+        width: 100%;
+    }
+`;
+
+const HeaderContentsInner = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media only screen and (min-width: 320px) and (max-width: 768px) {
+        width: 100%;
     }
 `;
 
@@ -51,36 +60,24 @@ const Ryan = styled.button`
     -webkit-text-fill-color: transparent;
     transform: rotate(1.5deg);
     @media only screen and (min-width: 320px) and (max-width: 768px) {
-        margin: 0;
     }
 `;
 
-const GoBackBtn = styled(motion.button)`
+const GoBackBtn = styled(FaBackward)`
     display: none;
-    font-size: 1.15rem;
     color: ${(props) => props.theme.red};
-    position: absolute;
-    top: 80px;
-    left: 80px;
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         display: block;
-        top: 20px;
-        left: 40px;
     }
 `;
 
-const MenuToggleBtn = styled.button`
-    position: absolute;
-    top: 40px;
-    right: 40px;
+const MenuToggleBtn = styled(FaBars)`
     display: none;
-    font-size: 1.15rem;
     color: ${(props) =>
         props.active ? props.theme.white.lighter : props.theme.red};
     transition: 1s cubic-bezier(0.29, 1.01, 1, -0.68);
     @media only screen and (min-width: 320px) and (max-width: 768px) {
         display: block;
-        top: 20px;
     }
 `;
 
@@ -123,16 +120,14 @@ export default function Header() {
             active={menu}
         >
             <HeaderContents>
-                <Ryan onClick={() => navigate('/')}>RyanFlix</Ryan>
+                <HeaderContentsInner>
+                    <GoBackBtn onClick={() => navigate(-1)} />
+                    <Ryan onClick={() => navigate('/')}>RyanFlix</Ryan>
+                    <MenuToggleBtn onClick={toggleMenu} active={menu} />
+                </HeaderContentsInner>
                 <HeaderItems />
             </HeaderContents>
             <HeaderSearch />
-            <GoBackBtn onClick={() => navigate(-1)}>
-                <FaBackward />
-            </GoBackBtn>
-            <MenuToggleBtn onClick={toggleMenu} active={menu}>
-                <FaBars />
-            </MenuToggleBtn>
         </HeaderWrapper>
     );
 }

@@ -4,40 +4,18 @@ import { HorizontalLine } from '../../../Pages/Detail';
 import DetailVoteAverage from './DetailVoteAverage';
 import DescriptionCast from './DescriptionCast';
 import DescriptionAdult from './DescriptionAdult';
+import { DetailItemWrapper } from '../DetailPoster/DetailPoster';
 
-export const DetailDescriptionWrapper = styled.div`
-    position: relative;
-    transform: translateY(10%);
-    width: 430px;
-    height: 610px;
-    padding: var(--padding-double-large);
-    background-color: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.95));
-    h2 {
-        text-align: center;
-        font-size: 1.5rem;
-        font-weight: 700;
-        font-style: italic;
-    }
-    p.vote {
-        display: flex;
-        align-items: center;
-    }
-    @media only screen and (min-width: 320px) and (max-width: 768px) {
-        width: 410px;
-        height: 450px;
-        margin: 5rem 0;
-    }
-    @media only screen and (min-width: 768px) and (max-width: 1024px) {
-        grid-area: 1 / 2 / 2 / 3;
-        height: 660px;
-    }
+export const DetailSubTitle = styled.h2`
+    text-align: center;
+    font-size: 1.25rem;
+    text-shadow: #fc0 1px 0 10px;
 `;
 
-export const DescriptionInner = styled.div`
+export const DetailItemInner = styled.div`
     position: relative;
-    min-height: 85%;
-    max-height: 85%;
-    margin: 2rem;
+    height: 85%;
+    margin: 1rem;
     padding: 2rem;
     border-radius: 20px;
     border: 2px solid ${(props) => props.theme.black.lighter};
@@ -45,32 +23,31 @@ export const DescriptionInner = styled.div`
 `;
 
 export const DescriptionItem = styled.p`
-    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
     line-height: 1.5;
     letter-spacing: 1px;
     margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
     span.sub-title {
-        font-size: 1.05rem;
-        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
         color: ${(props) => props.theme.white.darker};
     }
     @media only screen and (min-width: 768px) and (max-width: 1024px) {
-        font-size: 1.15rem;
     }
 `;
 
 export default function DetailDescription({ data, id, mediaType }) {
     return (
-        <DetailDescriptionWrapper>
-            <h2>
+        <DetailItemWrapper>
+            <DetailSubTitle>
                 {mediaType === 'movie'
                     ? data.title
                     : mediaType === 'tv' && data.name}
-            </h2>
+            </DetailSubTitle>
             <HorizontalLine />
-            <DescriptionInner>
+            <DetailItemInner>
                 <DescriptionItem>
                     <span className="sub-title">원제</span>
                     {mediaType === 'movie'
@@ -102,7 +79,7 @@ export default function DetailDescription({ data, id, mediaType }) {
                 <DescriptionCast id={id} mediaType={mediaType} />
                 <DetailVoteAverage data={data} />
                 <DescriptionAdult data={data} />
-            </DescriptionInner>
-        </DetailDescriptionWrapper>
+            </DetailItemInner>
+        </DetailItemWrapper>
     );
 }

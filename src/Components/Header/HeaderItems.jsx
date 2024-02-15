@@ -16,7 +16,7 @@ const HeaderItemsWrapper = styled(motion.div)`
 
 const HeaderItem = styled(Link)`
     position: relative;
-    font-size: 1.15rem;
+    font-size: 0.85rem;
     text-decoration: none;
     color: ${(props) => props.theme.white.lighter};
     margin: 0 0.5rem;
@@ -25,11 +25,11 @@ const HeaderItem = styled(Link)`
 
 const IsHere = styled(motion.div)`
     position: absolute;
-    bottom: -20px;
+    bottom: -15px;
     left: 0;
     right: 0;
-    width: 10px;
-    height: 10px;
+    width: 7.5px;
+    height: 7.5px;
     margin: 0 auto;
     border-radius: 50%;
     background-color: ${(props) => props.theme.red};

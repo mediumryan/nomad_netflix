@@ -8,15 +8,15 @@ export const DetailToggleButton = styled.button`
     top: 15px;
     left: 20px;
     font-size: 0.85rem;
-    padding: 4px 8px;
+    padding: 0.5rem 0.75rem;
     border-radius: 4px;
     background: none;
     background-color: ${(props) => props.theme.red};
     color: ${(props) => props.theme.white.lighter};
-    z-index: 5;
+    z-index: 3;
     @media only screen and (min-width: 768px) and (max-width: 1024px) {
         border-radius: 8px;
-        padding: 8px 16px;
+        padding: 0.5rem 1rem;
     }
 `;
 
