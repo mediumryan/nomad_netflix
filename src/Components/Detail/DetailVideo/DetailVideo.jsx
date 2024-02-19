@@ -12,6 +12,13 @@ import {
     DetailSubTitle,
 } from '../DetailDescription/DetailDescription';
 
+const DetailVideoWrapper = styled(DetailItemWrapper)`
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 40%;
+        height: 50vh;
+    }
+`;
+
 export const NoVideo = styled.p`
     position: absolute;
     top: 35%;
@@ -68,7 +75,7 @@ export default function DetailVideo({ id, mediaType }) {
     );
 
     return (
-        <DetailItemWrapper style={{ position: 'relative' }}>
+        <DetailVideoWrapper>
             <DetailSubTitle>Trailer</DetailSubTitle>
             <HorizontalLine />
             {videoDataIsLoading ? (
@@ -98,6 +105,6 @@ export default function DetailVideo({ id, mediaType }) {
                     </VideoContents>
                 </VideoInner>
             )}
-        </DetailItemWrapper>
+        </DetailVideoWrapper>
     );
 }

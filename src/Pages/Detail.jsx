@@ -37,6 +37,7 @@ const DetailInner = styled.div`
         flex-direction: column;
     }
     @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        flex-wrap: wrap;
     }
 `;
 
@@ -72,13 +73,22 @@ export default function Detail() {
                 <Loader>'Loading...'</Loader>
             ) : (
                 <DetailInner>
-                    <DetailPoster data={data} mediaType={mediaType} />
+                    <DetailPoster
+                        data={data}
+                        mediaType={mediaType}
+                        className="detail_poster"
+                    />
                     <DetailDescription
                         data={data}
                         id={id}
                         mediaType={mediaType}
+                        className="detail_description"
                     />
-                    <DetailVideo id={id} mediaType={mediaType} />
+                    <DetailVideo
+                        id={id}
+                        mediaType={mediaType}
+                        className="detail_video"
+                    />
                 </DetailInner>
             )}
         </DetailWrapper>

@@ -6,6 +6,13 @@ import DescriptionCast from './DescriptionCast';
 import DescriptionAdult from './DescriptionAdult';
 import { DetailItemWrapper } from '../DetailPoster/DetailPoster';
 
+const DetailDescriptionWrapper = styled(DetailItemWrapper)`
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 40%;
+        height: 50vh;
+    }
+`;
+
 export const DetailSubTitle = styled.h2`
     text-align: center;
     font-size: 1.25rem;
@@ -40,7 +47,7 @@ export const DescriptionItem = styled.p`
 
 export default function DetailDescription({ data, id, mediaType }) {
     return (
-        <DetailItemWrapper>
+        <DetailDescriptionWrapper>
             <DetailSubTitle>
                 {mediaType === 'movie'
                     ? data.title
@@ -80,6 +87,6 @@ export default function DetailDescription({ data, id, mediaType }) {
                 <DetailVoteAverage data={data} />
                 <DescriptionAdult data={data} />
             </DetailItemInner>
-        </DetailItemWrapper>
+        </DetailDescriptionWrapper>
     );
 }

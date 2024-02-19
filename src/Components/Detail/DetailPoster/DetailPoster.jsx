@@ -19,6 +19,8 @@ export const DetailItemWrapper = styled.div`
         margin: 1rem 0;
     }
     @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        width: 85%;
+        height: 75vh;
     }
 `;
 
