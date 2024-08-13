@@ -1,77 +1,44 @@
 'use client';
 
-import * as React from 'react';
 import Link from 'next/link';
-// utils
-import { cn } from '@/lib/utils';
-// components
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
+import { usePathname } from 'next/navigation';
 
 export function Navigation() {
+  const pathName = usePathname();
+
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <Link href="/">
-            <NavigationMenuLink className="mr-8 text-2xl italic font-bold tracking-[-1.5px] bg-gradient-to-r from-[#ff983f] to-[#61398f] text-gradient rounded-l-2xl">
-              RyanFlix
-            </NavigationMenuLink>
+    <nav className="w-full px-2">
+      <ul className="w-full h-12 flex items-center text-sm">
+        <li>
+          <Link
+            href="/"
+            className="mr-8 text-2xl italic font-bold tracking-[-1.5px] bg-gradient-to-r from-[#575d63] to-[#16032c] text-gradient rounded-l-2xl"
+          >
+            RYANFLIX
           </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Home
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/movie" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Movies
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/tv" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Tv Shows
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+        </li>
+        <li
+          className={`mx-1 p-1 rounded-md hover:text-black hover:bg-sky-50 ${
+            pathName === '/' ? 'text-black bg-sky-50' : ''
+          }`}
+        >
+          <Link href="/">HOME</Link>
+        </li>
+        <li
+          className={`mx-1 p-1 rounded-md hover:text-black hover:bg-sky-50 ${
+            pathName === '/movie' ? 'text-black bg-sky-50' : ''
+          }`}
+        >
+          <Link href="/movie">MOVIES</Link>
+        </li>
+        <li
+          className={`mx-1 p-1 rounded-md hover:text-black hover:bg-sky-50 ${
+            pathName === '/tv' ? 'text-black bg-sky-50' : ''
+          }`}
+        >
+          <Link href="tv">TV SHOWS</Link>
+        </li>
+      </ul>
+    </nav>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'>
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = 'ListItem';

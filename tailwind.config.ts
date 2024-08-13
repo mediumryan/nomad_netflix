@@ -19,6 +19,8 @@ const config = {
     },
     extend: {
       backgroundImage: {
+        'gradient-black':
+          'linear-gradient(to top right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5))',
         'home-image':
           'linear-gradient(to top right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5)), url("https://image.tmdb.org/t/p/original//7IEjgGVcOT3kTIb42yFLPVjSvot.jpg")',
       },

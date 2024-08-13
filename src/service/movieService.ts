@@ -2,6 +2,32 @@ import axios from 'axios';
 // props
 import { params, headers } from '@/service/index';
 
+export type Movie = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+
+export type MovieResponse = {
+  dates: {
+    maximum: string;
+    minimum: string;
+  };
+  page: number;
+  results: Movie[];
+};
+
 // Movies
 export const getNowPlayingMovies = async () => {
   const response = await axios.get(
@@ -13,7 +39,8 @@ export const getNowPlayingMovies = async () => {
   );
 
   if (response.status === 200) {
-    return response.data;
+    console.log(response.data);
+    return response.data as MovieResponse;
   } else {
     throw new Error('Fetch error');
   }

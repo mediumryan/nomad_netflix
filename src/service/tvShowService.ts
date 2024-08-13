@@ -2,6 +2,28 @@ import axios from 'axios';
 // props
 import { params, headers } from '@/service/index';
 
+export type Tv = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  first_air_date: string;
+  name: string;
+  vote_average: number;
+  vote_count: number;
+};
+
+export type TvResponse = {
+  page: number;
+  results: Tv[];
+};
+
 // TV Shows
 export const getPopularTvShows = async () => {
   const response = await axios.get(`${process.env.BASE_URL}/tv/popular`, {
