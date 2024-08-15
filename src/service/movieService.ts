@@ -52,7 +52,7 @@ export const getPopularMovies = async () => {
     headers,
   });
   if (response.status === 200) {
-    return response.data;
+    return response.data as MovieResponse;
   } else {
     throw new Error('Fetch error');
   }
@@ -64,7 +64,7 @@ export const getTopRatedMovies = async () => {
     headers,
   });
   if (response.status === 200) {
-    return response.data;
+    return response.data as MovieResponse;
   } else {
     throw new Error('Fetch error');
   }

@@ -42,12 +42,14 @@ export function HomeCarousel({ type, movieData, tvData }: HomeCarouselProps) {
                     <Card className="rounded-md overflow-hidden">
                       <CardContent className="flex aspect-square items-center justify-center">
                         <Link
-                          className="w-full h-full flex justify-center items-center bg-black"
+                          className="rounded-md w-[300px] h-[400px] flex justify-center items-center bg-black"
                           href="/movie"
                         >
                           <img
-                            className="w-full h-full"
-                            src={getImages(item.backdrop_path)}
+                            className="rounded-md w-full h-full"
+                            src={getImages(
+                              item.poster_path || item.backdrop_path
+                            )}
                             alt={item.title}
                           />
                         </Link>
@@ -77,12 +79,14 @@ export function HomeCarousel({ type, movieData, tvData }: HomeCarouselProps) {
                     <Card className="rounded-md overflow-hidden">
                       <CardContent className="flex aspect-square items-center justify-center">
                         <Link
-                          className="w-full h-full flex justify-center items-center bg-black"
+                          className="rounded-md w-[300px] h-[400px] flex justify-center items-center bg-black"
                           href="/movie"
                         >
                           <img
-                            className="w-full h-full"
-                            src={getImages(item.backdrop_path)}
+                            className="rounded-md w-full h-full"
+                            src={getImages(
+                              item.poster_path || item.backdrop_path
+                            )}
                             alt={item.name}
                           />
                         </Link>
