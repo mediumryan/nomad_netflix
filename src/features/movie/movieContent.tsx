@@ -4,6 +4,7 @@ import { Movie } from '@/service/movieService';
 import { convertGenres } from '@/utils/convertGenres';
 import { getImages } from '@/utils/getImage';
 import Image from 'next/image';
+import ContentSlider from './contentSlider';
 
 interface MovieContentProps {
   movieNowPlaying: Movie[];
@@ -21,7 +22,7 @@ export default function MovieContent({
   return (
     <div className="flex flex-col items-center">
       {/* movie big poster */}
-      <div className="relative w-screen h-screen">
+      <div className="relative w-full h-screen">
         <Image
           layout="fill"
           src={getImages(bigPosterItem.poster_path)}
@@ -45,13 +46,13 @@ export default function MovieContent({
         </div>
       </div>
       {/* movie slider */}
-      <div>
+      <div className="w-full h-screen space-2">
+        {/* movie now playing */}
+        <ContentSlider subTitle="Now Playing" data={movieNowPlaying} />
         {/* movie popular */}
-        <div></div>
+        <ContentSlider subTitle="Popular" data={moviePopular} />
         {/* movie top rated */}
-        <div></div>
-        {/* movie upcoming */}
-        <div></div>
+        <ContentSlider subTitle="Top Rated" data={movieTopRated} />
       </div>
     </div>
   );

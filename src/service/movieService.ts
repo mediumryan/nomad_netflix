@@ -39,7 +39,6 @@ export const getNowPlayingMovies = async () => {
   );
 
   if (response.status === 200) {
-    console.log(response.data);
     return response.data as MovieResponse;
   } else {
     throw new Error('Fetch error');

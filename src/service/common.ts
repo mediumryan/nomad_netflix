@@ -18,3 +18,5 @@ export const getSearch = async (query: string) => {
     throw new Error('Fetch error');
   }
 };
+
+export const AccentTextColor = 'rgb(255,120,25) 0.5px 0 5px';

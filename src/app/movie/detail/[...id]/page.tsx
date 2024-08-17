@@ -1,5 +1,13 @@
-import React from 'react';
+import { getMovieDetails } from '@/service/movieService';
 
-export default function MovieDetail() {
+interface MovieDetailProps {
+  params: {
+    id: string[];
+  };
+}
+
+export default async function MovieDetail({ params }: MovieDetailProps) {
+  const MovieDetailData = await getMovieDetails(params.id[0]);
+
   return <div>page</div>;
 }
