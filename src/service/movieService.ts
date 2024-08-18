@@ -28,6 +28,26 @@ export type MovieResponse = {
   results: Movie[];
 };
 
+export type Credit = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+};
+
+export type CreditResponse = {
+  id: number;
+  cast: Credit[];
+};
+
 // Movies
 export const getNowPlayingMovies = async () => {
   const response = await axios.get(
