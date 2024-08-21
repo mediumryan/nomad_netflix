@@ -1,3 +1,4 @@
+import MovieDetailVideo from '@/features/movie/detail/video';
 import { AccentTextColor } from '@/service/common';
 import {
   Credit,
@@ -35,7 +36,6 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
   const voteArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   // movie credit data
   const movieDetailCreditData = await getMovieCredits(movieId);
-  console.log(movieDetailCreditData);
   const movieDetailCredit = movieDetailCreditData.cast
     .slice(0, 5)
     .map((credit: Credit) => {
@@ -57,11 +57,11 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-black to-transparent z-20"></div>
       {/* big poster - info box */}
       <div
-        className="absolute top-[10%] left-12 w-[calc(100%-72px)] bg-black z-30 opacity-80 p-4 rounded-lg
+        className="absolute top-[10%] left-12 w-[calc(100%-72px)] h-[85%] bg-[rgba(0,0,0,0.5)] z-30 p-4 rounded-lg
     flex
   "
       >
-        <div className="basis-1/2">
+        <div className="basis-5/12 pt-24 pl-24">
           <h2 className="text-2xl">{movieDetailData.title}</h2>
           <h5>{movieDetailData.original_title}</h5>
           <div className="my-8 text-sm">
@@ -130,8 +130,10 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
             )}
           </div>
         </div>
+        <div className="basis-7/12 flex justify-center items-center">
+          <MovieDetailVideo movieDetailVideo={movieDetailVideo} />
+        </div>
       </div>
-      <div className="basis-1/2">Video</div>
     </div>
   );
 }

@@ -48,6 +48,24 @@ export type CreditResponse = {
   cast: Credit[];
 };
 
+export type Video = {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+};
+
+export type VideoResponse = {
+  id: number;
+  results: Video[];
+};
+
 // Movies
 export const getNowPlayingMovies = async () => {
   const response = await axios.get(
@@ -110,7 +128,7 @@ export const getMovieCredits = async (movieId: string) => {
     }
   );
   if (response.status === 200) {
-    return response.data;
+    return response.data as CreditResponse;
   } else {
     throw new Error('Fetch error');
   }
@@ -125,7 +143,7 @@ export const getMovieVideos = async (movieId: string) => {
     }
   );
   if (response.status === 200) {
-    return response.data;
+    return response.data as VideoResponse;
   } else {
     throw new Error('Fetch error');
   }
