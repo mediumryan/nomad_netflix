@@ -1,3 +1,4 @@
+import TvDetailVideo from '@/features/tv/detail/video';
 import { AccentTextColor } from '@/service/common';
 import { Credit } from '@/service/movieService';
 import {
@@ -28,7 +29,6 @@ export default async function TvDetail({ params }: TvDetailProps) {
   // tv detail data
   const TvDetailData = await getTvShowDetails(tvId);
 
-  console.log(TvDetailData);
   // get genres
   const tvDetailGenre = TvDetailData.genres
     .map((item: { id: number; name: string }) => {
@@ -40,13 +40,14 @@ export default async function TvDetail({ params }: TvDetailProps) {
   // tv credit data
   const tvDetailCreditData = await getTvShowCredits(tvId);
   const tvDetailCredit = tvDetailCreditData.cast
-    .slice(0, 5)
+    .slice(0, 3)
     .map((credit: Credit) => {
       return credit.name;
     })
     .join(', ');
-  // movie video data
-  const movieDetailVideo = await getTvShowVideos(tvId);
+  // tv video data
+  const tvDetailVideo = await getTvShowVideos(tvId);
+
   return (
     <div className="relative w-full h-screen">
       <Image
@@ -86,7 +87,7 @@ flex
                 <span
                   key={index}
                   className={`flex items-center w-2 h-4 mr-1 rounded-[1px] ${
-                    TvDetailData.vote_average.toFixed(1) >= index
+                    TvDetailData.vote_average.toFixed(1) > index
                       ? 'bg-red-500'
                       : 'bg-sky-50'
                   }
@@ -101,8 +102,9 @@ flex
           </div>
           <div className="flex items-center text-sm mt-2">
             <span className="mr-2">제작사 :</span>
-            {TvDetailData.production_companies.map(
-              (item: ProductionCompaniesType, index: number) => {
+            {TvDetailData.production_companies
+              .slice(0, 5)
+              .map((item: ProductionCompaniesType) => {
                 return (
                   <img
                     key={item.id}
@@ -111,8 +113,7 @@ flex
                     className="w-12 h-4 mx-1 bg-sky-50"
                   />
                 );
-              }
-            )}
+              })}
           </div>
           <div className="flex items-center text-sm mt-2">
             <span className="mr-2">출연 :</span>
@@ -131,8 +132,14 @@ flex
             </p>
           </div>
           <div className="flex items-center text-sm mt-2">
-            <span className="mr-2">런타임 :</span>
-            <p>{TvDetailData.runtime}분</p>
+            <span className="mr-2">첫방영 :</span>
+            <p>{TvDetailData.first_air_date}</p>
+          </div>
+          <div className="flex items-center text-sm mt-2">
+            <span className="mr-2">상태 :</span>
+            <p>
+              {TvDetailData.status === 'Returning Series' ? '방영중' : '종영'}
+            </p>
           </div>
           <div className="flex items-center text-sm mt-2">
             {TvDetailData.adult && (
@@ -141,7 +148,7 @@ flex
           </div>
         </div>
         <div className="basis-7/12 flex justify-center items-center">
-          {/* <MovieDetailVideo movieDetailVideo={movieDetailVideo} /> */}
+          <TvDetailVideo tvDetailVideo={tvDetailVideo} />
         </div>
       </div>
     </div>

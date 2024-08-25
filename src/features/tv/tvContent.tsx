@@ -16,8 +16,6 @@ export default function TvContent({
 }: TvContentProps) {
   const bigPosterItem = tvAiringToday[0];
 
-  console.log(bigPosterItem);
-
   return (
     <div className="flex flex-col items-center">
       {/* movie big poster */}

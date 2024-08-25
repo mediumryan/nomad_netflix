@@ -10,14 +10,12 @@ import {
 } from '@/components/ui/carousel';
 import { VideoResponse } from '@/service/movieService';
 
-interface MovieDetailVideoProps {
-  movieDetailVideo: VideoResponse;
+interface TvDetailVideoProps {
+  tvDetailVideo: VideoResponse;
 }
 
-export default function MovieDetailVideo({
-  movieDetailVideo,
-}: MovieDetailVideoProps) {
-  const data = movieDetailVideo?.results;
+export default function TvDetailVideo({ tvDetailVideo }: TvDetailVideoProps) {
+  const data = tvDetailVideo?.results;
 
   return (
     <Carousel

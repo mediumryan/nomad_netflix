@@ -1,5 +1,5 @@
 import { Tv } from '@/service/tvShowService';
-import { convertGenres } from '@/utils/convertGenres';
+import { convertGenres } from '@/utils/convertGnresTv';
 import { getImages } from '@/utils/getImage';
 import { InfoIcon } from 'lucide-react';
 import Image from 'next/image';

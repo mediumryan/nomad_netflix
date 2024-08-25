@@ -37,7 +37,7 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
   // movie credit data
   const movieDetailCreditData = await getMovieCredits(movieId);
   const movieDetailCredit = movieDetailCreditData.cast
-    .slice(0, 5)
+    .slice(0, 3)
     .map((credit: Credit) => {
       return credit.name;
     })
@@ -75,7 +75,7 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
           </div>
           <div className="flex items-center text-sm">
             <span className="mr-2">장르 :</span>
-            <p>{movieDetailGenre}</p>
+            <p>{movieDetailGenre ? movieDetailGenre : ''}</p>
           </div>
           <div className="flex items-center text-sm mt-2">
             <span className="mr-2">평점 :</span>
@@ -84,7 +84,7 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
                 <span
                   key={index}
                   className={`flex items-center w-2 h-4 mr-1 rounded-[1px] ${
-                    movieDetailData.vote_average.toFixed(1) >= index
+                    movieDetailData.vote_average.toFixed(1) > index
                       ? 'bg-red-500'
                       : 'bg-sky-50'
                   }
@@ -99,8 +99,9 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
           </div>
           <div className="flex items-center text-sm mt-2">
             <span className="mr-2">제작사 :</span>
-            {movieDetailData.production_companies.map(
-              (item: ProductionCompaniesType, index: number) => {
+            {movieDetailData.production_companies
+              .slice(0, 5)
+              .map((item: ProductionCompaniesType) => {
                 return (
                   <img
                     key={item.id}
@@ -109,8 +110,7 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
                     className="w-12 h-4 mx-1 bg-sky-50"
                   />
                 );
-              }
-            )}
+              })}
           </div>
           <div className="flex items-center text-sm mt-2">
             <span className="mr-2">출연 :</span>
