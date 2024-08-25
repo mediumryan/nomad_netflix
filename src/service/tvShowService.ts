@@ -31,7 +31,7 @@ export const getPopularTvShows = async () => {
     headers,
   });
   if (response.status === 200) {
-    return response.data;
+    return response.data as TvResponse;
   } else {
     throw new Error('Fetch error');
   }
@@ -43,7 +43,7 @@ export const getAiringTodayTvShows = async () => {
     headers,
   });
   if (response.status === 200) {
-    return response.data;
+    return response.data as TvResponse;
   } else {
     throw new Error('Fetch error');
   }
@@ -55,7 +55,7 @@ export const getTopRatedTvShows = async () => {
     headers,
   });
   if (response.status === 200) {
-    return response.data;
+    return response.data as TvResponse;
   } else {
     throw new Error('Fetch error');
   }

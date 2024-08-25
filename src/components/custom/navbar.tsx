@@ -36,7 +36,7 @@ export function Navigation() {
             pathName === '/tv' ? ' bg-sky-50' : ''
           }`}
         >
-          <Link href="tv">TV SHOWS</Link>
+          <Link href="/tv">TV SHOWS</Link>
         </li>
       </ul>
     </nav>
