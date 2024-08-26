@@ -14,91 +14,55 @@ import Link from 'next/link';
 
 interface HomeCarouselProps {
   type: string;
-  movieData?: MovieResponse;
-  tvData?: TvResponse;
+  data: MovieResponse | TvResponse;
 }
 
-export function HomeCarousel({ type, movieData, tvData }: HomeCarouselProps) {
-  const movie = movieData?.results;
-  const tv = tvData?.results;
+export function HomeCarousel({ type, data }: HomeCarouselProps) {
+  const homeData = data.results;
 
   return (
     <div>
-      {type === 'movie' ? (
-        <div className="opacity-70 hover:opacity-100">
-          <h2 className="text-lg font-bold italic text-center">Movies</h2>
-          <Carousel
-            className="w-full max-w-xs m-4 rounded-md overflow-hidden"
-            plugins={[
-              Autoplay({
-                delay: 2000,
-              }),
-            ]}
-          >
-            <CarouselContent>
-              {movie?.map((item, index) => (
-                <CarouselItem key={index}>
-                  <div className="p-1">
-                    <Card className="rounded-md overflow-hidden">
-                      <CardContent className="flex aspect-square items-center justify-center">
-                        <Link
-                          className="rounded-md w-[300px] h-[400px] flex justify-center items-center bg-black"
-                          href="/movie"
-                        >
-                          <img
-                            className="rounded-md w-full h-full"
-                            src={getImages(
-                              item.poster_path || item.backdrop_path
-                            )}
-                            alt={item.title}
-                          />
-                        </Link>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
-      ) : (
-        <div className="opacity-70 hover:opacity-100">
-          <h2 className="text-lg font-bold italic text-center">Tv Shows</h2>
-          <Carousel
-            className="w-full max-w-xs m-4 rounded-md overflow-hidden"
-            plugins={[
-              Autoplay({
-                delay: 2000,
-              }),
-            ]}
-          >
-            <CarouselContent>
-              {tv?.map((item, index) => (
-                <CarouselItem key={index}>
-                  <div className="p-1">
-                    <Card className="rounded-md overflow-hidden">
-                      <CardContent className="flex aspect-square items-center justify-center">
-                        <Link
-                          className="rounded-md w-[300px] h-[400px] flex justify-center items-center bg-black"
-                          href="/movie"
-                        >
-                          <img
-                            className="rounded-md w-full h-full"
-                            src={getImages(
-                              item.poster_path || item.backdrop_path
-                            )}
-                            alt={item.name}
-                          />
-                        </Link>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-          </Carousel>
-        </div>
-      )}
+      <div className="opacity-70 md:opacity-85 hover:opacity-100">
+        <h2 className="text-lg font-bold italic text-center">
+          {type === 'movie' ? 'Movies' : 'Tv Shows'}
+        </h2>
+        <Carousel
+          className="w-full max-w-xs m-4 rounded-md overflow-hidden"
+          plugins={[
+            Autoplay({
+              delay: 2000,
+              stopOnMouseEnter: true,
+              stopOnInteraction: false,
+            }),
+          ]}
+          opts={{ loop: true }}
+        >
+          <CarouselContent>
+            {homeData?.map((item, index) => (
+              <CarouselItem key={index}>
+                <div className="p-1">
+                  <Card className="rounded-md overflow-hidden">
+                    <CardContent className="flex aspect-square items-center justify-center">
+                      <Link
+                        className="rounded-md w-[250px] h-[300px] md:w-[300px] md:h-[400px] flex justify-center items-center bg-black"
+                        href="/movie"
+                      >
+                        <img
+                          className="rounded-md w-full h-full"
+                          src={getImages(
+                            item.poster_path || item.backdrop_path
+                          )}
+                          alt={type === 'movie' ? item?.title : item.name}
+                        />
+                      </Link>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
     </div>
   );
 }
