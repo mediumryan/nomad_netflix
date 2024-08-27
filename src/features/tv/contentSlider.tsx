@@ -24,12 +24,12 @@ export default function ContentSlider({ subTitle, data }: ContentSliderProps) {
     <div className="bg-black w-full py-2">
       <h3 className="text-lg ml-2 pt-2">{subTitle}</h3>
       <div className="w-full flex justify-center">
-        <Carousel className="w-11/12">
+        <Carousel className="w-7/12 md:w-11/12">
           <CarouselContent className="-ml-1">
             {data.map((item, index) => (
               <CarouselItem
                 key={index}
-                className="pl-1 sm:basis-1/2 md:basis-1/4 lg:basis-1/6"
+                className="pl-1 md:basis-1/3 lg:basis-1/6"
               >
                 <div className="p-1">
                   <Card>

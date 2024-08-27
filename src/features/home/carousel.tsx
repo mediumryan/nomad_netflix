@@ -22,7 +22,7 @@ export function HomeCarousel({ type, data }: HomeCarouselProps) {
 
   return (
     <div>
-      <div className="opacity-70 md:opacity-85 hover:opacity-100">
+      <div className="opacity-85 md:opacity-70 hover:opacity-100">
         <h2 className="text-lg font-bold italic text-center">
           {type === 'movie' ? 'Movies' : 'Tv Shows'}
         </h2>
@@ -45,7 +45,7 @@ export function HomeCarousel({ type, data }: HomeCarouselProps) {
                     <CardContent className="flex aspect-square items-center justify-center">
                       <Link
                         className="rounded-md w-[250px] h-[300px] md:w-[300px] md:h-[400px] flex justify-center items-center bg-black"
-                        href="/movie"
+                        href={`${type === 'movie' ? '/movie' : '/tv'}`}
                       >
                         <img
                           className="rounded-md w-full h-full"

@@ -5,13 +5,13 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function Navigation() {
   const pathName = usePathname();
   const router = useRouter();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const [searchWord, setSearchWord] = useState('');
   const handleSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
@@ -20,8 +20,16 @@ export function Navigation() {
     setSearchWord('');
   };
 
+  useEffect(() => {
+    setOpen(true);
+  }, [pathName]);
+
   return (
-    <nav className="w-full p-2 pb-8 absolute top-0 left-0 z-50 flex flex-col md:flex-row items-center justify-between bg-black md:bg-transparent">
+    <nav
+      className={`w-full p-2 ${
+        open ? 'pb-2 bg-[rgba(0,0,0,0.5)]' : 'pb-8 bg-[rgba(0,0,0,0.9)]'
+      } absolute top-0 left-0 z-50 flex flex-col md:flex-row items-center justify-between md:bg-transparent duration-700`}
+    >
       <Link
         href="/"
         className="mr-8 text-xl italic font-bold tracking-[-1.5px] bg-gradient-to-r from-[#575d63] to-[#16032c] text-gradient rounded-l-2xl"

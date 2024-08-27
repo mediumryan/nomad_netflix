@@ -18,7 +18,7 @@ export default function MovieContent({
   const bigPosterItem = movieNowPlaying[0];
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center bg-black">
       {/* movie big poster */}
       <MovieBigPoster bigPosterItem={bigPosterItem} />
       {/* movie slider */}

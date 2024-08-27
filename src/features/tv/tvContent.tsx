@@ -17,7 +17,7 @@ export default function TvContent({
   const bigPosterItem = tvAiringToday[0];
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center bg-black">
       {/* movie big poster */}
       <TvBigPoster bigPosterItem={bigPosterItem} />
       {/* movie slider */}
