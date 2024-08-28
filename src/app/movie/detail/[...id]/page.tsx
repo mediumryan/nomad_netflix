@@ -1,5 +1,6 @@
+import Description from '@/features/movie/detail/description';
+import ToggleBtn from '@/features/movie/detail/toggle';
 import MovieDetailVideo from '@/features/movie/detail/video';
-import { AccentTextColor } from '@/service/common';
 import {
   Credit,
   getMovieCredits,
@@ -15,13 +16,6 @@ interface MovieDetailProps {
   };
 }
 
-type ProductionCompaniesType = {
-  id: number;
-  logo_path: string;
-  name: string;
-  origin_country: string;
-};
-
 export default async function MovieDetail({ params }: MovieDetailProps) {
   const movieId = params.id[0];
   // movie detail data
@@ -32,8 +26,6 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
       return item.name;
     })
     .join(', ');
-  // vote average for arr
-  const voteArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   // movie credit data
   const movieDetailCreditData = await getMovieCredits(movieId);
   const movieDetailCredit = movieDetailCreditData.cast
@@ -56,81 +48,18 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
       {/* for bg gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-black to-transparent z-20"></div>
       {/* big poster - info box */}
+      <ToggleBtn />
       <div
-        className="absolute top-[10%] left-12 w-[calc(100%-72px)] h-[85%] bg-[rgba(0,0,0,0.5)] z-30 p-4 rounded-lg
-    flex
+        className="absolute top-[10%] left-1/2 translate-x-[-50%] md:left-12 md:translate-x-0 w-[calc(100%-72px)] h-[85%] bg-[rgba(0,0,0,0.5)] z-30 p-4 rounded-lg
+    flex flex-col md:flex-row
   "
       >
-        <div className="basis-5/12 pt-24 pl-24">
-          <h2 className="text-2xl">{movieDetailData.title}</h2>
-          <h5>{movieDetailData.original_title}</h5>
-          <div className="my-8 text-sm">
-            <p
-              className="text-lg italic mb-2"
-              style={{ textShadow: AccentTextColor }}
-            >
-              {movieDetailData.tagline}
-            </p>
-            <p>{movieDetailData.overview}</p>
-          </div>
-          <div className="flex items-center text-sm">
-            <span className="mr-2">장르 :</span>
-            <p>{movieDetailGenre ? movieDetailGenre : ''}</p>
-          </div>
-          <div className="flex items-center text-sm mt-2">
-            <span className="mr-2">평점 :</span>
-            {voteArr.map((_, index: number) => {
-              return (
-                <span
-                  key={index}
-                  className={`flex items-center w-2 h-4 mr-1 rounded-[1px] ${
-                    movieDetailData.vote_average.toFixed(1) > index
-                      ? 'bg-red-500'
-                      : 'bg-sky-50'
-                  }
-                  ${index === 9 && 'mr-2'}
-                  `}
-                />
-              );
-            })}
-            <span className="tracking-wider">
-              ({movieDetailData.vote_average.toFixed(1)})
-            </span>
-          </div>
-          <div className="flex items-center text-sm mt-2">
-            <span className="mr-2">제작사 :</span>
-            {movieDetailData.production_companies
-              .slice(0, 5)
-              .map((item: ProductionCompaniesType) => {
-                return (
-                  <img
-                    key={item.id}
-                    src={getImages(item.logo_path)}
-                    alt={item.name}
-                    className="w-12 h-4 mx-1 bg-sky-50"
-                  />
-                );
-              })}
-          </div>
-          <div className="flex items-center text-sm mt-2">
-            <span className="mr-2">출연 :</span>
-            <span>{movieDetailCredit}</span>
-          </div>
-          <div className="flex items-center text-sm mt-2">
-            <span className="mr-2">개봉일 :</span>
-            <p>{movieDetailData.release_date}</p>
-          </div>
-          <div className="flex items-center text-sm mt-2">
-            <span className="mr-2">런타임 :</span>
-            <p>{movieDetailData.runtime}분</p>
-          </div>
-          <div className="flex items-center text-sm mt-2">
-            {movieDetailData.adult && (
-              <span className="mr-2 bg-red-500 rounded-full p-1">청불</span>
-            )}
-          </div>
-        </div>
-        <div className="basis-7/12 flex justify-center items-center">
+        <Description
+          movieDetailData={movieDetailData}
+          movieDetailGenre={movieDetailGenre}
+          movieDetailCredit={movieDetailCredit}
+        />
+        <div className="md:basis-7/12 flex justify-center items-center h-full">
           <MovieDetailVideo movieDetailVideo={movieDetailVideo} />
         </div>
       </div>

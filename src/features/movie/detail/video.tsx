@@ -8,7 +8,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { trailerOpenAtom } from '@/data/detail';
 import { VideoResponse } from '@/service/movieService';
+import { useAtomValue } from 'jotai';
 
 interface MovieDetailVideoProps {
   movieDetailVideo: VideoResponse;
@@ -18,16 +20,16 @@ export default function MovieDetailVideo({
   movieDetailVideo,
 }: MovieDetailVideoProps) {
   const data = movieDetailVideo?.results;
+  const open = useAtomValue(trailerOpenAtom);
 
   return (
     <Carousel
-      opts={{
-        align: 'start',
-      }}
       orientation="vertical"
-      className="w-full"
+      className={`w-full ${
+        open ? 'block' : 'hidden'
+      } md:block duration-700 origin-center`}
     >
-      <CarouselContent className="-mt-1 h-[325px]">
+      <CarouselContent className="-mt-1 h-[500px] md:h-[325px]">
         {data.length > 0 ? (
           data?.map((item, index) => (
             <CarouselItem key={index} className="pt-1">
@@ -38,7 +40,7 @@ export default function MovieDetailVideo({
                       key={item.id}
                       src={`https://www.youtube.com/embed/${item.key}`}
                       title={item.key}
-                      className="w-3/4 h-full"
+                      className="w-full md:w-3/4 h-full"
                       allow="autoplay; encrypted-media"
                       allowFullScreen
                     />
