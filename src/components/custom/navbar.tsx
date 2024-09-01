@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Menu, Search } from 'lucide-react';
+import { Check, Menu, Search, StepBack } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '../ui/button';
@@ -80,6 +80,14 @@ export function Navigation() {
           <Check className="w-8 h-6" />
         </Button>
       </form>
+      <button
+        className="md:hidden absolute top-3 left-4 hover:text-red-500"
+        onClick={() => {
+          router.back();
+        }}
+      >
+        <StepBack />
+      </button>
       <Menu
         className="absolute top-2 right-4 hover:text-red-500 md:hidden"
         onClick={() => {

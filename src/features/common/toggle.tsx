@@ -3,10 +3,16 @@
 import { Button } from '@/components/ui/button';
 import { trailerOpenAtom } from '@/data/detail';
 import { useAtom } from 'jotai';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function ToggleBtn() {
   const [open, setOpen] = useAtom(trailerOpenAtom);
+
+  useEffect(() => {
+    return () => {
+      setOpen(false);
+    };
+  }, []);
 
   return (
     <Button
@@ -15,7 +21,7 @@ export default function ToggleBtn() {
         setOpen(!open);
       }}
     >
-      Trailer
+      {open ? 'Info' : 'Trailer'}
     </Button>
   );
 }

@@ -14,6 +14,9 @@ interface SearchPageProps {
 export default async function SearchPage({ params }: SearchPageProps) {
   const searchKey = decodeURIComponent(params.searchWord[0]);
   const data = (await getSearch(searchKey)).results;
+
+  console.log(data);
+
   const getLink = (media_type: string, id: number) => {
     return media_type === 'movie' ? `/movie/detail/${id}` : `/tv/detail/${id}`;
   };
@@ -25,7 +28,7 @@ export default async function SearchPage({ params }: SearchPageProps) {
           ? `[ ${searchKey} ]로 검색한 결과 입니다.`
           : `[ ${searchKey} ]로 검색한 결과가 없습니다.`}
       </h2>
-      <div className="grid grid-cols-5 gap-4 px-24 pb-24">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 px-12 mb-12 md:px-24 md:pb-24">
         {data.length > 0 &&
           data.map((item: any) => {
             return (
@@ -43,7 +46,10 @@ export default async function SearchPage({ params }: SearchPageProps) {
                         className="text-xl"
                         style={{ textShadow: AccentTextColor }}
                       >
-                        {item.name}({item.vote_average.toFixed(1)})
+                        {item.media_type === 'movie'
+                          ? item.title
+                          : item.media_type === 'tv' && item.name}
+                        ({item?.vote_average?.toFixed(1)})
                       </h4>
                     </div>
                   </Link>

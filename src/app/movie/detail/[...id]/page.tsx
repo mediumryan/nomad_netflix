@@ -1,5 +1,5 @@
+import ToggleBtn from '@/features/common/toggle';
 import Description from '@/features/movie/detail/description';
-import ToggleBtn from '@/features/movie/detail/toggle';
 import MovieDetailVideo from '@/features/movie/detail/video';
 import {
   Credit,
