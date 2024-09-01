@@ -42,7 +42,7 @@ export default async function TvDetail({ params }: TvDetailProps) {
   const tvDetailVideo = await getTvShowVideos(tvId);
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-full">
       <Image
         layout="fill"
         src={getImages(TvDetailData.poster_path)}

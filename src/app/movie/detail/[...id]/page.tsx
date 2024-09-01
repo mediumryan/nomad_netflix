@@ -38,7 +38,7 @@ export default async function MovieDetail({ params }: MovieDetailProps) {
   const movieDetailVideo = await getMovieVideos(movieId);
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-full">
       <Image
         layout="fill"
         src={getImages(movieDetailData.poster_path)}
