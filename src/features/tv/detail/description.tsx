@@ -37,7 +37,9 @@ export default function Description({
         open ? 'hidden' : 'block'
       } md:block duration-700 origin-center`}
     >
-      <h2 className="text-2xl">{TvDetailData.name}</h2>
+      <h2 className="text-2xl" style={{ textShadow: AccentTextColor }}>
+        {TvDetailData.name}
+      </h2>
       <h5>{TvDetailData.original_name}</h5>
       <div className="my-8 text-sm">
         <p

@@ -22,7 +22,9 @@ interface ContentSliderProps {
 export default function ContentSlider({ subTitle, data }: ContentSliderProps) {
   return (
     <div className="bg-black w-full py-2">
-      <h3 className="text-lg ml-2 pt-2">{subTitle}</h3>
+      <h3 className="text-lg ml-2 pt-2" style={{ textShadow: AccentTextColor }}>
+        {subTitle}
+      </h3>
       <div className="w-full flex justify-center">
         <Carousel className="w-7/12 md:w-11/12">
           <CarouselContent className="-ml-1">

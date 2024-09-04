@@ -1,3 +1,4 @@
+import { AccentTextColor } from '@/service/common';
 import { Movie } from '@/service/movieService';
 import { convertGenres } from '@/utils/convertGenres';
 import { getImages } from '@/utils/getImage';
@@ -27,7 +28,9 @@ export default function MovieBigPoster({ bigPosterItem }: MovieBigPosterProps) {
     flex flex-col
   "
       >
-        <h2 className="text-2xl">{bigPosterItem.title}</h2>
+        <h2 className="text-2xl" style={{ textShadow: AccentTextColor }}>
+          {bigPosterItem.title}
+        </h2>
         <h5 className="mb-4">{bigPosterItem.original_title}</h5>
         <p className="text-sm">{bigPosterItem.overview}</p>
         <p className="text-sm mt-4">

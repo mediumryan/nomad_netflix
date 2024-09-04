@@ -65,7 +65,7 @@ export function Navigation() {
       </ul>
       <form
         onSubmit={handleSubmit}
-        className={`flex items-center ${open ? 'hidden' : 'block'}`}
+        className={`flex items-center md:flex ${open ? 'hidden' : 'flex'}`}
       >
         <Search className="w-8 h-6" />
         <Input
