@@ -42,25 +42,74 @@ export function Navigation() {
         }`}
       >
         <li
-          className={`text-red-500 font-bold mx-1 p-1 rounded-md hover:text-black hover:bg-sky-50 ${
+          className={`text-red-500 font-bold mx-1 p-1 hover:text-black hover:bg-sky-50 ${
             pathName === '/' ? ' bg-sky-50' : ''
           }`}
+          style={{ borderRadius: '10px 10px 10px 0' }}
         >
           <Link href="/">HOME</Link>
         </li>
         <li
-          className={`text-red-500 font-bold mx-1 p-1 rounded-md hover:text-black hover:bg-sky-50 ${
+          className={`group relative text-red-500 font-bold mx-1 p-1 hover:text-black hover:bg-sky-50 ${
             pathName === '/movie' ? ' bg-sky-50' : ''
           }`}
+          style={{ borderRadius: '10px 10px 10px 0' }}
         >
           <Link href="/movie">MOVIES</Link>
+          <div
+            className="absolute left-0 hidden w-[120px] py-2 mt-1 group-hover:flex flex-col justify-center items-center bg-sky-50"
+            style={{ borderRadius: '0 10px 10px 10px' }}
+          >
+            <Link
+              href="/movie/now-playing"
+              className={`relative text-red-500 font-bold mx-1 rounded-md hover:text-black`}
+            >
+              Now Playing
+            </Link>
+            <Link
+              href="/movie/popular"
+              className={`relative text-red-500 font-bold mx-1 rounded-md hover:text-black`}
+            >
+              Popular
+            </Link>
+            <Link
+              href="/movie/top-rated"
+              className={`relative text-red-500 font-bold mx-1 rounded-md hover:text-black`}
+            >
+              Top Rated
+            </Link>
+          </div>
         </li>
         <li
-          className={`text-red-500 font-bold mx-1 p-1 rounded-md hover:text-black hover:bg-sky-50 ${
+          className={`relative group text-red-500 font-bold mx-1 p-1 hover:text-black hover:bg-sky-50 ${
             pathName === '/tv' ? ' bg-sky-50' : ''
           }`}
+          style={{ borderRadius: '10px 10px 10px 0' }}
         >
           <Link href="/tv">TV SHOWS</Link>
+          <div
+            className="absolute left-0 hidden w-[120px] py-2 mt-1 group-hover:flex flex-col justify-center items-center bg-sky-50"
+            style={{ borderRadius: '0 10px 10px 10px' }}
+          >
+            <Link
+              href="/tv/airing-today"
+              className={`relative text-red-500 font-bold mx-1 rounded-md hover:text-black`}
+            >
+              Airing Today
+            </Link>
+            <Link
+              href="/tv/popular"
+              className={`relative text-red-500 font-bold mx-1 rounded-md hover:text-black`}
+            >
+              Popular
+            </Link>
+            <Link
+              href="/tv/top-rated"
+              className={`relative text-red-500 font-bold mx-1 rounded-md hover:text-black`}
+            >
+              Top Rated
+            </Link>
+          </div>
         </li>
       </ul>
       <form

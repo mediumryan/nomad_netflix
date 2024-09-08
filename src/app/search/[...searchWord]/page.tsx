@@ -15,8 +15,6 @@ export default async function SearchPage({ params }: SearchPageProps) {
   const searchKey = decodeURIComponent(params.searchWord[0]);
   const data = (await getSearch(searchKey)).results;
 
-  console.log(data);
-
   const getLink = (media_type: string, id: number) => {
     return media_type === 'movie' ? `/movie/detail/${id}` : `/tv/detail/${id}`;
   };

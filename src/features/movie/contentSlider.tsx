@@ -13,18 +13,30 @@ import { getImages } from '@/utils/getImage';
 import { Movie } from '@/service/movieService';
 import { AccentTextColor } from '@/service/common';
 import Image from 'next/image';
+import { Play, PlayCircle } from 'lucide-react';
 
 interface ContentSliderProps {
   subTitle: string;
+  link: string;
   data: Movie[];
 }
 
-export default function ContentSlider({ subTitle, data }: ContentSliderProps) {
+export default function ContentSlider({
+  subTitle,
+  link,
+  data,
+}: ContentSliderProps) {
   return (
     <div className="bg-black w-full py-2">
-      <h3 className="text-lg ml-2 pt-2" style={{ textShadow: AccentTextColor }}>
-        {subTitle}
-      </h3>
+      <Link
+        className="group flex items-center w-48 pt-2"
+        href={`/movie/${link}`}
+      >
+        <h3 className="text-lg ml-2" style={{ textShadow: AccentTextColor }}>
+          {subTitle}
+        </h3>
+        <PlayCircle className="group-hover:scale-110 duration-300 " />
+      </Link>
       <div className="w-full flex justify-center">
         <Carousel className="w-7/12 md:w-11/12">
           <CarouselContent className="-ml-1">

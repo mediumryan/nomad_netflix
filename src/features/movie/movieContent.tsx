@@ -24,11 +24,19 @@ export default function MovieContent({
       {/* movie slider */}
       <div className="w-full h-screen space-2">
         {/* movie now playing */}
-        <ContentSlider subTitle="Now Playing" data={movieNowPlaying} />
+        <ContentSlider
+          subTitle="Now Playing"
+          data={movieNowPlaying}
+          link="now-playing"
+        />
         {/* movie popular */}
-        <ContentSlider subTitle="Popular" data={moviePopular} />
+        <ContentSlider subTitle="Popular" data={moviePopular} link="popular" />
         {/* movie top rated */}
-        <ContentSlider subTitle="Top Rated" data={movieTopRated} />
+        <ContentSlider
+          subTitle="Top Rated"
+          data={movieTopRated}
+          link="top-rated"
+        />
       </div>
     </div>
   );

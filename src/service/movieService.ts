@@ -68,11 +68,12 @@ export type VideoResponse = {
 };
 
 // Movies
-export const getNowPlayingMovies = async () => {
+export const getNowPlayingMovies = async (page: number = 1) => {
+  const newParams = { ...params, page };
   const response = await axios.get(
     `${process.env.BASE_URL}/movie/now_playing`,
     {
-      params,
+      params: newParams,
       headers,
     }
   );
@@ -84,9 +85,10 @@ export const getNowPlayingMovies = async () => {
   }
 };
 
-export const getPopularMovies = async () => {
+export const getPopularMovies = async (page: number = 1) => {
+  const newParams = { ...params, page };
   const response = await axios.get(`${process.env.BASE_URL}/movie/popular`, {
-    params,
+    params: newParams,
     headers,
   });
   if (response.status === 200) {
@@ -96,9 +98,10 @@ export const getPopularMovies = async () => {
   }
 };
 
-export const getTopRatedMovies = async () => {
+export const getTopRatedMovies = async (page: number = 1) => {
+  const newParams = { ...params, page };
   const response = await axios.get(`${process.env.BASE_URL}/movie/top_rated`, {
-    params,
+    params: newParams,
     headers,
   });
   if (response.status === 200) {
