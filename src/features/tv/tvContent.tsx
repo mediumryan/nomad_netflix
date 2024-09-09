@@ -23,11 +23,19 @@ export default function TvContent({
       {/* movie slider */}
       <div className="w-full h-screen space-2">
         {/* movie now playing */}
-        <ContentSlider subTitle="Airing Today" data={tvAiringToday} />
+        <ContentSlider
+          subTitle="Airing Today"
+          link="airing-today"
+          data={tvAiringToday}
+        />
         {/* movie popular */}
-        <ContentSlider subTitle="Popular" data={tvPopular} />
+        <ContentSlider subTitle="Popular" link="popular" data={tvPopular} />
         {/* movie top rated */}
-        <ContentSlider subTitle="Top Rated" data={tvTopRated} />
+        <ContentSlider
+          subTitle="Top Rated"
+          link="top-rated"
+          data={tvTopRated}
+        />
       </div>
     </div>
   );

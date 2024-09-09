@@ -31,7 +31,7 @@ export default function Content({ data }: ContentProps) {
   useEffect(() => {
     const getData = async () => {
       setPage((pre) => pre + 1);
-      const res = await fetch(`/movie/api/getPopular/${page}`);
+      const res = await fetch(`/movie/api/getTopRated/${page}`);
       const data = await res.json();
       setDataArr((pre) => {
         const newData = [...pre, ...data];
@@ -44,7 +44,10 @@ export default function Content({ data }: ContentProps) {
   }, [inView]);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-4 px-12 mb-12 md:px-24 md:pb-24">
+    <div
+      id="movie-content-popular"
+      className="grid grid-cols-2 md:grid-cols-5 gap-4 px-12 mb-12 md:px-24 md:pb-24"
+    >
       {dataArr.length > 0 &&
         dataArr.map((item: any) => {
           return (
@@ -55,17 +58,14 @@ export default function Content({ data }: ContentProps) {
                     layout="fill"
                     className="rounded-md group-hover:opacity-15"
                     src={getImages(item.poster_path || item.backdrop_path)}
-                    alt={item.name}
+                    alt={item.title}
                   />
                   <div className="absolute text-white top-0 left-0 w-full h-full pt-4 px-4 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                     <h4
                       className="text-xl"
                       style={{ textShadow: AccentTextColor }}
                     >
-                      {item.media_type === 'movie'
-                        ? item.title
-                        : item.media_type === 'tv' && item.name}
-                      ({item?.vote_average?.toFixed(1)})
+                      {item.title}({item?.vote_average?.toFixed(1)})
                     </h4>
                   </div>
                 </Link>

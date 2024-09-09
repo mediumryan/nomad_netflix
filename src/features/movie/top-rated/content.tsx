@@ -55,17 +55,14 @@ export default function Content({ data }: ContentProps) {
                     layout="fill"
                     className="rounded-md group-hover:opacity-15"
                     src={getImages(item.poster_path || item.backdrop_path)}
-                    alt={item.name}
+                    alt={item.title}
                   />
                   <div className="absolute text-white top-0 left-0 w-full h-full pt-4 px-4 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
                     <h4
                       className="text-xl"
                       style={{ textShadow: AccentTextColor }}
                     >
-                      {item.media_type === 'movie'
-                        ? item.title
-                        : item.media_type === 'tv' && item.name}
-                      ({item?.vote_average?.toFixed(1)})
+                      {item.title}({item?.vote_average?.toFixed(1)})
                     </h4>
                   </div>
                 </Link>

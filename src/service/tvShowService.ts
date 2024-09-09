@@ -26,9 +26,10 @@ export type TvResponse = {
 };
 
 // TV Shows
-export const getPopularTvShows = async () => {
+export const getPopularTvShows = async (page: number = 1) => {
+  const newParams = { ...params, page };
   const response = await axios.get(`${process.env.BASE_URL}/tv/popular`, {
-    params,
+    params: newParams,
     headers,
   });
   if (response.status === 200) {
@@ -38,9 +39,10 @@ export const getPopularTvShows = async () => {
   }
 };
 
-export const getAiringTodayTvShows = async () => {
+export const getAiringTodayTvShows = async (page: number = 1) => {
+  const newParams = { ...params, page };
   const response = await axios.get(`${process.env.BASE_URL}/tv/airing_today`, {
-    params,
+    params: newParams,
     headers,
   });
   if (response.status === 200) {
@@ -50,9 +52,10 @@ export const getAiringTodayTvShows = async () => {
   }
 };
 
-export const getTopRatedTvShows = async () => {
+export const getTopRatedTvShows = async (page: number = 1) => {
+  const newParams = { ...params, page };
   const response = await axios.get(`${process.env.BASE_URL}/tv/top_rated`, {
-    params,
+    params: newParams,
     headers,
   });
   if (response.status === 200) {

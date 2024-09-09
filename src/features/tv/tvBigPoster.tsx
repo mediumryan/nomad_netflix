@@ -23,7 +23,7 @@ export default function TvBigPoster({ bigPosterItem }: TvBigPosterProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-black to-transparent z-20"></div>
       {/* big poster - info box */}
       <div
-        className="absolute top-1/2 left-4 w-1/2 min-h-48 max-h-full bg-black z-30 opacity-80 p-4 rounded-lg
+        className="absolute top-1/2 left-4 w-3/4 md:w-1/2 min-h-48 max-h-full bg-black z-30 opacity-80 p-4 rounded-lg
     flex flex-col
   "
       >

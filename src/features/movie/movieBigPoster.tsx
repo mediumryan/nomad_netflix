@@ -24,7 +24,7 @@ export default function MovieBigPoster({ bigPosterItem }: MovieBigPosterProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-black to-transparent z-20"></div>
       {/* big poster - info box */}
       <div
-        className="absolute top-1/2 left-4 w-1/2 min-h-48 max-h-full bg-black z-30 opacity-80 p-4 rounded-lg
+        className="absolute top-1/2 left-4 w-3/4 md:w-1/2 min-h-48 max-h-full bg-black z-30 opacity-80 p-4 rounded-lg
     flex flex-col
   "
       >
@@ -32,7 +32,7 @@ export default function MovieBigPoster({ bigPosterItem }: MovieBigPosterProps) {
           {bigPosterItem.title}
         </h2>
         <h5 className="mb-4">{bigPosterItem.original_title}</h5>
-        <p className="text-sm">{bigPosterItem.overview}</p>
+        <p className="text-sm line-clamp-6">{bigPosterItem.overview}</p>
         <p className="text-sm mt-4">
           장르 : {convertGenres(bigPosterItem.genre_ids)}
         </p>

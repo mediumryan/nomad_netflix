@@ -13,7 +13,7 @@ import { getImages } from '@/utils/getImage';
 import { Movie } from '@/service/movieService';
 import { AccentTextColor } from '@/service/common';
 import Image from 'next/image';
-import { Play, PlayCircle } from 'lucide-react';
+import { PlayCircle } from 'lucide-react';
 
 interface ContentSliderProps {
   subTitle: string;
