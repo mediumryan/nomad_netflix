@@ -57,7 +57,7 @@ export function Navigation() {
         >
           <Link href="/movie">MOVIES</Link>
           <div
-            className="absolute left-0 hidden w-[120px] py-2 mt-1 group-hover:flex flex-col justify-center items-center bg-sky-50"
+            className="md:absolute left-0 md:hidden md:w-[120px] py-2 mt-1 flex group-hover:flex flex-col justify-center items-center bg-sky-50"
             style={{ borderRadius: '0 10px 10px 10px' }}
           >
             <Link
@@ -88,7 +88,7 @@ export function Navigation() {
         >
           <Link href="/tv">TV SHOWS</Link>
           <div
-            className="absolute left-0 hidden w-[120px] py-2 mt-1 group-hover:flex flex-col justify-center items-center bg-sky-50"
+            className="md:absolute left-0 md:hidden md:w-[120px] py-2 mt-1 flex group-hover:flex flex-col justify-center items-center bg-sky-50"
             style={{ borderRadius: '0 10px 10px 10px' }}
           >
             <Link
